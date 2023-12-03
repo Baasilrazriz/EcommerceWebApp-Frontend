@@ -1,28 +1,11 @@
 import React, { useState } from "react";
-
-const Cart = ({items,setItems}) => {
-  
-  const incrementQuantity = (itemId) => {
-    setItems((prevItems) =>
-      prevItems.map((items) =>
-        items.id === itemId ? { ...items, quantity: items.quantity + 1 } : items
-      )
-    );
-  };
-
-  const decrementQuantity = (itemId) => {
-    setItems((prevItems) =>
-      prevItems.map((items) =>
-        items.id === itemId && items.quantity > 1
-          ? { ...items, quantity: items.quantity - 1 }
-          : items
-      )
-    );
-  };
-  const removeItem = (itemId) => {
-    setItems((prevItems) => prevItems.filter((item) => item.id !== itemId));
-  };
-const discount= 10;
+import { useSelector, useDispatch } from 'react-redux';
+import { incrementQuantity, decrementQuantity, removeItem } from '../Features/Mart/cartSlice';
+// {items,setItems}
+const Cart = () => {
+  const dispatch = useDispatch();
+  const items = useSelector((state) => state.cart.cartItems);
+  const discount= 10;
     
       const total = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
       const grandtotal = total+140+(total*(discount/100));
@@ -55,14 +38,14 @@ const discount= 10;
                     <div className="flex items-center">
   {item.quantity === 1 ? (
     <button
-      onClick={() => removeItem(item.id)}
+      onClick={() => dispatch(removeItem(item.id))}
       className="bg-blue-500 text-white font-semibold  px-1 rounded-l"
     >
       🗑️
     </button>
   ) : (
     <button
-      onClick={() => decrementQuantity(item.id)}
+      onClick={() => dispatch(decrementQuantity(item.id))}
       className="bg-blue-500 text-white font-bold py-1 px-2 rounded-l"
     >
       -
@@ -75,13 +58,12 @@ const discount= 10;
     readOnly
   />
   <button
-    onClick={() => incrementQuantity(item.id)}
+    onClick={() => dispatch(incrementQuantity(item.id))}
     className="bg-blue-500 text-white font-bold py-1 px-2 rounded-r"
   >
     +
   </button>
 </div>
-
     
                       </div>
 

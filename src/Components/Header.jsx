@@ -1,14 +1,16 @@
 
 import React, { useState } from "react";
-import Cart from "./Cart";
+import { useDispatch, useSelector } from "react-redux";
+import {toggleCategoryDropdown, toggleUserDropdown } from "../Features/Mart/headerSlice"
 
-function Header({ isCartOpen, toggleCart }) {
-  const [toggle, setToggle] = useState(false);
-  const [toggleu, setToggleu] = useState(false);
+function Header({  toggleCart }) {
+  const dispatch = useDispatch();
+  const { categoryDropdownOpen, userDropdownOpen } = useSelector((state) => state.header);
 
   return (
     <>
       <div className="bg-white w-full fixed top-[3.5rem] left-0  z-40  gap-20 flex py-6 shadow    justify-between px-10">
+   
         <div className=" flex gap-36">
           <div className="title text-center">
             <h1 className="text-black text-3xl font-bold font-['Inter'] leading-normal  tracking-wide">
@@ -28,7 +30,7 @@ function Header({ isCartOpen, toggleCart }) {
                 <button
                   id="dropdown-button"
                   onClick={() => {
-                    setToggle(!toggle);
+                    dispatch(toggleCategoryDropdown())
                   }}
                   class="flex-col  h-[2.75rem]  px-5 z-10 inline-flex justify-center text-xs font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-l-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600"
                   type="button"
@@ -51,7 +53,7 @@ function Header({ isCartOpen, toggleCart }) {
                   </svg>
                   
                 </button>
-                {toggle && (
+                {categoryDropdownOpen && (
                     <ul
                       class="absolute z-[999] bg-gray-300 py-3 text-sm text-gray-700 dark:text-gray-200"
                       aria-labelledby="dropdown-button"
@@ -149,7 +151,8 @@ function Header({ isCartOpen, toggleCart }) {
             </svg>
           </button>
 
-          <button className="w-8 " onClick={toggleCart}>
+          
+          <button className="w-8 " onClick={toggleCart} >
             <svg
               width="32"
               height="32"
@@ -192,7 +195,7 @@ function Header({ isCartOpen, toggleCart }) {
           <button
             id="dropdown-user-button"
             onClick={() => {
-              setToggleu(!toggleu);
+              dispatch(toggleUserDropdown())
             }}
             className="w-8 "
           >
@@ -220,7 +223,7 @@ function Header({ isCartOpen, toggleCart }) {
               />
             </svg>
           </button>
-          {toggleu && (
+          {userDropdownOpen && (
           <div
             class= " absolute right-0  z-50     my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow-lg dark:bg-gray-700 dark:divide-gray-600"
             id="user-dropdown"

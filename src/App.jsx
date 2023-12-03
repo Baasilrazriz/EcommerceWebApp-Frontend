@@ -9,26 +9,16 @@ import { useState } from "react";
 import Cart from "./Components/Cart";
 import ProductCard from "./Components/ProductCard";
 import CategoryCard from "./Components/CategoryCard";
-
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "./Features/Mart/cartSlice";
 
 function App() {
+  const dispatch = useDispatch();
+  const categories=useSelector(state=>state.category)
   const [isCartOpen, setCartOpen] = useState(false);
-
   const toggleCart = () => {
     setCartOpen((prev) => !prev);
   };
-  const [quantity, setQuantity] = useState(1);
-   const [category, setCategory] = useState([
-    {name:"Woman’s Fashion"  ,image:"https://images.deliveryhero.io/image/darsktores-pk/PepsiHOB_oct23.png?height=104&dpi=1"},
-    {name:"Men’s Fashion"    ,image:"https://images.deliveryhero.io/image/darsktores-pk/PepsiHOB_oct23.png?height=104&dpi=1"},
-    {name:"Electronics"      ,image:"https://images.deliveryhero.io/image/darsktores-pk/PepsiHOB_oct23.png?height=104&dpi=1"},
-    {name:"Home & Lifestyle" ,image:"https://images.deliveryhero.io/image/darsktores-pk/PepsiHOB_oct23.png?height=104&dpi=1"},
-    {name:"Medicine"         ,image:"https://images.deliveryhero.io/image/darsktores-pk/PepsiHOB_oct23.png?height=104&dpi=1"},
-    {name:"Sports & Outdoor" ,image:"https://images.deliveryhero.io/image/darsktores-pk/PepsiHOB_oct23.png?height=104&dpi=1"},
-    {name:"Baby’s & Toys"    ,image:"https://images.deliveryhero.io/image/darsktores-pk/PepsiHOB_oct23.png?height=104&dpi=1"} ,
-    {name:"Groceries & Pets" ,image:"https://images.deliveryhero.io/image/darsktores-pk/PepsiHOB_oct23.png?height=104&dpi=1"},
-    {name:"Health & Beauty"  ,image:"https://images.deliveryhero.io/image/darsktores-pk/PepsiHOB_oct23.png?height=104&dpi=1"}
-  ]);
 
  
   const [items, setItems] = useState([
@@ -99,34 +89,34 @@ function App() {
     }
  
   ]);
+  
+ 
 
-  const [cartItems, setCartItems] = useState([]);
+  // const addToCart = (productId, productName, productPrice, productImage) => {
+  //   const existingItem = cartItems.find((item) => item.id === productId);
 
-  const addToCart = (productId, productName, productPrice, productImage) => {
-    const existingItem = cartItems.find((item) => item.id === productId);
-
-    if (existingItem) {
-      // If the item is already in the cart, update its quantity
-      const updatedCart = cartItems.map((item) =>
-        item.name === productName
-          ? { ...item, quantity: item.quantity + 1 }
-          : item
-      );
-      setCartItems(updatedCart);
-    } else {
-      // If the item is not in the cart, add it with quantity 1
-      setCartItems([
-        ...cartItems,
-        {
-          id: productId,
-          name: productName,
-          price: productPrice,
-          image: productImage,
-          quantity: 1,
-        },
-      ]);
-    }
-  };
+  //   if (existingItem) {
+  //     // If the item is already in the cart, update its quantity
+  //     const updatedCart = cartItems.map((item) =>
+  //       item.name === productName
+  //         ? { ...item, quantity: item.quantity + 1 }
+  //         : item
+  //     );
+  //     setCartItems(updatedCart);
+  //   } else {
+  //     // If the item is not in the cart, add it with quantity 1
+  //     setCartItems([
+  //       ...cartItems,
+  //       {
+  //         id: productId,
+  //         name: productName,
+  //         price: productPrice,
+  //         image: productImage,
+  //         quantity: 1,
+  //       },
+  //     ]);
+  //   }
+  // };
   const contentWidth = isCartOpen ? "w-[75%]" : "w-[100%]";
   const groupedProducts = {};
 
@@ -141,10 +131,10 @@ function App() {
   return (
     <div className="">
       <Banner />
-      <Header isCartOpen={isCartOpen} toggleCart={toggleCart} />
+      <Header toggleCart={toggleCart} />
       {isCartOpen && (
         <div className="absolute right-7   w-[25%] ">
-          <Cart items={cartItems} setItems={setCartItems} />
+          <Cart  />
         </div>
       )}
       <div
@@ -153,7 +143,7 @@ function App() {
         <div className="h-full w-full ">
           <div className="mt-20 mb-24 justify-center  flex gap-4 h-auto w-full ">
             <div className="">
-              <Category category={category} />
+              <Category  />
             </div>
             <div className="w-[983px] h-[352px] rounded-xl overflow-hidden">
               <CarouselDefault />
@@ -163,7 +153,7 @@ function App() {
           <div className="mx-14 my-5">
           <Heading  title="Categories" tagline={`Explore our categories`}/>
               <div className=" my-10 flex flex-row  flex-wrap gap-5 ">
-                        {category.map((cat) => (
+                        {categories.map((cat) => (
                         <CategoryCard  name={cat.name} image={cat.image} />
                         ))}
               </div>
@@ -175,8 +165,8 @@ function App() {
               <Heading  title={category} tagline={`Explore our ${category} products`}/>
               <div className="product-section my-10 flex flex-row  flex-wrap gap-5 ">
                         {categoryProducts.map((product) => (
-                        <ProductCard  image={product.image} name={product.name} price={product.price} handleAddToCart={()=>{addToCart(product.id,product.name,product.price,product.image)}} />
-                        
+                        <ProductCard  image={product.image} name={product.name} price={product.price} handleAddToCart={()=>{dispatch(addToCart({id:product.id,name:product.name,price:product.price,image:product.image}))}} />
+          
                         ))}
               </div>
             </div>
