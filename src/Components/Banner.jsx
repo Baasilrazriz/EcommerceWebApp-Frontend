@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {  setToggle } from '../features/Mart/bannerSlice';
+import {  setToggle } from '../Features/Mart/bannerSlice';
 
 function Banner() {
   const dispatch = useDispatch();

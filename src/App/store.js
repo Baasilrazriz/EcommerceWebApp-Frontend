@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
-import bannerReducer from '../features/Mart/bannerSlice';
+import bannerReducer from '../features/Mart/bannerSlice'
 import headerReducer from '../Features/Mart/headerSlice'
+import userReducer from '../Features/Mart/userSlice'
 import cartReducer from '../Features/Mart/cartSlice'
 import categoryReducer from '../Features/Mart/categorySlice'
 export const store = configureStore({
@@ -8,6 +9,8 @@ export const store = configureStore({
     banner: bannerReducer,
     header: headerReducer,
     cart: cartReducer,
-category:categoryReducer
+category:categoryReducer,
+user: userReducer,
+
 },
 });

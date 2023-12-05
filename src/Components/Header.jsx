@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {toggleCategoryDropdown, toggleUserDropdown } from "../Features/Mart/headerSlice"
+import { NavLink } from "react-router-dom";
 
 function Header({  toggleCart }) {
   const dispatch = useDispatch();
@@ -192,11 +193,11 @@ function Header({  toggleCart }) {
           </button>
           
           <div className="relative flex-col my-1">
-          <button
-            id="dropdown-user-button"
-            onClick={() => {
-              dispatch(toggleUserDropdown())
-            }}
+          <NavLink to={"/login"}
+            
+            // onClick={() => {
+            //   dispatch(toggleUserDropdown())
+            // }}
             className="w-8 "
           >
             <svg
@@ -222,7 +223,7 @@ function Header({  toggleCart }) {
                 stroke-linejoin="round"
               />
             </svg>
-          </button>
+          </NavLink>
           {userDropdownOpen && (
           <div
             class= " absolute right-0  z-50     my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow-lg dark:bg-gray-700 dark:divide-gray-600"

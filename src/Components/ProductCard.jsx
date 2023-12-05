@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 
 
-const ProductCard = ({ image, name, price,handleAddToCart}) => {
+const ProductCard = ({ image, name, price,handleAddToCart,handleAddToWishList}) => {
   
   return (
     <div className="relative flex flex-col     h-52  w-48  hover:bg-gray-100 items-center justify-center border-2 shadow-lg overflow-hidden">
@@ -10,6 +10,12 @@ const ProductCard = ({ image, name, price,handleAddToCart}) => {
       <h3 className="text-lg text-center  my-2 ">{name}</h3>
       <p className="text-gray-600 mb-2">Rs. {price}</p>
       <div className="flex items-center justify-center">
+        <button
+          className="text-green-500 hover:bg-green-700 hover:text-white border-2 bg-white rounded-full px-2 py-1 absolute  top-5 right-3"
+          onClick={handleAddToWishList}
+        > 
+    ♡      
+        </button>
         <button
           className="text-green-500 hover:bg-green-700 hover:text-white border-2 bg-white rounded-full px-2 py-1 absolute  top-16 right-3"
           onClick={handleAddToCart}
