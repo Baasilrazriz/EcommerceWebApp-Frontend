@@ -1,12 +1,15 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 
 function CategoryCard(props) {
     return (
         <>
-        <div>
-            <img src={props.image} alt={props.name} srcset="" />
-            <h1>{props.name}</h1>
+        <NavLink to={`/category/${props.name}`}>
+        <div  className=' flex flex-col     h-52  w-48  hover:bg-gray-100 items-center justify-center border-2 shadow-lg overflow-hidden' >
+            <img className='w-24 h-24 object-cover' src={props.image} alt={props.name} srcset="" />
+            <h1 className='text-lg text-center  my-2 '>{props.name}</h1>
         </div>
+        </NavLink>
         </>
     )
 }

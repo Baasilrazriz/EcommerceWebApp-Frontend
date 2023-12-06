@@ -1,12 +1,16 @@
-import { createSlice, nanoid } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState={
-  cartItems:[]
+  cartItems:[],
+  isCartOpen:false,
 }
 const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
+    toggleCart: (state) => {
+      state.isCartOpen = !state.isCartOpen;
+    },
     addToCart: (state, action) => {
       const existingItem = state.cartItems.find((item) => item.id === action.payload.id);
       if (existingItem) {
@@ -45,5 +49,5 @@ const cartSlice = createSlice({
   },
 });
 
-export const { addToCart, incrementQuantity, decrementQuantity, removeItem } = cartSlice.actions;
+export const {toggleCart, addToCart, incrementQuantity, decrementQuantity, removeItem } = cartSlice.actions;
 export default cartSlice.reducer;

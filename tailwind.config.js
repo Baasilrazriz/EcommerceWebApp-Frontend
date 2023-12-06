@@ -7,7 +7,9 @@ export default {
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    
+  ],
 }
 const withMT = require("@material-tailwind/react/utils/withMT");
  
@@ -16,5 +18,8 @@ module.exports = withMT({
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [ 
+    
+  ]
+    ,
 });

@@ -2,11 +2,22 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {toggleCategoryDropdown, toggleUserDropdown } from "../Features/Mart/headerSlice"
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import LoginModal from "./LoginModal";
+import { openLoginModal } from "../Features/Mart/LoginSlice";
+import { useEffect } from "react";
+
 
 function Header({  toggleCart }) {
   const dispatch = useDispatch();
   const { categoryDropdownOpen, userDropdownOpen } = useSelector((state) => state.header);
+const categories=useSelector(state=>state.category.cat)
+const handleOpenLoginModal = () => {
+  document.body.style.overflowY="hidden"
+  dispatch(openLoginModal());
+
+};
+
 
   return (
     <>
@@ -15,7 +26,8 @@ function Header({  toggleCart }) {
         <div className=" flex gap-36">
           <div className="title text-center">
             <h1 className="text-black text-3xl font-bold font-['Inter'] leading-normal  tracking-wide">
-              Exclusive
+            <NavLink to={"/"}>Exclusive</NavLink>
+                            
             </h1>
           </div>
 
@@ -33,7 +45,7 @@ function Header({  toggleCart }) {
                   onClick={() => {
                     dispatch(toggleCategoryDropdown())
                   }}
-                  class="flex-col  h-[2.75rem]  px-5 z-10 inline-flex justify-center text-xs font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-l-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600"
+                  class="flex-col   h-[2.75rem]  px-8  z-20 inline-flex justify-center text-xs font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-l-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600"
                   type="button"
                 >
                   All categories
@@ -56,42 +68,17 @@ function Header({  toggleCart }) {
                 </button>
                 {categoryDropdownOpen && (
                     <ul
-                      class="absolute z-[999] bg-gray-300 py-3 text-sm text-gray-700 dark:text-gray-200"
+                      class="overflow-hidden absolute  -z-10  text-sm  bg-gray-200 text-gray-700 dark:text-gray-200 rounded-bl-lg rounded-br-lg  focus:ring-4 focus:outline-none focus:ring-gray-100  border border-gray-300 "
                       aria-labelledby="dropdown-button"
                     >
-                      <li>
-                        <button
-                          type="button"
-                          class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                        >
-                          Mockups
-                        </button>
-                      </li>
-                      <li>
-                        <button
-                          type="button"
-                          class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                        >
-                          Templates
-                        </button>
-                      </li>
-                      <li>
-                        <button
-                          type="button"
-                          class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                        >
-                          Design
-                        </button>
-                      </li>
-                      <li>
-                        <button
-                          type="button"
-                          class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                        >
-                          Logos
-                        </button>
-                      </li>
+                       {categories.map((cat, index) => (
+          <li className=" w-full text-center  hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white " key={index}>
+            <NavLink to={`/category/${cat.name}`} ClassName="text-blue-500" >{cat.name}</NavLink>
+          </li>
+          
+        ))}
                     </ul>
+                    
                   )}
                 </div>
                 
@@ -133,6 +120,7 @@ function Header({  toggleCart }) {
         </div>
 
         <div className="justify-center gap-6 flex h-10 my-1">
+          <NavLink to={"/wishlist"}>
           <button className="w-8  ">
             <svg
               className=""
@@ -151,6 +139,7 @@ function Header({  toggleCart }) {
               />
             </svg>
           </button>
+          </NavLink>
 
           
           <button className="w-8 " onClick={toggleCart} >
@@ -193,12 +182,12 @@ function Header({  toggleCart }) {
           </button>
           
           <div className="relative flex-col my-1">
-          <NavLink to={"/login"}
             
-            // onClick={() => {
-            //   dispatch(toggleUserDropdown())
-            // }}
+          <button 
+            
+         
             className="w-8 "
+            onClick={handleOpenLoginModal}
           >
             <svg
               width="32"
@@ -223,7 +212,8 @@ function Header({  toggleCart }) {
                 stroke-linejoin="round"
               />
             </svg>
-          </NavLink>
+          </button>
+          <LoginModal/>
           {userDropdownOpen && (
           <div
             class= " absolute right-0  z-50     my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow-lg dark:bg-gray-700 dark:divide-gray-600"

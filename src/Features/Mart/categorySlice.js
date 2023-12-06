@@ -12,19 +12,13 @@ const initialState={
     {name:"Toys & Games" ,image:"https://images.deliveryhero.io/image/darsktores-pk/Catagory_Banner222/26.jpg?height=96&dpi=1",link:"/toys"},
     {name:"Spices"  ,image:"https://images.deliveryhero.io/image/darsktores-pk/Spices&Recipes_tile_10sept.jpg?height=96&dpi=1",link:"/spices"},    
   ],
-  prodInCat:[]
+  
 }
 const categorySlice = createSlice({
   name: 'category',
   initialState,
-  reducers: {
-    setProdInCat:(state,action)=>{
-      const cat=Object.groupBy(action.payload.item,({category})=>category);
-      state.prodInCat.push(cat);
-    }
-    
-  },
+  reducers: {    },
 });
 
-export const { setProdInCat } = categorySlice.actions;
+
 export default categorySlice.reducer;

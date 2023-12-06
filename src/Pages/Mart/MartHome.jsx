@@ -8,67 +8,15 @@ import Cart from "../../Components/Cart";
 import ProductCard from "../../Components/ProductCard";
 import CategoryCard from "../../Components/CategoryCard";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../../Features/Mart/cartSlice";
-import {setProdInCat} from "../../Features/Mart/categorySlice"
+import { addToCart,toggleCart } from "../../Features/Mart/cartSlice";
+import MartHeader from "./MartHeader";
+import { addTowishList } from "../../Features/Mart/wishSlice";
+
 function MartHome() {
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.category.cat);
-  const [isCartOpen, setCartOpen] = useState(false);
-  
-  const toggleCart = () => {
-    setCartOpen((prev) => !prev);
-  };
-
-  const [items, setItems] = useState([
-    {
-      id: 1,
-      name: "Olper's Milk Full Cream",
-      price: 395,
-      category: "Dairy Products",
-      quantity: 1,
-      image:
-        "https://images.deliveryhero.io/image/darsktores-pk/8964000346549.jpg?width=75&height=75",
-    },
-    {
-      id: 2,
-      name: "Cola Next",
-      price: 199,
-      category: "Beverages",
-      quantity: 15,
-      image:
-        "https://images.deliveryhero.io/image/darsktores-pk/Catagory_Banner222/41.jpg?height=96&dpi=1",
-    },
-
-    {
-      id: 3,
-      name: "Chocolates",
-      price: 215,
-      category: "Category B",
-      quantity: 1,
-      image:
-        "https://images.deliveryhero.io/image/darsktores-pk/Category_Banner2/03.jpg?height=96&dpi=1",
-    },
-    {
-      id: 4,
-      name: "Kurlees",
-      price: 73,
-      category: "Snacks",
-      quantity: 1,
-      image:
-        "https://images.deliveryhero.io/image/darsktores-pk/Category_Banner2/Snacks&conf12Septtile.jpg?height=96&dpi=1",
-    },
-    {
-      id: 5,
-      name: "Walls Chocolate",
-      price: 199,
-      category: "Ice Creams & Deserts",
-      quantity: 15,
-      image:
-        "https://images.deliveryhero.io/image/darsktores-pk/Catagory_Banner222/34.jpg?height=96&dpi=1",
-    }
-    
-  ]);
-
+  const items= useSelector(state=>state.product.products);
+  const isCartOpen= useSelector(state=>state.cart.isCartOpen)
   
   
   const contentWidth = isCartOpen ? "w-[75%]" : "w-[100%]";
@@ -83,14 +31,9 @@ function MartHome() {
   });
 
   return (
+    
     <div className="">
-      <Banner />
-      <Header toggleCart={toggleCart} />
-      {isCartOpen && (
-        <div className="absolute right-7   w-[25%] ">
-          <Cart />
-        </div>
-      )}
+      <MartHeader/>
       <div
         className={`mt-28 flex flex-row ${contentWidth}   px-10  justify-around `}
       >
@@ -136,6 +79,14 @@ function MartHome() {
                             })
                           );
                         }}
+                        handleAddToWishList={()=>{
+                          dispatch(addTowishList({
+                            id: product.id,
+                            name: product.name,
+                            price: product.price,
+                            image: product.image,
+                            quantity:product.quantity,
+                      }))}}
                       />
                     ))}
                   </div>
