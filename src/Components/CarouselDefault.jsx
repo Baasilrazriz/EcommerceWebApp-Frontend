@@ -4,7 +4,7 @@ function CarouselDefault() {
   return (
     <>
 
-<Carousel className="-z-50">
+<Carousel className="">
 <img
   src="https://icms-image.slatic.net/images/ims-web/96e0df13-5792-4bdc-a9e8-145c1b15980c.jpg"
   alt="image 1"

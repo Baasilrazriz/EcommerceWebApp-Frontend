@@ -8,14 +8,18 @@ function Category() {
 
 
   return (
-    <div className="w-full h-full">
-      <ul className='flex-col items-start gap-4 inline-flex rounded-lg bg-white pl-2 shadow-2xl w-60 py-1 border border-gray-400'>
+    <div className=" h-[22rem]   w-full rounded-lg overflow-x-hidden overflow-y-scroll scroll  border border-gray-400 shadow-2xl">
+      <ul className='  flex-col items-start  gap-4 inline-flex   bg-white   w-60   '>
         {categories.map((cat, index) => (
-          <li className="w-full text-left hover:bg-gray-50  text-black text-base font-normal font-['Poppins'] leading-normal" key={index}>
+          <li className="ml-2 w-full text-left hover:bg-gray-50  text-black text-base font-normal  font-['Poppins'] leading-normal" key={index}>
             <NavLink to={`/category/${cat.name}`} ClassName="text-blue-500" >{cat.name}</NavLink>
           </li>
-        ))}
+      
+      ))}
+      
+        
       </ul>
+      
     </div>
   );
 }
