@@ -2,49 +2,46 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { closeLoginModal } from "../Features/Mart/LoginSlice";
-import { Login } from "./Login";
-import { login, setEmail, setPassword, setUserRole } from "../Features/Mart/userSlice";
-
-const LoginModal = () => {
-  const isLoginModal = useSelector((state) => state.login.isLoginModalOpen);
-  const dispatch = useDispatch();
-  const authState = useSelector((state) => state.login.isAuthenticated);
-  const userRole = useSelector((state) => state.user.role);
   
-  const [email, setEmailLocal] = useState("");
-  const [password, setPasswordLocal] = useState("");
-
-  const handleRoleChange = (role) => {
-    dispatch(setUserRole(role));
-  };
-
-  const handleEmailChange = (e) => {
-    setEmailLocal(e.target.value);
-    dispatch(setEmail(e.target.value));
-  };
-
-  const handlePasswordChange = (e) => {
-    setPasswordLocal(e.target.value);
-    dispatch(setPassword(e.target.value));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-      if (email === 'baasilrazriz@email.com' && password === 'bas123') {
-        try {
-          dispatch(login());
-          alert(`${userRole} is is logged in from ${email}`);
-          dispatch(closeLoginModal());    
-          
-        } catch (error) {
-          alert("something went wrong")
-        }
-        
-      } else {
-        alert("incorrect credentials")
-      }
-  };
-
+  import { loginUser, setUserRole} from "../Features/Mart/userSlice";
+  const LoginModal = () => {
+    const dispatch = useDispatch();
+    const isLoginModal = useSelector((state) => state.login.isLoginModalOpen);
+  
+    const userRole = useSelector((state) => state.login.role); // Changed to state.login.role based on your initialState
+    const [username,setUsername]=useState('')
+    const [password,setPassword]=useState('')
+  
+    const handleRoleChange = (role) => {
+      dispatch(setUserRole({ role })); // Updated to send an object
+    
+    };
+  
+    const handleUsernameChange = (e) => {
+      setUsername(e.target.value);
+  
+    };
+  
+    const handlePasswordChange = (e) => {
+      setPassword(e.target.value);
+    };
+  
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      alert({ username, password })
+      // Dispatch loginUser with email and password
+      dispatch(loginUser({ username, password }))
+        .unwrap()
+        .then((originalPromiseResult) => {
+          // Handle success if needed
+          alert(`${userRole} is logged in from ${username}`);
+          dispatch(closeLoginModal());
+        })
+        .catch((rejectedValueOrSerializedError) => {
+          // Handle error here, for example:
+          alert("incorrect credentials or something went wrong");
+        });
+    };
   const handleClose = () => {
     dispatch(closeLoginModal());
     document.body.style.overflowY = "scroll";
@@ -121,12 +118,12 @@ const LoginModal = () => {
                     </div>
                     <div className="flex flex-col gap-5">
                       <input
-                        type="email"
-                        name="email"
+                        type="text"
+                        name="username"
                         className="  w-full px-3 py-2 border-2 border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
                         placeholder="Type your Email"
-                        value={email}
-                        onChange={handleEmailChange}
+                        value={username}
+                        onChange={handleUsernameChange}
                       />
                       <input
                         type="password"
