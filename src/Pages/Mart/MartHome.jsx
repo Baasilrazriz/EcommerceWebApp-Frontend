@@ -42,7 +42,7 @@ function MartHome() {
             <div className="">
               <Category />
             </div>
-            <div className="w-[983px] h-[352px] rounded-xl overflow-hidden z-1">
+            <div className="w-[983px] h-[352px] rounded-xl overflow-hidden z-0">
               <CarouselDefault />
             </div>
           </div>

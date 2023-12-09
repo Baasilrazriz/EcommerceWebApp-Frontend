@@ -31,9 +31,9 @@ const LoginModal = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    alert({ username, password });
+    
     // Dispatch loginUser with email and password
-    dispatch(loginUser({ username, password }))
+    await dispatch(loginUser({ username, password }))
       .unwrap()
       .then((originalPromiseResult) => {
         // Handle success if needed
@@ -59,7 +59,7 @@ const LoginModal = () => {
     <>
     
       {isLoginModal && (
-        <div className="  modal-overlay fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center ">
+        <div className="  z-10 modal-overlay fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center ">
           <div className="   login-modal bg-white   h-[30rem] w-[55rem] rounded-md overflow-hidden">
             <div className="flex h-full w-full ">
               <div className=" w-[53%] ">
@@ -166,6 +166,7 @@ const LoginModal = () => {
                           Password
                         </label>
                       </div>
+                      
                       <div className="flex  justify-end">
                         <NavLink
                           className=" text-xs text-red-300 font-bold cursor-pointer relative border-none bg-transparent uppercase transition-all duration-400 ease-in hover:text-red-700 focus:text-red-600 hover:underline focus:underline hover:scale-105 hover:brightness-110 hover:animate-pulse active:animate-bounce"
@@ -173,7 +174,7 @@ const LoginModal = () => {
                         >
                           Forgot your Password?
                         </NavLink>
-                        <ForgotPasswordModal/>
+                        
                       </div>
 
                       <div className="flex justify-center">
@@ -203,6 +204,7 @@ const LoginModal = () => {
           </div>
         </div>
       )}
+      <ForgotPasswordModal/>
     </>
   );
 };

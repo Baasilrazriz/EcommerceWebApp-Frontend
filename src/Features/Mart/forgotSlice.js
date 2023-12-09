@@ -6,6 +6,7 @@ const forgotSlice = createSlice({
   initialState: {
     step: 1, 
     username: '',
+    email:'',
     medium: '',
     otp: '',
     isForgotModalOpen:false,
@@ -21,6 +22,9 @@ const forgotSlice = createSlice({
     },
     setUsername: (state, action) => {
       state.username = action.payload;
+    },
+    setEmail: (state, action) => {
+      state.email = action.payload;
     },
     setMedium: (state, action) => {
       state.medium = action.payload;
@@ -40,7 +44,7 @@ const forgotSlice = createSlice({
   },
 });
 
-export const {setselectedDropdownValue,openforgotModal, closeforgotModal, setStep, setUsername, setMedium, setOTP, setNewPassword } = forgotSlice.actions;
+export const {setselectedDropdownValue,openforgotModal, setEmail,closeforgotModal, setStep, setUsername, setMedium, setOTP, setNewPassword } = forgotSlice.actions;
 
 export default forgotSlice.reducer;
 

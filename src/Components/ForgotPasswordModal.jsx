@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { closeforgotModal } from "../Features/Mart/forgotSlice";
+import { closeforgotModal, setStep } from "../Features/Mart/forgotSlice";
 import FogotPage1 from "./ForgotPasswordComponents/FogotPage1";
 import FogotPage2 from "./ForgotPasswordComponents/FogotPage2";
 import FogotPage3 from "./ForgotPasswordComponents/FogotPage3";
@@ -19,13 +19,13 @@ const ForgotPasswordModal = () => {
   const handleClose = () => {
     dispatch(closeforgotModal());
     document.body.style.overflowY = "scroll";
-    
+    dispatch(setStep(1))
   };
 
   return (
     <>
       {isForgotModal && (
-        <div className=" z-30 modal-overlay fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center ">
+        <div className=" z-20 modal-overlay fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center ">
           <div className=" login-modal bg-white   h-[30rem] w-[55rem] rounded-md overflow-hidden">
             <div className="flex h-full w-full ">
               <div className=" w-[53%] ">
