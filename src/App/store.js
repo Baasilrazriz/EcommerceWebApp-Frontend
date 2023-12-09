@@ -8,6 +8,7 @@ import productReducer from "../Features/Mart/productSlice";
 import wishReducer from "../Features/Mart/wishSlice";
 import loginReducer from "../Features/Mart/LoginSlice";
 import forgotReducer from "../Features/Mart/forgotSlice";
+import signupReducer from "../Features/Mart/signupSlice";
 export const store = configureStore({
   reducer: {
     banner: bannerReducer,
@@ -19,5 +20,6 @@ export const store = configureStore({
     wish: wishReducer,
     login: loginReducer,
     forgot: forgotReducer,
+    signup:signupReducer,
   },
 });
