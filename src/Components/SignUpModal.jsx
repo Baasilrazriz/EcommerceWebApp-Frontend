@@ -1,18 +1,19 @@
 import { useDispatch, useSelector } from "react-redux";
-import {  setStep } from "../Features/Mart/signupSlice";
+import { setStep } from "../Features/Mart/signupSlice";
 import { closeSignupModal } from "../Features/Mart/signupSlice";
-
+import SignupPage1 from "./SignUpComponents/SignupPage1";
+import SignupPage2 from "./SignUpComponents/SignupPage2";
+import SignupPage3 from "./SignUpComponents/SignupPage3";
+import SignupPage4 from "./SignUpComponents/SignupPage4"
 
 function SignUpModal() {
-   
   const dispatch = useDispatch();
   const step = useSelector((state) => state.signup.step);
   const isSignupModal = useSelector((state) => state.signup.isSignupModalOpen);
-
   const handleClose = () => {
     dispatch(closeSignupModal());
     document.body.style.overflowY = "scroll";
-    dispatch(setStep(1))
+    dispatch(setStep(1));
   };
   return (
     <>
@@ -29,19 +30,22 @@ function SignUpModal() {
                 />
               </div>
 
-              <div className=" w-[47%]   ">
-                <div className="flex justify-end mt-1 mr-1">
+              <div className=" w-[47%]    ">
+                <div className="flex justify-end mt-1 mr-1"onClick={handleClose}>
                   <button
-                    className="relative top-0  bg-red-500 text-white px-2 py-1 rounded-full transform transition-all duration-500 ease-in-out hover:scale-110   active:animate-bounce"
+                    className="absolute top-30 right-[21rem]  bg-red-500 text-white px-2 py-1 rounded-full transform transition-all duration-500 ease-in-out hover:scale-110   active:animate-bounce"
                     onClick={handleClose}
                   >
                     x
                   </button>
                 </div>
                 <h1 className=" font-bold text-gray-700 text-4xl flex justify-center">
-                 Signup
+                  Signup
                 </h1>
-                
+           <div className="">
+            <SignupPage1/>
+           </div>
+           
               </div>
             </div>
           </div>
@@ -51,4 +55,4 @@ function SignUpModal() {
   );
 }
 
-export default SignUpModal
+export default SignUpModal;

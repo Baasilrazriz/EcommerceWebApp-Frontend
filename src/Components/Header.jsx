@@ -1,73 +1,110 @@
-
-import React, { useState } from "react";
+import {React , useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {toggleCategoryDropdown, toggleUserDropdown } from "../Features/Mart/headerSlice"
-import { NavLink, useNavigate } from "react-router-dom";
+import {
+  CloseCategoryDropdown,
+  CloseUserDropdown,
+  OpenCategoryDropdown,
+  
+  toggleUserDropdown,
+
+} from "../Features/Mart/headerSlice";
+import { NavLink } from "react-router-dom";
 import LoginModal from "./LoginModal";
-import { openLoginModal } from "../Features/Mart/LoginSlice";
-import { useEffect } from "react";
+import { loggedOut, openLoginModal } from "../Features/Mart/LoginSlice";
 
 
-function Header({  toggleCart }) {
+function Header({ toggleCart }) {
   const dispatch = useDispatch();
-  const { categoryDropdownOpen, userDropdownOpen } = useSelector((state) => state.header);
-const categories=useSelector(state=>state.category.cat)
-const handleOpenLoginModal = () => {
-  document.body.style.overflowY="hidden"
-  dispatch(openLoginModal());
+  const { categoryDropdownOpen, userDropdownOpen } = useSelector(
+    (state) => state.header
+  );
+  const username=useSelector(state=>state.auth.username)
+  const categories = useSelector((state) => state.category.cat);
+  const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
+  const handleSignOut=()=>{
+    dispatch(loggedOut());
+    window.location.reload();
+  }
+  const handleOpenLoginModal = () => {
+    if (isLoggedIn === false ) {
+      document.body.style.overflowY = "hidden";
+      dispatch(openLoginModal());
+    } else {
+      document.body.style.overflowY = "scroll";
+      dispatch(toggleUserDropdown());
+    }
+  };
+  const categoryDropdownRef = useRef(null);
+  const userDropdownRef = useRef(null);
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      // Close the category dropdown if a click occurs outside of it
+      if (categoryDropdownRef.current && !categoryDropdownRef.current.contains(event.target)) {
+        dispatch(CloseCategoryDropdown());
+      }
 
-};
+      // Close the user dropdown if a click occurs outside of it
+      if (userDropdownRef.current && !userDropdownRef.current.contains(event.target)) {
+        dispatch(CloseUserDropdown());
+      }
+    };
 
+    // Attach the event listener to the window
+    window.addEventListener('click', handleClickOutside);
 
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener('click', handleClickOutside);
+    };
+  }, [dispatch]);  
   return (
     <>
       <div className="bg-white w-full fixed top-[3.5rem] left-0  z-40  gap-20 flex py-6 shadow    justify-between px-10">
-   
         <div className=" flex gap-36">
           <div className="title text-center">
             <h1 className="text-black text-3xl font-bold font-['Inter'] leading-normal  tracking-wide">
-            <NavLink to={"/"}>Exclusive</NavLink>
-                            
+              <NavLink to={"/"}>Exclusive</NavLink>
             </h1>
           </div>
-
-          
         </div>
 
-        <div className=" gap-14 flex">
+        <div className=" gap-14 flex" ref={categoryDropdownRef}>
           <div className="  rounded flex-col justify-center items-center  inline-flex">
             <form className="bg-white">
               <div class="flex bg-white">
-                
                 <div className="  relative flex-col">
-                <button
-                  id="dropdown-button"
-                  onClick={() => {
-                    dispatch(toggleCategoryDropdown())
-                  }}
-                  class="flex-col   h-[2.75rem]  px-8  z-20 inline-flex justify-center text-xs font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-l-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600"
-                  type="button"
-                >
-                  All categories
-                  
-                  
-                </button>
-                {categoryDropdownOpen && (
+                  <button
+                    id="dropdown-button"
+                    onClick={() => {
+                      dispatch(OpenCategoryDropdown());
+                    }}
+                    class="flex-col   h-[2.75rem]  px-8  z-20 inline-flex justify-center text-xs font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-l-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600"
+                    type="button"
+                  >
+                    All categories
+                  </button>
+                  {categoryDropdownOpen && (
                     <ul
                       class="overflow-hidden absolute  -z-10  text-sm  bg-gray-200 text-gray-700 dark:text-gray-200 rounded-bl-lg rounded-br-lg  focus:ring-4 focus:outline-none focus:ring-gray-100  border border-gray-300 "
                       aria-labelledby="dropdown-button"
                     >
-                       {categories.map((cat, index) => (
-          <li className=" w-full text-center  hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white " key={index}>
-            <NavLink to={`/category/${cat.name}`} ClassName="text-blue-500" >{cat.name}</NavLink>
-          </li>
-          
-        ))}
+                      {categories.map((cat, index) => (
+                        <li
+                          className=" w-full text-center  hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white "
+                          key={index}
+                        >
+                          <NavLink
+                            to={`/category/${cat.name}`}
+                            ClassName="text-blue-500"
+                          >
+                            {cat.name}
+                          </NavLink>
+                        </li>
+                      ))}
                     </ul>
-                    
                   )}
                 </div>
-                
+
                 <div class="relative h-[2.8rem] w-full bg-white">
                   <input
                     type="search"
@@ -99,36 +136,34 @@ const handleOpenLoginModal = () => {
                     <span class="sr-only">Search</span>
                   </button>
                 </div>
-
               </div>
             </form>
           </div>
         </div>
 
-        <div className="justify-center gap-6 flex h-10 my-1">
+        <div className="justify-center gap-6 flex h-10 my-1" ref={userDropdownRef}>
           <NavLink to={"/wishlist"}>
-          <button className="w-8  ">
-            <svg
-              className=""
-              width="32"
-              height="40"
-              viewBox="0 0 32 32"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M11 7C8.239 7 6 9.216 6 11.95C6 14.157 6.875 19.395 15.488 24.69C15.6423 24.7839 15.8194 24.8335 16 24.8335C16.1806 24.8335 16.3577 24.7839 16.512 24.69C25.125 19.395 26 14.157 26 11.95C26 9.216 23.761 7 21 7C18.239 7 16 10 16 10C16 10 13.761 7 11 7Z"
-                stroke="black"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </button>
+            <button className="w-8  ">
+              <svg
+                className=""
+                width="32"
+                height="40"
+                viewBox="0 0 32 32"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M11 7C8.239 7 6 9.216 6 11.95C6 14.157 6.875 19.395 15.488 24.69C15.6423 24.7839 15.8194 24.8335 16 24.8335C16.1806 24.8335 16.3577 24.7839 16.512 24.69C25.125 19.395 26 14.157 26 11.95C26 9.216 23.761 7 21 7C18.239 7 16 10 16 10C16 10 13.761 7 11 7Z"
+                  stroke="black"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
           </NavLink>
 
-          
-          <button className="w-8 " onClick={toggleCart} >
+          <button className="w-8 " onClick={toggleCart}>
             <svg
               width="32"
               height="32"
@@ -166,93 +201,85 @@ const handleOpenLoginModal = () => {
               />
             </svg>
           </button>
-          
+
           <div className="relative flex-col my-1">
-            
-          <button 
-            
-         
-            className="w-8 "
-            onClick={handleOpenLoginModal}
-          >
-            <svg
-              width="32"
-              height="32"
-              viewBox="0 0 32 32"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <rect width="32" height="32" rx="16" fill="#DB4444" />
-              <path
-                d="M21 23V21.3333C21 20.4493 20.691 19.6014 20.1408 18.9763C19.5907 18.3512 18.8446 18 18.0667 18H12.9333C12.1554 18 11.4093 18.3512 10.8592 18.9763C10.309 19.6014 10 20.4493 10 21.3333V23"
-                stroke="white"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M16 15C17.6569 15 19 13.6569 19 12C19 10.3431 17.6569 9 16 9C14.3431 9 13 10.3431 13 12C13 13.6569 14.3431 15 16 15Z"
-                stroke="white"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </button>
-          <LoginModal/>
-          {userDropdownOpen && (
-          <div
-            class= " absolute right-0  z-50     my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow-lg dark:bg-gray-700 dark:divide-gray-600"
-            id="user-dropdown"
-          >
-            <div class="px-4 py-3">
-              <span class="block text-sm text-gray-900 dark:text-white">
-                Bonnie Green
-              </span>
-              <span class="block text-sm  text-gray-500 truncate dark:text-gray-400">
-                name@flowbite.com
-              </span>
-            </div>
-            <ul class="py-2" aria-labelledby="user-menu-button">
-              <li>
-                <a
-                  href="#"
-                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                >
-                  Dashboard
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                >
-                  Settings
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                >
-                  Earnings
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                >
-                  Sign out
-                </a>
-              </li>
-            </ul>
-          </div>
-        )}
+            <button className="w-8 " onClick={handleOpenLoginModal}>
+              <svg
+                width="32"
+                height="32"
+                viewBox="0 0 32 32"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect width="32" height="32" rx="16" fill="#DB4444" />
+                <path
+                  d="M21 23V21.3333C21 20.4493 20.691 19.6014 20.1408 18.9763C19.5907 18.3512 18.8446 18 18.0667 18H12.9333C12.1554 18 11.4093 18.3512 10.8592 18.9763C10.309 19.6014 10 20.4493 10 21.3333V23"
+                  stroke="white"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M16 15C17.6569 15 19 13.6569 19 12C19 10.3431 17.6569 9 16 9C14.3431 9 13 10.3431 13 12C13 13.6569 14.3431 15 16 15Z"
+                  stroke="white"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+            <LoginModal />
+            {userDropdownOpen && (
+              <div
+                class=" absolute right-0  z-50   my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow-lg dark:bg-gray-700 dark:divide-gray-600"
+              >
+                <div class="px-4 py-3">
+                  <span class="block text-sm text-gray-900 dark:text-white">
+                    {username}
+                  </span>
+                  <span class="block text-sm  text-gray-500 truncate dark:text-gray-400">
+                    {username}@gmail.com
+                  </span>
+                </div>
+                <ul class="py-2" aria-labelledby="user-menu-button">
+                  <li>
+                    <button
+                      
+                      class="w-full block text-start px-4  py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    >
+                      Track your Order
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      
+                      class="block w-full text-start px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    >
+                      Order History
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      
+                      class="block w-full text-start px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    >
+                      Help
+                    </button>
+                  </li>
+                  
+                  <li>
+                    <button
+                     onClick={handleSignOut} 
+                      class="w-full block text-start px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    >
+                      Sign out
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            )}
           </div>
         </div>
-        
-       
       </div>
     </>
   );

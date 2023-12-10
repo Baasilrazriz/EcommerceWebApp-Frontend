@@ -38,7 +38,7 @@ const ForgotPasswordModal = () => {
               </div>
 
               <div className=" w-[47%]   ">
-                <div className="flex justify-end mt-1 mr-1">
+                <div className="flex justify-end mt-1 mr-1"onClick={handleClose}>
                   <button
                     className="relative top-0  bg-red-500 text-white px-2 py-1 rounded-full transform transition-all duration-500 ease-in-out hover:scale-110   active:animate-bounce"
                     onClick={handleClose}

@@ -11,8 +11,17 @@ const headerSlice = createSlice({
   name: 'header',
   initialState,
   reducers: {
-    toggleCategoryDropdown: (state) => {
-      state.categoryDropdownOpen = !state.categoryDropdownOpen;
+    OpenCategoryDropdown: (state) => {
+      state.categoryDropdownOpen = true;
+    },
+    CloseCategoryDropdown:(state)=>{
+      state.categoryDropdownOpen = false;
+    },
+    OpenUserDropdown: (state) => {
+      state.userDropdownOpen = true;
+    },
+    CloseUserDropdown:(state)=>{
+      state.userDropdownOpen = false;
     },
     toggleUserDropdown: (state) => {
       state.userDropdownOpen = !state.userDropdownOpen;
@@ -23,5 +32,5 @@ const headerSlice = createSlice({
   },
 });
 
-export const { toggleCategoryDropdown, toggleUserDropdown,toggleCartDropdown } = headerSlice.actions;
+export const { toggleCategoryDropdown,toggleUserDropdown, CloseUserDropdown,OpenUserDropdown,CloseCategoryDropdown,OpenCategoryDropdown } = headerSlice.actions;
 export default headerSlice.reducer;

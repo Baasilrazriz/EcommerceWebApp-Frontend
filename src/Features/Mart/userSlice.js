@@ -24,19 +24,23 @@ export const logoutUser = createAsyncThunk('login/logoutUser', async () => {
 });
 
 export const userSlice = createSlice({
-  name: 'login',
+  name: 'auth',
   initialState: {
     role: null,
     username: '',
     isAuthenticated: false,
     password: '',
+    showPassword:false
   },
   reducers: {
+    togglePasswordVisibility:(state,action)=>{
+      state.showPassword = !state.showPassword;
+    },
     setUserRole: (state, action) => {
       state.role = action.payload.role;
     },
-    setUsername: (state, action) => {
-      state.username = action.payload.username;
+    setUsernames: (state, action) => {
+      state.username = action.payload;
     },
     setPassword: (state, action) => {
       state.password = action.payload.password;
@@ -59,6 +63,6 @@ export const userSlice = createSlice({
   },
 });
 
-export const { setUserRole, setUsername, setPassword } = userSlice.actions;
+export const { setUserRole, setUsernames, setPassword,togglePasswordVisibility } = userSlice.actions;
 
 export default userSlice.reducer;
