@@ -28,13 +28,21 @@ export const userSlice = createSlice({
   initialState: {
     role: null,
     username: '',
+    email:'',
     isAuthenticated: false,
     password: '',
+    profilepic:'',
     showPassword:false
   },
   reducers: {
     togglePasswordVisibility:(state,action)=>{
       state.showPassword = !state.showPassword;
+    },
+    setProfilePic:(state,action)=>{
+      state.profilepic = action.payload;
+    },
+    setEmail:(state,action)=>{
+      state.email = action.payload;
     },
     setUserRole: (state, action) => {
       state.role = action.payload.role;
@@ -63,6 +71,6 @@ export const userSlice = createSlice({
   },
 });
 
-export const { setUserRole, setUsernames, setPassword,togglePasswordVisibility } = userSlice.actions;
+export const {setProfilePic, setUserRole,setEmail, setUsernames, setPassword,togglePasswordVisibility } = userSlice.actions;
 
 export default userSlice.reducer;

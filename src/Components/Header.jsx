@@ -16,10 +16,12 @@ import { updateSearchTerm } from "../Features/searchSlice";
 
 function Header({ toggleCart }) {
   const dispatch = useDispatch();
+  const email=useSelector(state=>state.auth.email)
+  const profilepic=useSelector(state=>state.auth.profilepic)
   const { categoryDropdownOpen, userDropdownOpen } = useSelector(
     (state) => state.header
   );
-  const searchTerm = useSelector(state=>state.search.searchTerm);
+  const searchTerm = useSelector( state=>state.search.searchTerm);
   const username=useSelector(state=>state.auth.username)
   const categories = useSelector((state) => state.category.cat);
   const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
@@ -209,11 +211,12 @@ function Header({ toggleCart }) {
             </svg>
           </button>
 
-          <div className="relative flex-col my-1">
-            <button className="w-8 " onClick={handleOpenLoginModal}>
-              <svg
-                width="32"
-                height="32"
+          <div className="relative flex-col ">
+            <button className="w-10 h-10 rounded-full overflow-hidden" onClick={handleOpenLoginModal}>
+            {isLoggedIn?<img className="h-full w-full object-fill" src={profilepic} alt="" srcset="" />
+              :<svg
+                width= "35"
+                height="35"
                 viewBox="0 0 32 32"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -234,9 +237,12 @@ function Header({ toggleCart }) {
                   stroke-linejoin="round"
                 />
               </svg>
+}
+
             </button>
             <LoginModal />
             {userDropdownOpen && (
+              
               <div
                 class=" absolute right-0  z-50   my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow-lg dark:bg-gray-700 dark:divide-gray-600"
               >
@@ -245,7 +251,7 @@ function Header({ toggleCart }) {
                     {username}
                   </span>
                   <span class="block text-sm  text-gray-500 truncate dark:text-gray-400">
-                    {username}@gmail.com
+                  {email}
                   </span>
                 </div>
                 <ul class="py-2" aria-labelledby="user-menu-button">

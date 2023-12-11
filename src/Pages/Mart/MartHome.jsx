@@ -2,8 +2,6 @@
 import CarouselDefault from "../../Components/CarouselDefault";
 import Category from "../../Components/Category";
 import Heading from "../../Components/Heading";
-import { useState } from "react";
-import Cart from "../../Components/Cart";
 import ProductCard from "../../Components/ProductCard";
 import CategoryCard from "../../Components/CategoryCard";
 import { useDispatch, useSelector } from "react-redux";

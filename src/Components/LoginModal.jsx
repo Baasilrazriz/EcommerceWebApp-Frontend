@@ -9,12 +9,14 @@ import ForgotPasswordModal from "./ForgotPasswordModal";
 import {  openSignupModal } from "../Features/Mart/signupSlice";
 import {setUsernames} from "../Features/Mart/userSlice"
 import SignUpModal from "./SignUpModal";
-
+import GoogleButton from "./GoogleButton";
 const LoginModal = () => {
   const dispatch = useDispatch();
+  
   const isLoginModal = useSelector((state) => state.login.isLoginModalOpen);
   const showPassword = useSelector((state) => state.auth.showPassword);
   const userRole = useSelector((state) => state.auth.role); // Changed to state.login.role based on your initialState
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const handleTogglePassword = () => {
@@ -76,11 +78,11 @@ const LoginModal = () => {
     
       {isLoginModal && (
         <div className="  z-10 modal-overlay fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center ">
-          <div className="   login-modal bg-white   h-[30rem] w-[55rem] rounded-md overflow-hidden">
+          <div className="   login-modal bg-white   h-[33rem] w-[55rem] rounded-md overflow-hidden">
             <div className="flex h-full w-full ">
               <div className=" w-[53%] ">
                 <img
-                  className="h-[30rem]  object-fill"
+                  className="h-full  object-fill"
                   src="assets\loginbg1.jpg"
                   alt=""
                   srcset=""
@@ -173,7 +175,7 @@ const LoginModal = () => {
                           class="peer h-full w-full rounded-md border  order border-blue-gray-200 border-t-transparent bg-transparent px-3 py-3 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-cyan-500 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
                         />
                         <label class="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none text-[11px] font-normal leading-tight text-blue-gray-400 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-200 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-200 after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[4.1] peer-placeholder-shown:text-blue-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-cyan-500 peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:!border-cyan-500 peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:!border-cyan-500 peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
-                          Email
+                        username
                         </label>
                       </div>
                       <div class="relative h-11 w-full min-w-[200px]">
@@ -198,7 +200,7 @@ const LoginModal = () => {
                 >
                   {showPassword ? "Hide" : "Show"}
                 </button>
-                </div>
+                </div >
                       
                       <div className="flex  justify-end">
                         <NavLink
@@ -209,14 +211,20 @@ const LoginModal = () => {
                         </NavLink>
                         
                       </div>
-
-                      <div className="flex justify-center">
+<div className="flex flex-col gap-3">
+  
+<div className="flex justify-center">
                         <button
                           type="submit"
                           className=" bg-purple-800 hover:bg-purple-500 text-white font-bold py-3 w-[17rem]  rounded-3xl shadow-lg shadow-neutral-950 hover:text-white transform transition-all duration-500 ease-in-out hover:scale-110 hover:brightness-110 hover:animate-pulse active:animate-bounce"
                         >
                           Login
                         </button>
+                  
+</div>
+<div className="flex justify-center">
+<GoogleButton/>
+                  </div>
                       </div>
                       <div>
                         <p class="mt-1 flex justify-center font-sans text-sm font-light leading-normal text-inherit antialiased">
