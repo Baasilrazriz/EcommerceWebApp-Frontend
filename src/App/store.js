@@ -8,7 +8,9 @@ import productReducer from "../Features/Mart/productSlice";
 import wishReducer from "../Features/Mart/wishSlice";
 import loginReducer from "../Features/Mart/LoginSlice";
 import forgotReducer from "../Features/Mart/forgotSlice";
+import searchReducer from "../Features/searchSlice"
 import signupReducer from "../Features/Mart/signupSlice";
+
 export const store = configureStore({
   reducer: {
     banner: bannerReducer,
@@ -21,5 +23,7 @@ export const store = configureStore({
     login: loginReducer,
     forgot: forgotReducer,
     signup:signupReducer,
+    search:searchReducer,
+    
   },
 });

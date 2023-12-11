@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCart} from "../../Features/Mart/cartSlice";
 import ProductCard from "../../Components/ProductCard";
 import { addTowishList } from "../../Features/Mart/wishSlice";
+import Footer from "../../Components/Footer";
 function MartCategory() {
     const dispatch = useDispatch();
   const { categoryName } = useParams()
@@ -54,6 +55,7 @@ const categoryProducts=useSelector(state=>state.product.products)
              
             
           </div>
+          <Footer/>
     </>
   );
 }

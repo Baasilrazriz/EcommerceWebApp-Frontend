@@ -2,9 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setStep } from "../Features/Mart/signupSlice";
 import { closeSignupModal } from "../Features/Mart/signupSlice";
 import SignupPage1 from "./SignUpComponents/SignupPage1";
-import SignupPage2 from "./SignUpComponents/SignupPage2";
-import SignupPage3 from "./SignUpComponents/SignupPage3";
-import SignupPage4 from "./SignUpComponents/SignupPage4"
+
 
 function SignUpModal() {
   const dispatch = useDispatch();

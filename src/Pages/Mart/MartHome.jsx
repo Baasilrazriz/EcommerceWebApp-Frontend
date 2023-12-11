@@ -1,5 +1,4 @@
-import Banner from "../../Components/Banner";
-import Header from "../../Components/header";
+
 import CarouselDefault from "../../Components/CarouselDefault";
 import Category from "../../Components/Category";
 import Heading from "../../Components/Heading";
@@ -11,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCart,toggleCart } from "../../Features/Mart/cartSlice";
 import MartHeader from "./MartHeader";
 import { addTowishList } from "../../Features/Mart/wishSlice";
+import Footer from "../../Components/Footer";
 
 function MartHome() {
   const dispatch = useDispatch();
@@ -96,6 +96,7 @@ function MartHome() {
           </div>
         </div>
       </div>
+      <Footer/>
     </div>
   );
 }

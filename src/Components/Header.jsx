@@ -11,6 +11,7 @@ import {
 import { NavLink } from "react-router-dom";
 import LoginModal from "./LoginModal";
 import { loggedOut, openLoginModal } from "../Features/Mart/LoginSlice";
+import { updateSearchTerm } from "../Features/searchSlice";
 
 
 function Header({ toggleCart }) {
@@ -18,6 +19,7 @@ function Header({ toggleCart }) {
   const { categoryDropdownOpen, userDropdownOpen } = useSelector(
     (state) => state.header
   );
+  const searchTerm = useSelector(state=>state.search.searchTerm);
   const username=useSelector(state=>state.auth.username)
   const categories = useSelector((state) => state.category.cat);
   const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
@@ -109,12 +111,16 @@ function Header({ toggleCart }) {
                   <input
                     type="search"
                     id="search-dropdown"
+                    value={searchTerm}
+          onChange={(e) => dispatch(updateSearchTerm(e.target.value))}
                     class=" h-[2.75rem] pr-3 text-center  w-[30rem] z-20 text-sm text-gray-900 bg-gray-50  border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
                     placeholder="Search Mockups, Logos, Design Templates..."
                     required
                   />
+<NavLink  to="/search">
 
                   <button
+                 
                     type="submit"
                     class="absolute top-0 left-[30rem] p-3 text-sm font-medium h-full text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                   >
@@ -135,6 +141,7 @@ function Header({ toggleCart }) {
                     </svg>
                     <span class="sr-only">Search</span>
                   </button>
+                  </NavLink>
                 </div>
               </div>
             </form>
