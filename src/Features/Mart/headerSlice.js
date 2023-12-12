@@ -23,6 +23,9 @@ const headerSlice = createSlice({
     CloseUserDropdown:(state)=>{
       state.userDropdownOpen = false;
     },
+    toggleCategoryDropdown: (state) => {
+      state.categoryDropdownOpen = !state.categoryDropdownOpen;
+    },
     toggleUserDropdown: (state) => {
       state.userDropdownOpen = !state.userDropdownOpen;
     },
@@ -32,5 +35,5 @@ const headerSlice = createSlice({
   },
 });
 
-export const { toggleCategoryDropdown,toggleUserDropdown, CloseUserDropdown,OpenUserDropdown,CloseCategoryDropdown,OpenCategoryDropdown } = headerSlice.actions;
+export const { toggleCategoryDropdown,toggleUserDropdown, toggleCartDropdown,CloseUserDropdown,OpenUserDropdown,CloseCategoryDropdown,OpenCategoryDropdown } = headerSlice.actions;
 export default headerSlice.reducer;

@@ -4,10 +4,12 @@ import { useDispatch } from 'react-redux';
 import { setEmail, setProfilePic, setUsernames } from '../Features/Mart/userSlice';
 import { closeLoginModal, loggedIn } from '../Features/Mart/LoginSlice';
 import { jwtDecode } from 'jwt-decode';
+import { useNavigate } from 'react-router-dom';
 
 
 function GoogleButton() {
     const dispatch = useDispatch();
+    const navigation=useNavigate()  
     return (
         <>
         <GoogleLogin
@@ -19,6 +21,9 @@ function GoogleButton() {
     dispatch(setProfilePic(credentialResponseDecoded.picture))
     dispatch(loggedIn())
     dispatch(closeLoginModal())
+    
+    
+navigation('/')
     alert("success");
     document.body.style.overflowY = "scroll";
 

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { incrementQuantity, decrementQuantity, removeItem } from '../Features/Mart/cartSlice';
+import { useNavigate } from "react-router-dom";
 // {items,setItems}
 const Cart = () => {
   const dispatch = useDispatch();
@@ -9,7 +10,10 @@ const Cart = () => {
     
       const total = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
       const grandtotal = total+140+(total*(discount/100));
-
+      const navigation=useNavigate()
+const handleCheckOut=()=>{
+  navigation('/checkout')
+}
   return (
         <>
             
@@ -99,7 +103,7 @@ const Cart = () => {
                 <h4 className="px-5 py-2 text-[19px]  font-[750]   font-sans">Rs.  {grandtotal.toFixed(2)} </h4>
                    </div>
               
-              <button className="bg-blue-500 text-white font-bold  mt-3 ml-6 py-3 px-28 rounded">Go to Checkout</button>
+              <button onClick={handleCheckOut} className="bg-blue-500 text-white font-bold  mt-3 ml-6 py-3 px-28 rounded">Go to Checkout</button>
             </div>
           
     </div>  

@@ -5,10 +5,12 @@ import {
   CloseUserDropdown,
   OpenCategoryDropdown,
   
+  toggleCategoryDropdown,
+  
   toggleUserDropdown,
 
 } from "../Features/Mart/headerSlice";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate} from "react-router-dom";
 import LoginModal from "./LoginModal";
 import { loggedOut, openLoginModal } from "../Features/Mart/LoginSlice";
 import { updateSearchTerm } from "../Features/searchSlice";
@@ -21,6 +23,7 @@ function Header({ toggleCart }) {
   const { categoryDropdownOpen, userDropdownOpen } = useSelector(
     (state) => state.header
   );
+  const navigation=useNavigate()
   const searchTerm = useSelector( state=>state.search.searchTerm);
   const username=useSelector(state=>state.auth.username)
   const categories = useSelector((state) => state.category.cat);
@@ -30,13 +33,16 @@ function Header({ toggleCart }) {
     window.location.reload();
   }
   const handleOpenLoginModal = () => {
+
     if (isLoggedIn === false ) {
       document.body.style.overflowY = "hidden";
       dispatch(openLoginModal());
+      navigation('/login')
     } else {
       document.body.style.overflowY = "scroll";
       dispatch(toggleUserDropdown());
     }
+
   };
   const categoryDropdownRef = useRef(null);
   const userDropdownRef = useRef(null);
@@ -80,7 +86,7 @@ function Header({ toggleCart }) {
                   <button
                     id="dropdown-button"
                     onClick={() => {
-                      dispatch(OpenCategoryDropdown());
+                      dispatch(toggleCategoryDropdown());
                     }}
                     class="flex-col   h-[2.75rem]  px-8  z-20 inline-flex justify-center text-xs font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-l-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600"
                     type="button"
