@@ -10,7 +10,7 @@ import loginReducer from "../Features/Mart/LoginSlice";
 import forgotReducer from "../Features/Mart/forgotSlice";
 import searchReducer from "../Features/searchSlice"
 import signupReducer from "../Features/Mart/signupSlice";
-
+import navigationReducer from "../Features/navigationSlice"
 export const store = configureStore({
   reducer: {
     banner: bannerReducer,
@@ -24,6 +24,6 @@ export const store = configureStore({
     forgot: forgotReducer,
     signup:signupReducer,
     search:searchReducer,
-    
+    navigation:navigationReducer,
   },
 });

@@ -9,6 +9,7 @@ import ForgotPasswordModal from "./ForgotPasswordModal";
 import SignUpModal from "./SignUpModal";
 import GoogleButton from "./GoogleButton";
 import Login from "./Login";
+
 const LoginModal = () => {
   const isLoginModal = useSelector((state) => state.login.isLoginModalOpen);
 

@@ -32,6 +32,7 @@ const headerSlice = createSlice({
     toggleCartDropdown: (state) => {
       state.CartDropdownOpen = !state.CartDropdownOpen;
     },
+    
   },
 });
 

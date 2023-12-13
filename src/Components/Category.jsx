@@ -14,7 +14,6 @@ function Category() {
           <li className="ml-2 w-full text-left hover:bg-gray-50  text-black text-base font-normal  font-['Poppins'] leading-normal" key={index}>
             <NavLink to={`/category/${cat.name}`} ClassName="text-blue-500" >{cat.name}</NavLink>
           </li>
-      
       ))}
       
         

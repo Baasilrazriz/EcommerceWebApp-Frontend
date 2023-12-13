@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import { incrementQuantity, decrementQuantity, removeItem } from '../Features/Mart/cartSlice';
+import { incrementQuantity, decrementQuantity, removeItem, toggleCart } from '../Features/Mart/cartSlice';
 import { useNavigate } from "react-router-dom";
+
 // {items,setItems}
 const Cart = () => {
   const dispatch = useDispatch();
@@ -9,10 +10,11 @@ const Cart = () => {
   const discount= 10;
     
       const total = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
-      const grandtotal = total+140+(total*(discount/100));
+      const grandtotal = total+140-(total*(discount/100));
       const navigation=useNavigate()
 const handleCheckOut=()=>{
   navigation('/checkout')
+  dispatch(toggleCart())
 }
   return (
         <>
@@ -76,7 +78,7 @@ const handleCheckOut=()=>{
               ))}
                 {
                  items.length > 0
-                ? <div className="flex flex-col px-4 gap-1 py-2  text-gray-800 font-semibold  bg-white">
+                ? <div className="flex flex-col ml-5  px-4 gap-1 py-2  text-gray-800 font-semibold  bg-white">
                 <div className="flex flex-row    gap-[7.3rem]">
                 <h4 className="text-[18px] font-[400] font-sans  w-full">subtotal</h4>
                 <h4 className="text-[18px] font-[400] font-sans  w-full">Rs. {total}</h4>
@@ -85,7 +87,7 @@ const handleCheckOut=()=>{
                 <h4 className="text-[18px] font-[400] font-sans  w-full">delivery</h4>
                 <h4 className="text-[18px] font-[400] font-sans  w-full">Rs. 140</h4>
                    </div>
-                   <div className="flex flex-row  gap-[6rem]">
+                   <div className="flex flex-row  gap-[7rem]">
                 <h4 className="text-[18px] font-[400] font-sans  w-full">discount({discount}%)</h4>
                 <h4 className="text-[18px] font-[400] font-sans  w-full">Rs. {(total*(discount/100)).toFixed(2)} </h4>
                    </div>
@@ -100,7 +102,7 @@ const handleCheckOut=()=>{
         <div className="flex flex-row  gap-[6rem]">
         <h4 className="mx-5 py-2 text-[19px]  font-[700]   font-sans">Total: <span className="text-[10px] font-[700]">
 (Incl. VAT)</span></h4>
-                <h4 className="px-5 py-2 text-[19px]  font-[750]   font-sans">Rs.  {grandtotal.toFixed(2)} </h4>
+                <h4 className="px-5 py-2 text-[22px]  font-[750]   font-sans">Rs.  {grandtotal.toFixed(2)} </h4>
                    </div>
               
               <button onClick={handleCheckOut} className="bg-blue-500 text-white font-bold  mt-3 ml-6 py-3 px-28 rounded">Go to Checkout</button>
