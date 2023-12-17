@@ -8,7 +8,7 @@ import ProductCard from "../../Components/ProductCard";
 import { addTowishList } from "../../Features/Mart/wishSlice";
 import Footer from "../../Components/Footer";
 function MartCategory() {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const { categoryName } = useParams()
   const category=categoryName
 

@@ -63,7 +63,7 @@ const handleCheckOut=()=>{
     value={item.quantity}
     readOnly
   />
-  <button
+  <button    
     onClick={() => dispatch(incrementQuantity(item.id))}
     className="bg-blue-500 text-white font-bold py-1 px-2 rounded-r"
   >

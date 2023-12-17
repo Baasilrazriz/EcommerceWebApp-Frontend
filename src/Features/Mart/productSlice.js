@@ -47,7 +47,17 @@ const initialState={
       quantity: 15,
       image:
         "https://images.deliveryhero.io/image/darsktores-pk/Catagory_Banner222/34.jpg?height=96&dpi=1",
+    },
+    {
+      id: 5,
+      name: "Tomatoes",
+      price: 209,
+      category: "Fruits & Vegetables",
+      quantity: 15,
+      image:
+       "../assets/tomatoes.png",
     }
+
     
   ],
   prodInCat:[]
