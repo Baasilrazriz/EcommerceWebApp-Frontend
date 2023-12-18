@@ -19,7 +19,7 @@ const ProductCard = ({ image, name, price,handleAddToCart,handleAddToWishList}) 
   ♡      
       </button>
       <button
-        className="text-green-500 hover:bg-green-700 hover:text-white border-2 bg-white rounded-full px-2 py-1 absolute  top-16 right-3"
+        className=" text-green-500 hover:bg-green-700 hover:text-white border-2 bg-white rounded-full px-2 py-1 absolute  top-16 right-3"
         onClick={handleAddToCart}
       > 
   +      

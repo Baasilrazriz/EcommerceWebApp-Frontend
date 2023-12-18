@@ -23,7 +23,7 @@ function MartHeader() {
            <Banner />
       <Header toggleCart={handleToggleCart} />
       {isCartOpen && (
-        <div className="absolute right-6 inline-flex   w-[25%] ">
+        <div className="absolute right-1 inline-flex   w-[25%] ">
           <Cart />
         </div>
       )}

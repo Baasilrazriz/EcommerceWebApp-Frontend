@@ -10,7 +10,11 @@ import loginReducer from "../Features/Mart/LoginSlice";
 import forgotReducer from "../Features/Mart/forgotSlice";
 import searchReducer from "../Features/searchSlice"
 import signupReducer from "../Features/Mart/signupSlice";
+import CuisineReducer from "../Features/FoodDelivery/CuisineSlice";
+import restrauntReducer from  "../Features/FoodDelivery/restrauntSlice";
+import carouselReducer from "../Features/carouselSlice"
 import navigationReducer from "../Features/navigationSlice"
+
 export const store = configureStore({
   reducer: {
     banner: bannerReducer,
@@ -25,5 +29,8 @@ export const store = configureStore({
     signup:signupReducer,
     search:searchReducer,
     navigation:navigationReducer,
+    cuisine:CuisineReducer,
+    carousel:carouselReducer,
+    restraunt:restrauntReducer,
   },
 });

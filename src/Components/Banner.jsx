@@ -18,7 +18,7 @@ function Banner() {
    
     <div class=" rounded-lg bg-white overflow-hidden mt-1  inline-flex">
       
-    <GoogleTranslate />
+    {/* <GoogleTranslate /> */}
     
          
   </div>

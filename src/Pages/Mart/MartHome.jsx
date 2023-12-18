@@ -13,6 +13,7 @@ import Footer from "../../Components/Footer";
 function MartHome() {
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.category.cat);
+  const carousel=useSelector(state=>state.carousel.martimage)
   const items= useSelector(state=>state.product.products);
   const isCartOpen= useSelector(state=>state.cart.isCartOpen)
   
@@ -41,7 +42,7 @@ function MartHome() {
               <Category />
             </div>
             <div className="w-[983px] h-[352px] rounded-xl overflow-hidden z-0">
-              <CarouselDefault />
+              <CarouselDefault carousel={carousel}/>
             </div>
           </div>
           <hr />

@@ -99,10 +99,10 @@ function Login() {
               </h1>
               <div className="   ">
                 <form className=" border-gray-700 " onSubmit={handleSubmit}>
-                  <div className="my-5  flex  items-center gap-3 justify-center">
+                  <div className="my-5   flex  items-center gap-3 justify-center">
                     <button
                       type="button"
-                      className={`h-24 w-20 p-2   border rounded-md text-base shadow-sm font-medium ${
+                      className={`h-20 w-18 p-2   border rounded-md text-base shadow-sm font-medium ${
                         userRole === "Admin"
                           ? " focus:shadow-lg focus:border-2 focus:animate-pulse focus:ring-purple-600 focus:border-purple-500 focus:z-10 sm:text-sm text-purple-500"
                           : "bg-white text-gray-600"
@@ -110,8 +110,8 @@ function Login() {
                       onClick={() => handleRoleChange("Admin")}
                     >
                       <img
-                        width="80"
-                        height="80"
+                        width="50"
+                        height="50"
                         src="assets\admin.png"
                         alt="administrator-male--v1"
                       />
@@ -120,7 +120,7 @@ function Login() {
 
                     <button
                       type="button"
-                      className={`h-24 w-20 p-2  border rounded-md text-base shadow-sm font-medium ${
+                      className={`h-20 w-18 p-2  border rounded-md text-base shadow-sm font-medium ${
                         userRole === "Buyer"
                           ? " focus:shadow-lg focus:border-2 focus:animate-pulse focus:ring-purple-600 focus:border-purple-500 focus:z-10 sm:text-sm text-purple-500"
                           : "bg-white text-gray-600"
@@ -128,8 +128,9 @@ function Login() {
                       onClick={() => handleRoleChange("Buyer")}
                     >
                       <img
-                        width="80"
-                        height="80"
+                        width="50"
+                        height="50"
+
                         src="assets\shopping_4990616 (1).png"
                         alt=""
                         srcset=""
@@ -138,31 +139,38 @@ function Login() {
                     </button>
                     <button
                       type="button"
-                      className={`h-24 w-20 p-2  border rounded-md text-base shadow-sm font-medium ${
+                      className={`h-20 w-18 p-2  border rounded-md text-base shadow-sm font-medium ${
                         userRole === "Seller"
-                          ? " focus:shadow-lg focus:border-2 focus:animate-pulse focus:ring-purple-600 focus:border-purple-500 focus:z-10 sm:text-sm text-purple-500"
+                          ? " focus:shadow-lg focus:border-2 focus:animate-pulse focus:ring-purple-600 focus:border-purple-500 focus:z-10 sm:text-sm  text-purple-500"
                           : "bg-white text-gray-600"
                       }transform transition-all duration-500 ease-in-out hover:scale-110   `}
                       onClick={() => handleRoleChange("Seller")}
                     >
-                      <img src="assets\seller.png" alt="" />
+                      <img 
+                      width="50"
+                      height="50"
+                      src="assets\seller.png" alt="" />
                       Seller
                     </button>
                     <button
                       type="button"
-                      className={`h-24 w-20 p-2  border rounded-md text-base shadow-sm font-medium ${
+                      className={`h-20 w-18 p-2  border rounded-md text-base shadow-sm font-medium ${
                         userRole === "Rider"
                           ? " focus:shadow-lg focus:border-2 focus:animate-pulse focus:ring-purple-600 focus:border-purple-500 focus:z-10 sm:text-sm text-purple-500"
                           : "bg-white text-gray-600"
                       }transform transition-all duration-500 ease-in-out hover:scale-110   `}
                       onClick={() => handleRoleChange("Rider")}
                     >
-                      <img src="assets\food-delivery.png" alt="" />
+                      <img
+                      width="50"
+                      height="50"
+                      
+                      src="assets\food-delivery.png" alt="" />
                       Rider
                     </button>
                   </div>
 
-                  <div className="flex flex-col gap-4 mx-12">
+                  <div className="flex flex-col gap-4 mx-14">
                     <div class="relative h-11 w-full min-w-[200px]">
                       <input
                       type="text"

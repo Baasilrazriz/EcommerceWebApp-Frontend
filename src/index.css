@@ -60,3 +60,12 @@ scrollbar-color: #777 #555;
   border-radius:10px;
   
 }
+/* Tailwind CSS classes to hide scrollbar */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* Internet Explorer and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;  /* Safari and Chrome */
+}
