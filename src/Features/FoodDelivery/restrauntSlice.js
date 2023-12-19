@@ -9,6 +9,7 @@ const initialState={
       category: "Burgers",
       image:
       "https://images.deliveryhero.io/image/fd-pk/LH/s6sw-hero.jpg?width=560&height=240&quality=45",
+      restraunt_image:"https://images.deliveryhero.io/image/fd-pk/pk-logos/ca5vf-logo.jpg?width=200&height=200",
     },
     {
       id: 2,
