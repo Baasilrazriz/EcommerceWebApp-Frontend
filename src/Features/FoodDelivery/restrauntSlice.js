@@ -18,6 +18,8 @@ const initialState={
       category: "Pizza",
       image:
         "https://images.deliveryhero.io/image/fd-pk/LH/s9sw-hero.jpg?width=560&height=240&quality=45",
+        restraunt_image:"https://thebigpizza.pk/_next/image?url=https%3A%2F%2Fconsole.indolj.io%2Fupload%2F1660313444-Logo-png.png&w=128&q=75"
+        
     },
 
     // {

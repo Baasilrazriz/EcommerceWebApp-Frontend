@@ -12,6 +12,7 @@ import searchReducer from "../Features/searchSlice"
 import signupReducer from "../Features/Mart/signupSlice";
 import CuisineReducer from "../Features/FoodDelivery/CuisineSlice";
 import restrauntReducer from  "../Features/FoodDelivery/restrauntSlice";
+import menuSectionReducer from  "../Features/FoodDelivery/menuSectionSlice";
 import carouselReducer from "../Features/carouselSlice"
 import navigationReducer from "../Features/navigationSlice"
 
@@ -32,5 +33,6 @@ export const store = configureStore({
     cuisine:CuisineReducer,
     carousel:carouselReducer,
     restraunt:restrauntReducer,
+    menuSection:menuSectionReducer,
   },
 });
