@@ -8,11 +8,11 @@ import {
   
   toggleUserDropdown,
 
-} from "../Features/Mart/headerSlice";
+} from "../../Features/Mart/headerSlice";
 import { NavLink, useNavigate} from "react-router-dom";
-import LoginModal from "./LoginModal";
-import { loggedOut, openLoginModal } from "../Features/Mart/LoginSlice";
-import { updateSearchTerm } from "../Features/searchSlice";
+import LoginModal from "../Modals/LoginModal";
+import { loggedOut, openLoginModal } from "../../Features/Mart/LoginSlice";
+import { updateSearchTerm } from "../../Features/searchSlice";
 
 
 function Header({ toggleCart }) {

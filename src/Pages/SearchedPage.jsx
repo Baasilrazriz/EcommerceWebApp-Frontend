@@ -1,8 +1,8 @@
 // SearchResults.js
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import ProductCard from "../Components/ProductCard";
-import Heading from "../Components/Heading";
+import ProductCard from "../Components/MartComponents/ProductCard";
+import Heading from "../Components/GeneralComponents/Heading";
 import MartHeader from "./Mart/MartHeader";
 import { addToCart } from "../Features/Mart/cartSlice";
 import { addTowishList } from "../Features/Mart/wishSlice";

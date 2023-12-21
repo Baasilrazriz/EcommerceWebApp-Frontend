@@ -7,11 +7,11 @@ const RestrauntCard = ({ image, name,description,handleAddToWishList}) => {
   
   return (
     
-      <div className=" relative flex rounded-xl     h-66  w-full  hover:bg-gray-100 items-center justify-center border-2 shadow-lg overflow-hidden">
+      <div className=" relative flex rounded-xl  hover:border-gray-300   h-66  w-full  hover:bg-gray-100 items-center justify-center border-2 shadow-lg overflow-hidden ease-in transition-all">
             <div className="w-[90vw] h-full flex gap-10">
-    <div className="rounded-l-2xl h-full w-1/2 overflow-hidden">
+    <div className="rounded-l-xl h-full w-1/2 overflow-hidden ml-[-1rem]">
             <NavLink to={`/restraunts/${name}`} ClassName="-z-50 text-blue-500" >
-    <img  src={image} alt={name} className="h-full w-full  " />
+    <img  src={image} alt={name} className="h-full w-full object-cover   " />
     </NavLink>
     </div>
     <div className="overflow-hidden w-1/2 flex flex-col gap-5 my-6">

@@ -1,22 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import MartHeader from "../Mart/MartHeader";
-import Footer from "../../Components/Footer";
-import { useSelector } from "react-redux";
-import DiscountCard from "../../Components/DiscountCard";
-import MenuBar from "../../Components/MenuBar";
-import FoodItemSection from "../../Components/FoodItemSection";
+import Footer from "../../Components/GeneralComponents/Footer";
+import { useDispatch, useSelector } from "react-redux";
+import DiscountCard from "../../Components/FoodDeliveryComponents/DiscountCard";
+import MenuBar from "../../Components/FoodDeliveryComponents/MenuBar";
+import FoodItemSection from "../../Components/FoodDeliveryComponents/FoodItemSection";
+import { openDiscountModal } from "../../Features/FoodDelivery/discountSlice";
+import DiscountModal from "../../Components/Modals/DiscountModal";
 
 function RestrauntPage() {
   const { restraunt } = useParams();
+  const dispatch = useDispatch();
+  const [title,setTitle]=useState("");
+  const [desc,setDesc]=useState("");
   const items = useSelector((state) => state.restraunt.restraunts);
   const restraunts = items.find((item) => item.name === restraunt);
   const sections = useSelector(state=>state.menuSection.sections)
   const isCartOpen= useSelector(state=>state.cart.isCartOpen)
-  
-  
+ const discount=useSelector(state=>state.discount.deals);  
   const contentWidth = isCartOpen ? "w-[75%]" : "w-[100%]";
-  
+  const handleOpenDiscountModal = (dtitle,ddesc) => {
+      document.body.style.overflowY = "hidden";
+      dispatch(openDiscountModal());
+      
+      setTitle(dtitle);
+      setDesc(ddesc)    
+  };
+  const handleOpenRestrauntModal = (dtitle,ddesc) => {
+    document.body.style.overflowY = "hidden";
+    dispatch(openDiscountModal());
+    
+    setTitle(dtitle);
+    setDesc(ddesc)    
+};
   return (
     <div>
       <MartHeader />
@@ -24,11 +41,11 @@ function RestrauntPage() {
         {restraunt ? (
           <>
             <div className="p-5 px-20 w-full  h-full flex gap-5">
-              <div className="mx-4 rounded-2xl h-40 w-[13rem] overflow-hidden">
+              <div className="mx-4 rounded-2xl h-40 w-[13rem] overflow-hidden shadow-sm">
                 <img
                   src={restraunts.restraunt_image}
                   alt={restraunts.name}
-                  className="h-full w-full  "
+                  className="h-full w-full  object-cover "
                 />
               </div>
               <div className="  w-full    flex flex-col gap-5 justify-start mt-7">
@@ -75,7 +92,18 @@ function RestrauntPage() {
                   <p className="text-[13px] font-[Open Sans] bg-green-100 rounded-full p-1 px-2 shadow-md flex flex-col justify-center text-green-700 font-[600]">
                     Free Delivery
                   </p>
+                  <div className=" p-1 px-2 flex justify-center gap-1 bg-gray-300 rounded-full hover:bg-gray-200  shadow-md  text-gray-700 font-[600] hover:scale-105 transition-all ease-in">
+                   <p className="rounded-full border bg-gray-800 text-white py-[0.05rem] px-2">i</p>
+                    <p className="text-[14px] font-[Open Sans] flex flex-col justify-center     text-gray-700 font-[600]">
+                    More Detail     
+                    </p>
+                  </div>
 
+{/* <div className=" flex-row text-[13px] font-[Open Sans] bg-gray-300 rounded-full p-1 px-4 shadow-md flex flex-col justify-center text-gray-700 font-[600]">
+  
+                  <p>i</p>
+<p className=" ">               More Detail             </p>
+</div> */}
                 </div>
               </div>
             </div>
@@ -92,15 +120,15 @@ function RestrauntPage() {
               Available deals
             </h1>
             <div className="my-8 flex gap-5">
-              <DiscountCard
-                title="FREE DELIVERY"
-                desc="Valid for all items. Min. order Rs. 249."
-              />
-              <DiscountCard
-                title="FREE DELIVERY"
-                desc="Valid for all items. Min. order Rs. 249."
-              />
+{discount? (discount.map(disc=>(<div className=" cursor-pointer"  onClick={()=>{handleOpenDiscountModal(disc.title,disc.desc)
+}}><DiscountCard
+                title={disc.title}
+                desc={disc.desc}
+              /></div>))  ):<h1 className="grid place-items-center  h-full w-full text-2xl text-red-700" >No discount available.</h1>}
+         <DiscountModal title={title} desc={desc}/>
+              
             </div>
+            
           </div>
           <hr />
           <div className=" sticky top-36 z-20 ">

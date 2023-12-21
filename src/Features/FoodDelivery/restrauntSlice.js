@@ -1,6 +1,7 @@
 
 import { createSlice } from '@reduxjs/toolkit';
 const initialState={
+  isRestrauntModalOpen: false,
   restraunts:[
     {
       id: 1,
@@ -22,43 +23,6 @@ const initialState={
         
     },
 
-    // {
-    //   id: 3,
-    //   name: "Chocolates",
-    //   price: 215,
-    //   category: "Category B",
-    //   quantity: 1,
-    //   image:
-    //     "https://images.deliveryhero.io/image/darsktores-pk/Category_Banner2/03.jpg?height=96&dpi=1",
-    // },
-    // {
-    //   id: 4,
-    //   name: "Kurlees",
-    //   price: 73,
-    //   category: "Snacks",
-    //   quantity: 1,
-    //   image:
-    //     "https://images.deliveryhero.io/image/darsktores-pk/Category_Banner2/Snacks&conf12Septtile.jpg?height=96&dpi=1",
-    // },
-    // {
-    //   id: 5,
-    //   name: "Walls Chocolate",
-    //   price: 199,
-    //   category: "Ice Creams & Deserts",
-    //   quantity: 15,
-    //   image:
-    //     "https://images.deliveryhero.io/image/darsktores-pk/Catagory_Banner222/34.jpg?height=96&dpi=1",
-    // },
-    // {
-    //   id: 6,
-    //   name: "Tomatoes",
-    //   price: 209,
-    //   category: "Fruits & Vegetables",
-    //   quantity: 15,
-    //   image:
-    //    "../assets/tomatoes.png",
-    // }
-
     
   ],
   prodInCat:[]
@@ -67,13 +31,15 @@ const restrauntSlice = createSlice({
   name: 'restraunt',
   initialState,
   reducers: { 
-    setProdInCat: (state, action) => { 
-    state.prodInCat.push(action.payload)
-    
-
-  },  
+    openRestrauntModal: (state) => {
+      
+      state.isRestrauntModalOpen = true;
+    },
+    closeRestrauntModal: (state) => {
+      state.isRestrauntModalOpen = false;
+    }, 
 },
 });
 
-export const { setProdInCat } = restrauntSlice.actions;
+export const { openRestrauntModal, closeRestrauntModal }= restrauntSlice.actions;
 export default restrauntSlice.reducer;

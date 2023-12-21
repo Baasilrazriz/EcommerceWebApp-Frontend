@@ -1,10 +1,10 @@
 import React, { useRef } from 'react';
 import { useSelector } from 'react-redux';
 
-function ScrollableComponent () {
+function ScrollableComponent (props) {
   const scrollRef = useRef(null);
 
-const categories=useSelector(state=>state.cuisine.Cuisine);
+
 
   const scroll = (direction) => {
     if (direction === 'left') {
@@ -27,7 +27,7 @@ const categories=useSelector(state=>state.cuisine.Cuisine);
         ref={scrollRef}
         className="flex overflow-x-auto scroll-smooth scrollbar-hide "
       >
-        {categories.map((category, index) => (
+        {props.categories.map((category, index) => (
           <div key={index} className="flex-none w-36 h-32 mx-1 overflow-hidden rounded-lg border shadow-lg ">
             <div className='h-24 hover:scale-110'>
             <img

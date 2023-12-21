@@ -9,7 +9,7 @@ import ProtectedRoutes from './Pages/ProtectRoutes/ProtectedRoutes'
 import LoginPage from './Pages/LoginPage'
 import Checkout from './Pages/Checkout/Checkout'
 import MartProductPage from './Pages/Mart/MartProductPage'
-import Dashboard from './Components/Dashboard'
+import Dashboard from './Components/DashboardComponents/Dashboard'
 import FDHome from './Pages/FoodDelivery/FDHome'
 import RestrauntPage from './Pages/FoodDelivery/RestrauntPage'
 

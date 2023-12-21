@@ -1,14 +1,14 @@
 
-import CarouselDefault from "../../Components/CarouselDefault";
-import Category from "../../Components/Category";
-import Heading from "../../Components/Heading";
-import ProductCard from "../../Components/ProductCard";
-import CategoryCard from "../../Components/CategoryCard";
+import CarouselDefault from "../../Components/GeneralComponents/CarouselDefault";
+import Category from "../../Components/MartComponents/Category";
+import Heading from "../../Components/GeneralComponents/Heading";
+import ProductCard from "../../Components/MartComponents/ProductCard";
+import CategoryCard from "../../Components/MartComponents/CategoryCard";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart,toggleCart } from "../../Features/Mart/cartSlice";
 import MartHeader from "./MartHeader";
 import { addTowishList } from "../../Features/Mart/wishSlice";
-import Footer from "../../Components/Footer";
+import Footer from "../../Components/GeneralComponents/Footer";
 
 function MartHome() {
   const dispatch = useDispatch();

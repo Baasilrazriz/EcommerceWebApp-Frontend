@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import { incrementQuantity, decrementQuantity, removeItem, toggleCart } from '../Features/Mart/cartSlice';
+import { incrementQuantity, decrementQuantity, removeItem, toggleCart } from '../../Features/Mart/cartSlice';
 import { useNavigate } from "react-router-dom";
 
 // {items,setItems}

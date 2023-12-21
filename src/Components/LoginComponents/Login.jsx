@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { openSignupModal } from '../Features/Mart/signupSlice';
-import { closeLoginModal, loggedIn, loggedOut } from '../Features/Mart/LoginSlice';
-import { openforgotModal } from '../Features/Mart/forgotSlice';
-import { setUserRole, setUsernames, togglePasswordVisibility } from '../Features/Mart/userSlice';
+import { openSignupModal } from '../../Features/Mart/signupSlice';
+import { closeLoginModal, loggedIn, loggedOut } from '../../Features/Mart/LoginSlice';
+import { openforgotModal } from '../../Features/Mart/forgotSlice';
+import { setUserRole, setUsernames, togglePasswordVisibility } from '../../Features/Mart/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useNavigate } from "react-router-dom";
 import GoogleButton from "./GoogleButton";

@@ -2,7 +2,7 @@ import React, { Children } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate,Outlet } from 'react-router-dom';
 import { openLoginModal } from '../../Features/Mart/LoginSlice';
-import LoginModal from '../../Components/LoginModal';
+import LoginModal from '../../Components/Modals/LoginModal';
 
 function ProtectedRoutes() {
     const isLoggedIn = useSelector((state) => state.login.isLoggedIn);

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {  useSelector } from 'react-redux';
 import { NavLink, useParams } from 'react-router-dom';
-import { setProdInCat } from '../Features/Mart/productSlice';
+import { setProdInCat } from '../../Features/Mart/productSlice';
 
 function Category() {
   const categories=useSelector(state=>state.category.cat)

@@ -1,8 +1,8 @@
 import { GoogleLogin } from '@react-oauth/google'
 import React from 'react'
 import { useDispatch } from 'react-redux';
-import { setEmail, setProfilePic, setUsernames } from '../Features/Mart/userSlice';
-import { closeLoginModal, loggedIn } from '../Features/Mart/LoginSlice';
+import { setEmail, setProfilePic, setUsernames } from '../../Features/Mart/userSlice';
+import { closeLoginModal, loggedIn } from '../../Features/Mart/LoginSlice';
 import { jwtDecode } from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
 

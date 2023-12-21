@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import MartHeader from './MartHeader';
-import Footer from '../../Components/Footer';
+import Footer from '../../Components/GeneralComponents/Footer';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addTowishList } from '../../Features/Mart/wishSlice';

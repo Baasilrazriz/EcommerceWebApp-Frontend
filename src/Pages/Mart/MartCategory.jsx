@@ -1,12 +1,12 @@
 import React from "react";
 import MartHeader from "./MartHeader";
 import { useParams } from "react-router-dom";
-import Heading from "../../Components/Heading";
+import Heading from "../../Components/GeneralComponents/Heading";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart} from "../../Features/Mart/cartSlice";
-import ProductCard from "../../Components/ProductCard";
+import ProductCard from "../../Components/MartComponents/ProductCard";
 import { addTowishList } from "../../Features/Mart/wishSlice";
-import Footer from "../../Components/Footer";
+import Footer from "../../Components/GeneralComponents/Footer";
 function MartCategory() {
   const dispatch = useDispatch();
   const { categoryName } = useParams()

@@ -1,17 +1,17 @@
 import React from 'react';
 import MartHeader from '../Mart/MartHeader';
-import Footer from '../../Components/Footer';
-import ScrollableComponent from '../../Components/ScrollableComponent';
+import Footer from '../../Components/GeneralComponents/Footer';
+import ScrollableComponent from '../../Components/GeneralComponents/ScrollableComponent';
 import { useDispatch, useSelector } from 'react-redux';
-import CarouselDefault from '../../Components/CarouselDefault';
-import Heading from '../../Components/Heading';
+import CarouselDefault from '../../Components/GeneralComponents/CarouselDefault';
+import Heading from '../../Components/GeneralComponents/Heading';
 import { addTowishList } from '../../Features/Mart/wishSlice';
-import { addToCart } from '../../Features/Mart/cartSlice';
-import ProductCard from '../../Components/ProductCard';
-import RestrauntCard from '../../Components/RestrauntCard';
+
+import RestrauntCard from '../../Components/FoodDeliveryComponents/RestrauntCard';
 
 function FDHome() {
-    const isCartOpen= useSelector(state=>state.cart.isCartOpen)
+  const categories=useSelector(state=>state.cuisine.Cuisine);
+  const isCartOpen= useSelector(state=>state.cart.isCartOpen)
     const carousel=useSelector(state=>state.carousel.foodimages)
     const dispatch = useDispatch();
     const items= useSelector(state=>state.restraunt.restraunts);
@@ -28,7 +28,7 @@ function FDHome() {
  </div>
  <div className='mx-14 my-10'>
  <Heading title="Cuisines"/>
- <ScrollableComponent/>
+ <ScrollableComponent categories={categories}/>
  </div>
  <div className="my-5 mx-14">
                 <div  className="">
@@ -36,7 +36,7 @@ function FDHome() {
                     title="All Restraunts"
                     
                   />
-                  <div className="product-section my-10 flex flex-row  flex-wrap gap-10 ">
+                  <div className="product-section  my-10 flex flex-row  flex-wrap gap-10 ">
                     {items.map((product) => (
                       <RestrauntCard
                         image={product.image}

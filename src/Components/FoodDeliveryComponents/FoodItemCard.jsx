@@ -1,5 +1,5 @@
 import React from 'react';
-import { addToCart } from '../Features/Mart/cartSlice';
+import { addToCart } from '../../Features/Mart/cartSlice';
 import { useDispatch } from 'react-redux';
 
 function FoodItemCard(props) {

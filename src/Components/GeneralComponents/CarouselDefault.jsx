@@ -5,7 +5,6 @@ function CarouselDefault(props) {
  const carousel=useSelector(state=>state.carousel.martimage)
   return (
     <>
-
 <Carousel className="">
 {props.car.map((car, index) => (
         <img

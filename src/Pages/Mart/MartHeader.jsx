@@ -1,7 +1,7 @@
 import React from 'react'
-import Banner from '../../Components/Banner'
-import Header from '../../Components/header'
-import Cart from '../../Components/Cart'
+import Banner from '../../Components/HeadersComponents/Banner'
+import Header from '../../Components/HeadersComponents/Header'
+import Cart from '../../Components/GeneralComponents/Cart'
 import MartHome from './MartHome'
 import { useDispatch, useSelector } from "react-redux";
 import { toggleCart } from "../../Features/Mart/cartSlice";

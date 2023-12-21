@@ -1,8 +1,8 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import MartHeader from './MartHeader';
-import Heading from '../../Components/Heading';
-import ProductCard from '../../Components/ProductCard';
+import Heading from '../../Components/GeneralComponents/Heading';
+import ProductCard from '../../Components/MartComponents/ProductCard';
 import { addToCart } from '../../Features/Mart/cartSlice';
 import { addTowishList } from '../../Features/Mart/wishSlice';
 

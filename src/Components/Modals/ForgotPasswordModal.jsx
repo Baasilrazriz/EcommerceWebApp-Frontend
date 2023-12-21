@@ -2,12 +2,12 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { closeforgotModal, setStep } from "../Features/Mart/forgotSlice";
-import FogotPage1 from "./ForgotPasswordComponents/FogotPage1";
-import FogotPage2 from "./ForgotPasswordComponents/FogotPage2";
-import FogotPage3 from "./ForgotPasswordComponents/FogotPage3";
-import FogotPage4 from "./ForgotPasswordComponents/FogotPage4";
-import FogotPage5 from "./ForgotPasswordComponents/FogotPage5";
+import { closeforgotModal, setStep } from "../../Features/Mart/forgotSlice";
+import FogotPage1 from "../ForgotPasswordComponents/FogotPage1";
+import FogotPage2 from "../ForgotPasswordComponents/FogotPage2";
+import FogotPage3 from "../ForgotPasswordComponents/FogotPage3";
+import FogotPage4 from "../ForgotPasswordComponents/FogotPage4";
+import FogotPage5 from "../ForgotPasswordComponents/FogotPage5";
 
 const ForgotPasswordModal = () => {
     
