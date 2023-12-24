@@ -102,7 +102,7 @@ const handleCheckOut=()=>{
         <div className="flex flex-row  gap-[6rem]">
         <h4 className="mx-5 py-2 text-[19px]  font-[700]   font-sans">Total: <span className="text-[10px] font-[700]">
 (Incl. VAT)</span></h4>
-                <h4 className="px-5 py-2 text-[22px]  font-[750]   font-sans">Rs.  {grandtotal.toFixed(2)} </h4>
+                <h4 className="px-5 py-2 text-[22px]  font-[750]   font-sans">Rs.  {grandtotal  } </h4>
                    </div>
               
               <button onClick={handleCheckOut} className="bg-blue-500 text-white font-bold  mt-3 ml-6 py-3 px-28 rounded">Go to Checkout</button>

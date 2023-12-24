@@ -8,10 +8,18 @@ import MenuBar from "../../Components/FoodDeliveryComponents/MenuBar";
 import FoodItemSection from "../../Components/FoodDeliveryComponents/FoodItemSection";
 import { openDiscountModal } from "../../Features/FoodDelivery/discountSlice";
 import DiscountModal from "../../Components/Modals/DiscountModal";
+import { openRestrauntModal } from "../../Features/FoodDelivery/restrauntSlice";
+import RestrauntinfoModal from "../../Components/Modals/RestrauntinfoModal";
+import { calculateAverageRating, countTotalReviews, openReviewModal } from "../../Features/FoodDelivery/reviewSlice";
+import ReviewModal from "../../Components/Modals/ReviewModal";
 
 function RestrauntPage() {
   const { restraunt } = useParams();
   const dispatch = useDispatch();
+  dispatch(calculateAverageRating());
+  dispatch(countTotalReviews());
+  const averageRating=useSelector(state=>state.review.averageRating);
+  const totalReviewsCount=useSelector(state=>state.review.totalReviewsCount);
   const [title,setTitle]=useState("");
   const [desc,setDesc]=useState("");
   const items = useSelector((state) => state.restraunt.restraunts);
@@ -27,12 +35,15 @@ function RestrauntPage() {
       setTitle(dtitle);
       setDesc(ddesc)    
   };
-  const handleOpenRestrauntModal = (dtitle,ddesc) => {
+  const handleOpenRestrauntModal = () => {
     document.body.style.overflowY = "hidden";
-    dispatch(openDiscountModal());
+    dispatch(openRestrauntModal());
     
-    setTitle(dtitle);
-    setDesc(ddesc)    
+};
+  const handleOpenReviewModal = () => {
+    document.body.style.overflowY = "hidden";
+    dispatch(openReviewModal());
+    
 };
   return (
     <div>
@@ -55,21 +66,25 @@ function RestrauntPage() {
                   </h1>
                   <div className="mt-[-1rem] flex flex-col gap-2">
                     <div className="flex ">
-                      
-                      <img
+                      <div onClick={handleOpenRestrauntModal}>
+
+                      <img 
                         className="mt-[-0.15rem]"
                         height={25}
                         width={25}
                         src="../assets/FoodDelivery/star.png"
                         alt=""
-                      />
+                        />
+                        </div>
+                        
                       <h1 className=" text-[18px] font-[Open Sans] text-gray-800 font-[600]">
-                        4.2/5 <span className="text-gray-600">(15000+)</span>
+                      {averageRating.toFixed(1)}/5 <span className="text-gray-600">({totalReviewsCount}+)</span>
                       </h1>
                     </div>
-                    <button className=" ml-[0.5rem] text-[15px] font-[Open Sans] bg-gray-200 flex justify-center rounded-full p-1 shadow-md text-gray-800 font-[600] hover:bg-gray-400 ease-in transition-all hover:scale-110">
+                    <button onClick={handleOpenReviewModal} className=" ml-[0.5rem] text-[15px] font-[Open Sans] bg-gray-200 flex justify-center rounded-full p-1 shadow-md text-gray-800 font-[600] hover:bg-gray-400 ease-in transition-all hover:scale-110">
                       See Reviews
                     </button>
+                    <ReviewModal restraunt={restraunt}/>
                   </div>
                 </div>
                 <div className="flex gap-2 mt-2 ">
@@ -89,21 +104,17 @@ function RestrauntPage() {
                     </p>
                   </div>
 
-                  <p className="text-[13px] font-[Open Sans] bg-green-100 rounded-full p-1 px-2 shadow-md flex flex-col justify-center text-green-700 font-[600]">
+                  <p className="text-[13px] font-[Open Sans]  bg-green-100 rounded-full p-1 px-2 shadow-md flex flex-col justify-center text-green-700 font-[600]">
                     Free Delivery
                   </p>
-                  <div className=" p-1 px-2 flex justify-center gap-1 bg-gray-300 rounded-full hover:bg-gray-200  shadow-md  text-gray-700 font-[600] hover:scale-105 transition-all ease-in">
+                  <div  onClick={handleOpenRestrauntModal} className="cursor-pointer p-1 px-2 flex justify-center gap-1 bg-gray-300 rounded-full hover:bg-gray-200  shadow-md  text-gray-700 font-[600] hover:scale-105 transition-all ease-in">
                    <p className="rounded-full border bg-gray-800 text-white py-[0.05rem] px-2">i</p>
                     <p className="text-[14px] font-[Open Sans] flex flex-col justify-center     text-gray-700 font-[600]">
                     More Detail     
                     </p>
                   </div>
+<RestrauntinfoModal restraunt={restraunt}/>
 
-{/* <div className=" flex-row text-[13px] font-[Open Sans] bg-gray-300 rounded-full p-1 px-4 shadow-md flex flex-col justify-center text-gray-700 font-[600]">
-  
-                  <p>i</p>
-<p className=" ">               More Detail             </p>
-</div> */}
                 </div>
               </div>
             </div>

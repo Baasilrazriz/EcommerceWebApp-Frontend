@@ -13,7 +13,6 @@ function DiscountModal(props) {
     };
     const handleTermClick=()=>{
         setToggle(!toggle)
-        
     };
     const contentHeight = toggle ? "h-[28rem]" : "h-[22rem]";
     return (
@@ -31,7 +30,7 @@ function DiscountModal(props) {
                   </button>
                 </div>
            <div className='mt-[-1rem] mx-5 text-gray-800 flex flex-col gap-7'>
-           <h1 className=' text-2xl font-[600]  font-sans '>Offer details </h1>     
+           <h1 className=' text-2xl font-[600]  font-sans '>{}</h1>     
 <div>
 <div className=" w-66">
         <div className="flex gap-2">
@@ -56,7 +55,7 @@ Automatically applied to cart
 <h1 className='text-[26px] font-[Open Sans] font-[600]    text-red-500 ' >Terms & conditions</h1>
 <button className='rounded-full hover:scale-105 text-xl font-bold pt-1  h-7 w-7 text-red-600 border border-gray-400 shadow-xl'>^</button>
 </div>
-<ul className=' text-red-800 mt-7'>
+<ul className=' text-red-800 mt-12'>
     <li>1) Valid for a minimum order of Rs.225</li>
     <li>2) Applicable for Delivery.</li>
     <li>3) Applicable only for selected products or categories.</li>
