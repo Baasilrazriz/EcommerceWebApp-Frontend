@@ -1,16 +1,31 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { calculateAverageRating, closeReviewModal, countTotalReviews } from '../../Features/FoodDelivery/reviewSlice';
+import { FixedSizeList as List } from 'react-window';
+
+import { calculateAverageRating, closeReviewModal, countTotalReviews, openReviewModal, sortByAscendingRating, sortByDescendingDate, sortByDescendingRating } from '../../Features/FoodDelivery/reviewSlice';
 
 import RatingComponent from '../GeneralComponents/RatingComponent';
 import ProgressBar from '../GeneralComponents/ProgressBar';
 import ReviewCard from '../FoodDeliveryComponents/ReviewCard';
+import { Alert } from '@material-tailwind/react';
 
-function ReviewModal(props) {
+
+ function  ReviewModal(props) {
     const dispatch = useDispatch();
-    dispatch(calculateAverageRating());
-    dispatch(countTotalReviews());
-    
+  
+      dispatch(calculateAverageRating());
+      dispatch(countTotalReviews());  
+      const Row = ({ index, style }) => (
+        <div style={style} >
+          <ReviewCard
+            key={index}
+            name={reviews[index].name}
+            rating={reviews[index].star}
+            desc={reviews[index].desc}
+          />
+        </div>
+      );
+
     const isReviewModalOpen = useSelector((state) => state.review.isReviewModalOpen);
     const averageRating=useSelector(state=>state.review.averageRating);
     const reviews=useSelector(state=>state.review.reviews)
@@ -20,26 +35,37 @@ function ReviewModal(props) {
     const restraunts = items.find((item) => item.name === props.restraunt);
     const handleClose = () => {
       dispatch(closeReviewModal());
-      
       document.body.style.overflowY = "scroll";
       
     };
+    const  handleAscSort=()=>{
+      dispatch(sortByDescendingRating());
+      
+    }
+    const handleDescSort=()=>{
+       dispatch(sortByAscendingRating());
+       
+    }
+    const handlelatest=()=>{
+      
+dispatch(sortByDescendingDate());
+    }
     
     return (
         <div>
          { isReviewModalOpen&& (
         <div className=" z-50 modal-overlay fixed  inset-0 bg-black bg-opacity-50 flex items-center justify-center ">
-          <div className={` login-modal bg-white transition-all ease-in    h-[32rem] w-[35rem] rounded-md overflow-x-hidden overflow-y-auto l`}>
+          <div className={` login-modal bg-white transition-all ease-in    h-[32rem] w-[35rem] rounded-md overflow-hidden`}>
             <div className=''>
           <div className="flex justify-end mt-1 mr-1 "onClick={handleClose}>
                   <button
-                    className="relative top-1 right-1  bg-red-500 text-white px-2 py-1 rounded-full transform transition-all duration-500 ease-in-out hover:scale-110   active:animate-bounce"
+                    className="fixed  top-32 right-[32rem]  bg-red-500 text-white px-2 py-1 rounded-full transform transition-all duration-500 ease-in-out hover:scale-110   active:animate-bounce"
                     onClick={handleClose}
                   >
                     x
                   </button>
                 </div>
-           <div className='mx-5 mt-[-1.5rem]  text-gray-800 flex flex-col '>
+           <div className='mx-5   text-gray-800 flex flex-col '>
 
            <h1 className=' text-3xl font-[700] text-gray-800  font-sans '>Reviews</h1>     
            <h1 className=' text-lg font-[700] text-gray-700  font-sans line-clamp-1 text-ellipsis '>{restraunts.name} </h1>     
@@ -69,23 +95,23 @@ function ReviewModal(props) {
 </div>
 
 <div className='py-5 flex gap-4'>
-<button  className=" ml-[0.5rem]  text-[14px] font-[Open Sans] bg-gray-200 flex justify-center rounded-full px-4 py-2 shadow-md text-gray-800 font-[400] hover:bg-gray-400 ease-in transition-all hover:scale-110">
+<button  onClick={handlelatest} className=" ml-[0.5rem]  text-[14px] font-[Open Sans] bg-gray-200 flex justify-center rounded-full px-4 py-2 shadow-md text-gray-800 font-[400] hover:bg-gray-400 ease-in transition-all hover:scale-110">
                       Newest</button>
-<button  className=" ml-[0.5rem] text-[14px] font-[Open Sans] bg-gray-200 flex justify-center rounded-full px-4 py-2 shadow-md text-gray-800 font-[400] hover:bg-gray-400 ease-in transition-all hover:scale-110">
+<button  onClick={handleAscSort} className=" ml-[0.5rem] text-[14px] font-[Open Sans] bg-gray-200 flex justify-center rounded-full px-4 py-2 shadow-md text-gray-800 font-[400] hover:bg-gray-400 ease-in transition-all hover:scale-110">
                       Highest rating</button>
-<button  className=" ml-[0.5rem] text-[14px] font-[Open Sans] bg-gray-200 flex justify-center rounded-full px-4 py-2 shadow-md text-gray-800 font-[400] hover:bg-gray-400 ease-in transition-all hover:scale-110">
+<button onClick={handleDescSort} className=" ml-[0.5rem] text-[14px] font-[Open Sans] bg-gray-200 flex justify-center rounded-full px-4 py-2 shadow-md text-gray-800 font-[400] hover:bg-gray-400 ease-in transition-all hover:scale-110">
 Lowest rating</button>
 </div>
-<div className='flex flex-col gap-5 '>
-  {reviews?.length === 0 ? (  
-    <p className='text-center text-lg text-gray-600'>No reviews yet.</p>
-    ) : (
-      reviews.map((review, i) => (
-        <ReviewCard key={i} name={review.name} rating={review.star} desc={review.desc} />
-          ))
-          )}
-  
-</div>
+<div className='  '>
+              <List 
+                height={170} // Adjust the height accordingly
+                itemCount={reviews.length}
+                itemSize={140} // Adjust the size of each item
+                width={"103.5%"}
+              >
+                {Row}
+              </List>
+            </div>
 
 </div>
            </div>

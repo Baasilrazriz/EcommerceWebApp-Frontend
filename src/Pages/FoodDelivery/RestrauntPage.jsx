@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import MartHeader from "../Mart/MartHeader";
 import Footer from "../../Components/GeneralComponents/Footer";
@@ -16,8 +16,17 @@ import ReviewModal from "../../Components/Modals/ReviewModal";
 function RestrauntPage() {
   const { restraunt } = useParams();
   const dispatch = useDispatch();
-  dispatch(calculateAverageRating());
-  dispatch(countTotalReviews());
+  const [isReviewModalReady, setIsReviewModalReady] = useState(false);
+
+  useEffect(() => {
+    async function fetchData() {
+      await dispatch(calculateAverageRating());
+      await dispatch(countTotalReviews());
+      setIsReviewModalReady(true);
+    }
+
+    fetchData();
+  }, [dispatch]);
   const averageRating=useSelector(state=>state.review.averageRating);
   const totalReviewsCount=useSelector(state=>state.review.totalReviewsCount);
   const [title,setTitle]=useState("");
@@ -84,7 +93,7 @@ function RestrauntPage() {
                     <button onClick={handleOpenReviewModal} className=" ml-[0.5rem] text-[15px] font-[Open Sans] bg-gray-200 flex justify-center rounded-full p-1 shadow-md text-gray-800 font-[600] hover:bg-gray-400 ease-in transition-all hover:scale-110">
                       See Reviews
                     </button>
-                    <ReviewModal restraunt={restraunt}/>
+                    {isReviewModalReady && <ReviewModal restraunt={restraunt} />}
                   </div>
                 </div>
                 <div className="flex gap-2 mt-2 ">

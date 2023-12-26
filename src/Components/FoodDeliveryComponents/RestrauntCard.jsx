@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import ReviewModal from "../Modals/ReviewModal";
 
 
 
@@ -27,7 +28,7 @@ const RestrauntCard = ({ image, name,description,handleAddToWishList}) => {
       > 
   ♡      
       </button>
-            <NavLink to={`/restraunts/${name}`} ClassName="-z-50 text-blue-500" >
+            <NavLink to={`/restraunts/${name}`} onClick={()=>{<ReviewModal/>}} ClassName="-z-50 text-blue-500" >
       <button
         className=" text-green-500 hover:bg-green-700 hover:text-white border-2 bg-white rounded-full px-9 py-3 absolute  top-52 right-3"
         
