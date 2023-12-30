@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import MartHeader from "./MartHeader";
 import { useParams } from "react-router-dom";
 import Heading from "../../Components/GeneralComponents/Heading";
@@ -7,12 +7,16 @@ import { addToCart} from "../../Features/Mart/cartSlice";
 import ProductCard from "../../Components/MartComponents/ProductCard";
 import { addTowishList } from "../../Features/Mart/wishSlice";
 import Footer from "../../Components/GeneralComponents/Footer";
+import { fetchProductByCategoryName } from "../../Features/Mart/categorySlice";
 function MartCategory() {
   const dispatch = useDispatch();
   const { categoryName } = useParams()
   const category=categoryName
+  useEffect(() => {
+    dispatch(fetchProductByCategoryName(category));
+  }, [dispatch]);
+const items=useSelector(state=>state.category.prodInCat)
 
-const categoryProducts=useSelector(state=>state.product.products)
   return (
     <>
       <MartHeader />
@@ -25,7 +29,7 @@ const categoryProducts=useSelector(state=>state.product.products)
                     tagline={`Explore our ${category} products`}
                   />
                   <div className="product-section my-10 flex flex-row  flex-wrap gap-5 ">
-                    {categoryProducts.map((product) => (
+                    {items.map((product) => (
                       <ProductCard
                         image={product.image}
                         name={product.name}

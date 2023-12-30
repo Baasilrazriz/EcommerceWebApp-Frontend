@@ -2,7 +2,6 @@ import { Carousel } from "@material-tailwind/react";
 import { useSelector } from "react-redux";
 
 function CarouselDefault(props) {
- const carousel=useSelector(state=>state.carousel.martimage)
   return (
     <>
 <Carousel className="">

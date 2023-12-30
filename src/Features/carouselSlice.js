@@ -27,7 +27,7 @@ const initialState={
 const carouselSlice = createSlice({
   name: 'carousel',
   initialState,
-  
+  reducers:{},
 });
 
 

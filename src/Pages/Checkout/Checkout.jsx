@@ -6,7 +6,6 @@ function Checkout() {
         <div>
             <MartHeader/>
             <div className=' mt-[12rem] mx-20'> <CheckOutPage1/></div>
-            
         </div>
     );
 }

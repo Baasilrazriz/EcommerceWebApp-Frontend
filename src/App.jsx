@@ -17,15 +17,15 @@ function App() {
   return (
    <BrowserRouter>
    <Routes>
-    <Route path="/" element={<FDHome />}/>
+    <Route path="/" element={<MartHome/>}/>
     <Route path='/login' element={<MartHome/>}/>
     <Route path='/auth' element={<LoginPage/>}/>
-    <Route path='/checkout' element={<Checkout/>}/>
     <Route path="/search" element={<SearchedPage  />}/>
     <Route path="/category/:categoryName" element={<MartCategory  />}/>
     <Route path="/products/:productName" element={<MartProductPage  />}/>
     <Route path="/restraunts/:restraunt" element={<RestrauntPage  />}/>
     <Route element={<ProtectedRoutes/>} >
+    <Route path='/checkout' element={<Checkout/>}/>
     <Route path="/mart/wishlist" element={<MartWishList  />}/>
       </Route>    
    </Routes>

@@ -1,11 +1,18 @@
 import React from 'react';
 import TableComponent from './TableComponent';
+import NavBar from './NavBar';
 
 function DashboardPage1(props) {
     return (
         
   <>
-       
+       <div className=' border rounded-xl h-fit mt-3 p-2 w-full overflow-hidden    shadow-lg'>
+    <NavBar/>
+   
+   </div>
+    
+   <div className=' border rounded-xl h-[40rem] mt-3 p-2 w-full overflow-hidden    shadow-lg'>
+
         <div className="mt-12">
           <div className="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-4">
             <div className="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md">
@@ -103,6 +110,7 @@ function DashboardPage1(props) {
             </div>
           </div> 
         </div>
+   </div>
 
   </>
 

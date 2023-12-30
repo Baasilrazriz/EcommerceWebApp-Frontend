@@ -1,29 +1,22 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import axios from 'axios'
 
-// Define the URL of the login API
-const LOGIN_API_URL = 'https://10.133.134.40:44369/Auth/login';
-
-// Async thunk action for logging in
 export const loginUser = createAsyncThunk(
   'login/loginUser',
-  async (credentials, { rejectWithValue }) => {
+  async ({ username, password }, { rejectWithValue }) => {
     try {
-      const response = await axios.post(LOGIN_API_URL, credentials);
-      // You might want to store the token you get from the response in local storage or in the state
-      return response.data;
+      const response = await axios.post('https://localhost:7158/Auth/login', {
+        username,
+        password
+      })
+      return response.data
     } catch (error) {
-      return rejectWithValue(error.response.data);
+      return rejectWithValue(error.response.data)
     }
   }
-);
+)
 
-// Async thunk action for logging out
-export const logoutUser = createAsyncThunk('login/logoutUser', async () => {
-  // Perform any necessary cleanup, like removing the token from local storage
-});
-
-export const userSlice = createSlice({
+const userSlice = createSlice({
   name: 'auth',
   initialState: {
     role: null,
@@ -51,7 +44,7 @@ export const userSlice = createSlice({
       state.username = action.payload;
     },
     setPassword: (state, action) => {
-      state.password = action.payload.password;
+      state.password = action.payload;
     },
   },
   extraReducers: {
@@ -63,10 +56,10 @@ export const userSlice = createSlice({
       state.isAuthenticated = false;
       // You may want to handle the error
     },
-    [logoutUser.fulfilled]: (state, action) => {
-      state.isAuthenticated = false;
-      // Reset state to initial state or perform other cleanup
-    },
+    // [logoutUser.fulfilled]: (state, action) => {
+    //   state.isAuthenticated = false;
+    //   // Reset state to initial state or perform other cleanup
+    // },
     // Handle pending and rejected states if necessary
   },
 });

@@ -11,15 +11,11 @@ function Dashboard() {
    <SideBar/>
    </div>
    <div className='w-full h-full'>
-   <div className=' border rounded-xl h-fit mt-3 p-2 w-full overflow-hidden    shadow-lg'>
-    <NavBar/>
    
-   </div>
-    
-   <div className=' border rounded-xl h-[40rem] mt-3 p-2 w-full overflow-hidden    shadow-lg'>
+   
    <DashboardPage1/> 
    
-   </div>
+   
     
 
    </div>

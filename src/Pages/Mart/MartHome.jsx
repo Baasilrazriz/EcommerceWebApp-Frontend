@@ -9,24 +9,38 @@ import { addToCart,toggleCart } from "../../Features/Mart/cartSlice";
 import MartHeader from "./MartHeader";
 import { addTowishList } from "../../Features/Mart/wishSlice";
 import Footer from "../../Components/GeneralComponents/Footer";
+import { useEffect } from "react";
+import {  fetchProducts } from "../../Features/Mart/productSlice";
+import { fetchCategories } from "../../Features/Mart/categorySlice";
 
 function MartHome() {
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchProducts());
+    dispatch(fetchCategories());
+  }, [dispatch]);
+
   const categories = useSelector((state) => state.category.cat);
-  const carousel=useSelector(state=>state.carousel.martimage)
+  const carousel=useSelector(state=>state.carousel.martimages)
   const items= useSelector(state=>state.product.products);
+  
   const isCartOpen= useSelector(state=>state.cart.isCartOpen)
+  function getCatNameById( catId) {
+    const category = categories.find(cat => cat.categoryID === catId);
+    return category ? category.name : null;
+  }
   
   
   const contentWidth = isCartOpen ? "w-[75%]" : "w-[100%]";
   const groupedProducts = {};
 
   items.map((product) => {
-    const { category } = product;
-    if (!groupedProducts[category]) {
-      groupedProducts[category] = [];
+    const { categoryID } = product;
+  const catName= getCatNameById(categoryID);
+    if (!groupedProducts[catName]) {
+      groupedProducts[catName] = [];
     }
-    groupedProducts[category].push(product);
+    groupedProducts[catName].push(product);
   });
 
   return (
@@ -34,7 +48,7 @@ function MartHome() {
     <div className="">
       <MartHeader/>
       <div
-        className={`mt-28 flex flex-row ${contentWidth}   px-10  justify-around `}
+        className={`mt-28 flex flex-row ${contentWidth}   px-10  j  ustify-around `}
       >
         <div className="h-full w-full ">
           <div className="mt-20 mb-24 justify-center  flex gap-4 h-auto w-full ">
@@ -42,7 +56,7 @@ function MartHome() {
               <Category />
             </div>
             <div className="w-[983px] h-[352px] rounded-xl overflow-hidden z-0">
-              <CarouselDefault carousel={carousel}/>
+            <CarouselDefault car={carousel} />
             </div>
           </div>
           <hr />
