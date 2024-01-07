@@ -44,10 +44,11 @@ function MartHome() {
   const categories = useSelector((state) => state.category.cat);
   const carousel=useSelector(state=>state.carousel.martimages)
   const items= useSelector(state=>state.product.products);
-  
+  const wishlist=useSelector(state=>state.wish.wishList)
   const isCartOpen= useSelector(state=>state.cart.isCartOpen)
   const cartItems= useSelector(state=>state.cart.cartItems)
   const addCartStatus= useSelector(state=>state.cart.fetchCartStatus)
+  const addwhishListStatus = useSelector((state) => state.wish.addwhishListStatus);
   function getCatNameById( catId) {
     const category = categories.find(cat => cat.categoryID === catId);
     return category ? category.name : null;
@@ -77,6 +78,48 @@ function MartHome() {
               if(addCartStatus===""||addCartStatus==="failed")
               {
                 dispatch(addToCart({ userId, prodId,quantity:1}));
+              }
+        
+            }
+          
+            
+    
+        }
+          //postcart
+        //   const items={
+        //     id: action.payload.id,
+        //     name: action.payload.name,
+        //     price: action.payload.price,
+        //     image: action.payload.image,
+        //     quantity: 1,
+        // }
+        // state.cartItems.push(items)
+      }
+    
+  }
+  function handleAddToWhishList(prodId)
+  {
+      if (userId===null||userId==="")
+      {
+        alert("Please login to add items to wishlist")
+      }
+      else
+      {
+        const existingItem = wishlist.find((item) => item.id === prodId);
+        if (existingItem) {
+          // If the item exists, dispatch the putCart thunk
+          // dispatch(putCart({ userId, prodId, quantity: existingItem.quantity + 1 }));
+          alert("existingItem")
+        } else {
+          // If the item does not exist, dispatch the postCart thunk
+            if (addwhishListStatus==="success"||addwhishListStatus==="pending") {
+              console.log("wishlist loaded")
+            }
+            else{
+              if(addwhishListStatus===""||addwhishListStatus==="failed")
+              {
+                console.log((addwhishListStatus))
+                dispatch(addTowishList({prodId,userId}));
               }
         
             }
@@ -149,21 +192,8 @@ function MartHome() {
                         name={product.name}
                         price={product.price}
                         handleAddToCart={()=>{handleAddToCart(product.id)}}
-                        handleAddToWishList={()=>{
-                          if (userId===null)
-                          {
-                            alert("Please login to add items to wishlist")
-                          }
-                          else
-                          {
-                            dispatch(addTowishList({
-                                id: product.productID,
-                                name: product.name,
-                                price: product.price,
-                                image: product.image,
-                                quantity:product.quantity,
-                          }))
-                          }  
+                        handleAddToWishList={()=>{handleAddToWhishList(product.id)
+                          
                         }}
                       />
                     ))}

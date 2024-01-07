@@ -8,14 +8,14 @@ export const loginUser = createAsyncThunk(
     try {
       const response = await axios.post('https://localhost:7158/Auth/login', {
         username,
-        password
+          password
 
       })
-      console.log(response.data)
+      
       let id,email,profilepic;
 if(response.data.validUser.role==='Admin') {  
             try {
-              console.log("enter in admin")    
+             
               const roleDataResponse = await axios.get(`https://localhost:7158/Admin/${response.data.validUser.userName}`);
               console.log(roleDataResponse.data)
               id = roleDataResponse.data.adminID;     
@@ -28,7 +28,7 @@ if(response.data.validUser.role==='Admin') {
             }
             else if(response.data.validUser.role==='Seller') {  
               try {
-                console.log("enter in seller")    
+      
                 const roleDataResponse = await axios.get(`https://localhost:7158/Seller/${response.data.validUser.userName}`);
                 console.log(roleDataResponse.data)
                 id = roleDataResponse.data.sellerID; 
@@ -42,7 +42,7 @@ if(response.data.validUser.role==='Admin') {
               }
               else if(response.data.validUser.role==='User') {  
                 try {
-                  console.log("enter in user")    
+      
                   const roleDataResponse = await axios.get(`https://localhost:7158/User/${response.data.validUser.userName}`);
                   console.log(roleDataResponse.data)
                   id = roleDataResponse.data.userID;   

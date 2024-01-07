@@ -28,7 +28,7 @@ alert("please login to add to cart");
                     }
                   }
         }
-   
+        
     };
 
     const items= useSelector(state=>state.product.products);

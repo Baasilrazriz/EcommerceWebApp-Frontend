@@ -5,7 +5,7 @@ export const fetchCart = createAsyncThunk(
   'cart/fetchCart',
   async (userId, { rejectWithValue }) => {
     try {
-      console.log("entering fetch cart")
+  
       const response = await axios.get(`https://localhost:7158/Cart/GetUserCart/${userId}`);
       console.log(response.data)  
       return response.data; // Assuming the response contains the cart items
@@ -18,7 +18,7 @@ export const addToCart = createAsyncThunk(
   'cart/addToCart',
   async ({userId,prodId,quantity}, { rejectWithValue }) => {
     try {
-      console.log("entering post cart")
+ 
         const response = await axios.post('https://localhost:7158/Cart', {
           userId,
           prodId,
