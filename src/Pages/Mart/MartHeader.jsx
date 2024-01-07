@@ -14,14 +14,14 @@ function MartHeader() {
       const handleToggleCart = () => {
    if(userId===null||userId==="")
    {
-
+alert("please login to add to cart");
   }
   else
   {
-          dispatch(toggleCart(userId))
+         dispatch(toggleCart(userId))
           if (fetchCartStatus==="success"||fetchCartStatus==="pending") {
-            console.log("cat loaded")
-                }
+          console.log("cat loaded")
+            }
                 else{
                     if (fetchCartStatus !==""||fetchCartStatus !=="failed") {
                       dispatch(fetchCart(userId));

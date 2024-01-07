@@ -1,3 +1,4 @@
+import { accordion } from '@material-tailwind/react';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 export const fetchCart = createAsyncThunk(
@@ -6,7 +7,7 @@ export const fetchCart = createAsyncThunk(
     try {
       console.log("entering fetch cart")
       const response = await axios.get(`https://localhost:7158/Cart/GetUserCart/${userId}`);
-      console.log(response.data)
+      console.log(response.data)  
       return response.data; // Assuming the response contains the cart items
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -33,20 +34,22 @@ export const addToCart = createAsyncThunk(
 );
 export const UpdateCart = createAsyncThunk(
   'cart/UpdateCart',
-  async ({quantity,cart_id}, { rejectWithValue }) => {
+  async ({ quantity, cart_id }, { rejectWithValue }) => {
     try {
-      console.log("entering post cart")
-        const response = await axios.post(`https://localhost:7158/Cart/${cart_id}`, {
-          quantity
-        })
-  
-      console.log(response.data)
-      return response.data; // Assuming the response contains the cart items
+      console.log("Entering put cart");
+      const response = await axios.put(`https://localhost:7158/Cart/${cart_id}`, {
+        quantity: quantity
+      });
+
+      console.log("Response Data:", response.data);
+      return response.data; // Assuming the response contains the updated cart items
     } catch (error) {
+      console.log("Error in UpdateCart:", error);
       return rejectWithValue(error.response.data);
     }
   }
 );
+
 const initialState={
   cartItems:[],
   isCartOpen:false,
@@ -74,21 +77,9 @@ const cartSlice = createSlice({
       }
 
     },
-
-    incrementQuantity: (state, action) => {
-      
-      const item = state.cartItems.find((item) => item.id === action.payload);
-      if (item) {
-        item.quantity += 1;
-      }
-    },
-    decrementQuantity: (state, action) => {
-      
-      const item = state.cartItems.find((item) => item.id === action.payload);
-      if (item && item.quantity > 1) {
-            item.quantity -= 1;
-      }
-    },
+setfetchCartStatus:(state,action)=>{
+  state.fetchCartStatus=action.payload;
+},
     removeItem: (state, action) => {
       
       state.cartItems = state.cartItems.filter((item) => item.id !== action.payload);
@@ -143,5 +134,5 @@ const cartSlice = createSlice({
   },  
 });
 
-export const {toggleCart,applyDiscount, incrementQuantity, decrementQuantity, removeItem } = cartSlice.actions;
+export const {toggleCart,applyDiscount,setfetchCartStatus, incrementQuantity, decrementQuantity, removeItem } = cartSlice.actions;
 export default cartSlice.reducer;

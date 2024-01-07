@@ -23,7 +23,8 @@ function MartHome() {
     if (catStatus==="success"||catStatus==="pending") {
       console.log("cat loaded")
     }
-    else{
+    else
+    {
       if(catStatus===""||catStatus==="failed")
       {
         dispatch(fetchCategories());

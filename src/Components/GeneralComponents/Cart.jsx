@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import { incrementQuantity, decrementQuantity, removeItem, toggleCart, UpdateCart } from '../../Features/Mart/cartSlice';
+import { incrementQuantity, decrementQuantity, removeItem, toggleCart, UpdateCart, setfetchCartStatus, fetchCart } from '../../Features/Mart/cartSlice';
 import { useNavigate } from "react-router-dom";
 
 // {items,setItems}
 const Cart = () => {
-  const dispatch = useDispatch();
+
+  const userId = useSelector((state) => state.auth.userId);
+    const dispatch = useDispatch();
   const items = useSelector((state) => state.cart.cartItems);
+  const fetchCartStatus = useSelector((state) => state.cart.fetchCartStatus);
   const discount= 10;
-    
+
       const total = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
       const grandtotal = total+140-(total*(discount/100));
       const navigation=useNavigate()
@@ -28,7 +31,7 @@ const handleCheckOut=()=>{
   
   <div className="cart-items flex flex-col gap-2 overflow-x-hidden  overflow-y-scroll scroll  h-[19.7rem] my-2">
               {items.map((item, index) => (
-                <div key={index} id={item.id} className="border border-transparent shadow-lg gap-1   flex px-3   py-4">
+                <div key={index} id={item.cartId} className="border border-transparent shadow-lg gap-1   flex px-3   py-4">
                   <div className="border border-transparent shadow-lg overflow-hidden h-16 w-16">
                    <img className="h-full w-full object-fill" src={item.image} alt={item.name} />
                   </div>
@@ -43,15 +46,30 @@ const handleCheckOut=()=>{
                     <div className=" w-10 h-8 relative  left-[9rem]">
                     <div className="flex items-center">
   {item.quantity === 1 ? (
+    
     <button
-      onClick={() => dispatch(removeItem(item.id))}
+      onClick={() => dispatch(removeItem(item.cartId))}
       className="bg-blue-500 text-white font-semibold  px-1 rounded-l py-[0.1rem]"
     >
       🗑️
     </button>
   ) : (
     <button
-      onClick={() => dispatch(UpdateCart(item.id))}
+    
+    onClick={async () => {
+      if(item.quantity>1){
+        dispatch(setfetchCartStatus(""));    
+      try {
+        await dispatch(UpdateCart({ quantity: item.quantity - 1, cart_id: item.cartId }));
+         dispatch(fetchCart(userId));
+      } catch (error) {
+        console.error("Error updating cart:", error);
+        // Handle error (show message to user, etc.)
+      }
+        
+      }
+ 
+    }}
       className="bg-blue-500 text-white font-bold py-1 px-2 rounded-l"
     >
       -
@@ -60,16 +78,21 @@ const handleCheckOut=()=>{
   <input
     type="text"
     className="w-14 text-center"
-    value={item.quantity}
+    value={fetchCartStatus==="pending"?"...":item.quantity}
     readOnly
   />
   <button    
-    onClick={() =>{
-      if(item && item.quantity > 1) {
-        dispatch(UpdateCart( item.quantity-1,item.id))
+ onClick={async () => {
+  dispatch(setfetchCartStatus(""));    
+  try {
+    await dispatch(UpdateCart({ quantity: item.quantity + 1, cart_id: item.cartId }));
+     dispatch(fetchCart(userId));
+  } catch (error) {
+    console.error("Error updating cart:", error);
+    // Handle error (show message to user, etc.)
   }
-   }
-  }
+}}
+  
     className="bg-blue-500 text-white font-bold py-1 px-2 rounded-r"
   >
     +
@@ -120,3 +143,4 @@ const handleCheckOut=()=>{
     
     export default Cart;
     
+  
