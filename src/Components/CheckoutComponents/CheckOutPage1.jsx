@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import CheckoutSteps from './CheckoutSteps';
-import { goToNextStep } from '../../Features/navigationSlice';
+import { goToNextStep } from '../../Features/General/navigationSlice';
 import AccountDetails from './AccountDetails';
 import OrderSummary from './OrderSummary';
 import ShippingDetails from './ShippingDetails';

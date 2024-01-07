@@ -21,6 +21,7 @@ function MartWishList() {
                     tagline={`Explore your WishList`}
                   />
                   <div className="product-section my-10 flex flex-row  flex-wrap gap-5 ">
+                   {wishlist.length>0?(<>
                     {wishlist.map((product) => (
                       <ProductCard
                         image={product.image}
@@ -46,6 +47,14 @@ function MartWishList() {
                         }))}}
                       />
                     ))}
+                   </>):<>
+                   
+                   <div class="w-full h-[30vh] grid place-content-center">
+              <p class="text-center">No products found.</p>
+          
+          </div>
+                   </>}
+
                   </div>
                 </div>
              

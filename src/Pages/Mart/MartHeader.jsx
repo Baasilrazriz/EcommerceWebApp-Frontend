@@ -2,20 +2,36 @@ import React from 'react'
 import Banner from '../../Components/HeadersComponents/Banner'
 import Header from '../../Components/HeadersComponents/Header'
 import Cart from '../../Components/GeneralComponents/Cart'
-import MartHome from './MartHome'
 import { useDispatch, useSelector } from "react-redux";
-import { toggleCart } from "../../Features/Mart/cartSlice";
+import { fetchCart, toggleCart } from "../../Features/Mart/cartSlice";
+
 
 function MartHeader() {
     const dispatch = useDispatch();
     const isCartOpen= useSelector(state=>state.cart.isCartOpen)
-  
-    const handleToggleCart = () => {
-      dispatch(toggleCart());
+    const userId = useSelector((state) => state.auth.userId);
+    const fetchCartStatus= useSelector(state=>state.cart.fetchCartStatus);  
+      const handleToggleCart = () => {
+   if(userId===null||userId==="")
+   {
+
+  }
+  else
+  {
+          dispatch(toggleCart(userId))
+          if (fetchCartStatus==="success"||fetchCartStatus==="pending") {
+            console.log("cat loaded")
+                }
+                else{
+                    if (fetchCartStatus !==""||fetchCartStatus !=="failed") {
+                      dispatch(fetchCart(userId));
+                    }
+                  }
+        }
+   
     };
+
     const items= useSelector(state=>state.product.products);
-  
-    
     return (
         <>
 

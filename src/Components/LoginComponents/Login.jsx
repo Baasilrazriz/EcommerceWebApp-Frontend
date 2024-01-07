@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { openSignupModal } from '../../Features/Mart/signupSlice';
-import { closeLoginModal, loggedIn, loggedOut } from '../../Features/Mart/LoginSlice';
-import { openforgotModal, setUsername } from '../../Features/Mart/forgotSlice';
-import { loginUser, setPassword, setUserRole, setUsernames, togglePasswordVisibility } from '../../Features/Mart/userSlice';
+
+import { openforgotModal } from '../../Features/Mart/forgotSlice';
+import {closeLoginModal, loggedIn, loggedOut , loginUser, setUserRole, togglePasswordVisibility } from '../../Features/Mart/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useNavigate } from "react-router-dom";
 import GoogleButton from "./GoogleButton";
@@ -11,8 +11,10 @@ function Login() {
     const navigation=useNavigate()      
     const showPassword = useSelector((state) => state.auth.showPassword);
     const userRole = useSelector((state) => state.auth.role); // Changed to state.login.role based on your initialState
-    const username=useSelector(state=>state.auth.username)  
-    const password=useSelector(state=>state.auth.password)  
+    const [username,setUsername] =useState("");
+    const [password,setPassword] =useState("");
+    const isAuthenticated=useSelector(state=>state.auth.isAuthenticated)  
+    const userId=useSelector(state=>state.auth.userId)  
 
     
     const handleTogglePassword = () => {
@@ -22,27 +24,30 @@ function Login() {
     const handleRoleChange = (role) => {
       dispatch(setUserRole({ role })); // Updated to send an object
     };
-  
-  
-  
     const  handleSubmit = async (e) => {
       e.preventDefault();
 
-    await dispatch(loginUser( {username, password} ))
-    .unwrap()
-    .then((originalPromiseResult) => {
-      dispatch(loggedIn())
-      dispatch(closeLoginModal());
-      document.body.style.overflowY = "scroll";
-  navigation('/') 
-       alert("success");  
-      alert(`${userRole} is logged in from ${username}`);
-      dispatch(closeLoginModal());
-    })
-    .catch((rejectedValueOrSerializedError) => {
-      dispatch(loggedOut())
-      alert(`incorrect credentials or something went wrong ${username} AND ${password}`);
-    });
+  if(username!==""&&password!=="")
+  {
+     dispatch(loginUser( {username, password} ))
+    if(isAuthenticated===true)
+    {
+     
+         navigation('/') 
+         alert("success");  
+         setPassword("");
+         setUsername("");
+    }
+    else if (isAuthenticated===false)
+        {
+              setPassword("");
+         setUsername("");
+        }
+  }
+else
+{
+  alert(`username and password cannot be empty`);
+}
       
     };
     const handleClose = () => {
@@ -164,8 +169,8 @@ function Login() {
                       <input
                       type="text"
                         placeholder=""
-                        value={username}
-                        onChange={(e) => dispatch(setUsernames(e.target.value))}
+                        value={username||""}
+                        onChange={(e) => dispatch(setUsername(e.target.value))}
                         class="peer h-full w-full rounded-md border  order border-blue-gray-200 border-t-transparent bg-transparent px-3 py-3 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-cyan-500 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
                       />
                       <label class="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none text-[11px] font-normal leading-tight text-blue-gray-400 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-200 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-200 after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[4.1] peer-placeholder-shown:text-blue-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-cyan-500 peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:!border-cyan-500 peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:!border-cyan-500 peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
@@ -176,7 +181,7 @@ function Login() {
               <input
                 type={showPassword ? "text" : "password"} // Dynamic password type
                 placeholder=""
-                value={password}
+                value={password||""}
                 onChange={(e) => dispatch(setPassword(e.target.value))}
                 class="peer h-full w-full rounded-md border border-blue-gray-200 border-t-transparent bg-transparent px-3 py-3 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-cyan-500 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
               />

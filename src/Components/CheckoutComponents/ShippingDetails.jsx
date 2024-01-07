@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { goToNextStep } from '../../Features/navigationSlice';
+import { goToNextStep } from '../../Features/General/navigationSlice';
 import { useDispatch } from 'react-redux';
 
 function ShippingDetails(props) {

@@ -5,7 +5,7 @@ import { openLoginModal } from '../../Features/Mart/LoginSlice';
 import LoginModal from '../../Components/Modals/LoginModal';
 
 function ProtectedRoutes() {
-    const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
+    const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
     
         if(!isLoggedIn) 
     {

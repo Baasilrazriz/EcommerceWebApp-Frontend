@@ -11,8 +11,8 @@ import {
 } from "../../Features/Mart/headerSlice";
 import { NavLink, useNavigate} from "react-router-dom";
 import LoginModal from "../Modals/LoginModal";
-import { loggedOut, openLoginModal } from "../../Features/Mart/LoginSlice";
-import { updateSearchTerm } from "../../Features/searchSlice";
+import { loggedOut, openLoginModal } from "../../Features/Mart/userSlice";
+import { updateSearchTerm } from "../../Features/General/searchSlice";
 
 
 function Header({ toggleCart }) {
@@ -26,7 +26,8 @@ function Header({ toggleCart }) {
   const searchTerm = useSelector( state=>state.search.searchTerm);
   const username=useSelector(state=>state.auth.username)
   const categories = useSelector((state) => state.category.cat);
-  const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  
   const handleSignOut=()=>{
     dispatch(loggedOut());
     window.location.reload();
@@ -120,7 +121,8 @@ function Header({ toggleCart }) {
                       type="text"
                         placeholder=""
                         value={searchTerm}
-                        onChange={(e) => dispatch(updateSearchTerm(e.target.value))}
+                        onChange={(e) => dispatch(updateSearchTerm(e.target.value))
+                        }
                         class="peer h-full w-full  border  order border-blue-gray-200 border-t-transparent bg-transparent py-3 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-cyan-500 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
                       />
                       <label class="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none text-[11px] font-normal leading-tight text-blue-gray-400 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:border-t before:border-l before:border-blue-gray-200 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:border-t after:border-r after:border-blue-gray-200 after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[4.1] peer-placeholder-shown:text-blue-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-cyan-500 peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:!border-cyan-500 peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:!border-cyan-500 peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
@@ -145,7 +147,9 @@ function Header({ toggleCart }) {
                  
                     type="submit"
                     class="absolute top-0 left-[30rem] p-3 text-sm font-medium h-full text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  
                   >
+
                     <svg
                       class="w-4 h-4"
                       aria-hidden="true"
@@ -296,7 +300,7 @@ function Header({ toggleCart }) {
                       
                       class="block w-full text-start px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                     >
-                      Help
+                      My Profile
                     </button>
                   </li>
                   

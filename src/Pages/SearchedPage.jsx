@@ -65,7 +65,7 @@ const SearchedPage = () => {
         )}
                 </div>
               </div>
-           
+    
           
         </div>
   </>  

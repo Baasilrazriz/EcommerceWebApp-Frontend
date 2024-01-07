@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { setActiveStep } from '../../Features/navigationSlice';
+import { setActiveStep } from '../../Features/General/navigationSlice';
 
 function CheckoutSteps() {
     const steps = ['Account', 'Shipping', 'Payment'];

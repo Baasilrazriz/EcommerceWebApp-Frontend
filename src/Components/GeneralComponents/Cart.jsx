@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import { incrementQuantity, decrementQuantity, removeItem, toggleCart } from '../../Features/Mart/cartSlice';
+import { incrementQuantity, decrementQuantity, removeItem, toggleCart, UpdateCart } from '../../Features/Mart/cartSlice';
 import { useNavigate } from "react-router-dom";
 
 // {items,setItems}
@@ -28,16 +28,16 @@ const handleCheckOut=()=>{
   
   <div className="cart-items flex flex-col gap-2 overflow-x-hidden  overflow-y-scroll scroll  h-[19.7rem] my-2">
               {items.map((item, index) => (
-                <div key={index} className="border border-transparent shadow-lg gap-1   flex px-3   py-4">
+                <div key={index} id={item.id} className="border border-transparent shadow-lg gap-1   flex px-3   py-4">
                   <div className="border border-transparent shadow-lg overflow-hidden h-16 w-16">
                    <img className="h-full w-full object-fill" src={item.image} alt={item.name} />
                   </div>
-
+  
                    <div className="cart-item__details flex flex-col gap-2  pr-4">
 
                     <div className=" flex justify-between gap-10">
-                    <h4 className="text-md relative top-5 font-body  w-36">{item.name}</h4>
-                    <p className=" w-10 flex gap-2 relative mt-5  font-semibold "><span>Rs </span>{item.price}</p>
+                    <h4 className="text-md relative top-5 font-body  w-36">{item.productName}</h4>
+                    <p className=" w-10 flex gap-2 relative mt-5  font-semibold "><span>Rs </span>{item.productPrice}</p>
                     </div>
                     
                     <div className=" w-10 h-8 relative  left-[9rem]">
@@ -51,7 +51,7 @@ const handleCheckOut=()=>{
     </button>
   ) : (
     <button
-      onClick={() => dispatch(decrementQuantity(item.id))}
+      onClick={() => dispatch(UpdateCart(item.id))}
       className="bg-blue-500 text-white font-bold py-1 px-2 rounded-l"
     >
       -
@@ -64,7 +64,12 @@ const handleCheckOut=()=>{
     readOnly
   />
   <button    
-    onClick={() => dispatch(incrementQuantity(item.id))}
+    onClick={() =>{
+      if(item && item.quantity > 1) {
+        dispatch(UpdateCart( item.quantity-1,item.id))
+  }
+   }
+  }
     className="bg-blue-500 text-white font-bold py-1 px-2 rounded-r"
   >
     +

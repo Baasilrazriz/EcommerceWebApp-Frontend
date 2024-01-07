@@ -8,15 +8,15 @@ import productReducer from "../Features/Mart/productSlice";
 import wishReducer from "../Features/Mart/wishSlice";
 import loginReducer from "../Features/Mart/LoginSlice";
 import forgotReducer from "../Features/Mart/forgotSlice";
-import searchReducer from "../Features/searchSlice"
+import searchReducer from "../Features/General/searchSlice"
 import signupReducer from "../Features/Mart/signupSlice";
 import CuisineReducer from "../Features/FoodDelivery/CuisineSlice";
 import restrauntReducer from  "../Features/FoodDelivery/restrauntSlice";
 import menuSectionReducer from  "../Features/FoodDelivery/menuSectionSlice";
 import discountReducer from  "../Features/FoodDelivery/discountSlice";
 import reviewReducer from "../Features/FoodDelivery/reviewSlice"
-import carouselReducer from "../Features/carouselSlice"
-import navigationReducer from "../Features/navigationSlice"
+import carouselReducer from "../Features/General/carouselSlice"
+import navigationReducer from "../Features/General/navigationSlice"
 
 export const store = configureStore({
   reducer: {

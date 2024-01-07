@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import CheckoutSteps from './CheckoutSteps';
-import { goToNextStep } from '../../Features/navigationSlice';
+import { goToNextStep } from '../../Features/General/navigationSlice';
  // These actions would be defined in your user slice
 
  

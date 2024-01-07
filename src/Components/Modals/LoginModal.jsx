@@ -11,7 +11,7 @@ import GoogleButton from "../LoginComponents/GoogleButton";
 import Login from "../LoginComponents/Login";
 
 const LoginModal = () => {
-  const isLoginModal = useSelector((state) => state.login.isLoginModalOpen);
+  const isLoginModal = useSelector((state) => state.auth.isLoginModalOpen);
 
 
 

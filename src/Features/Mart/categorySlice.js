@@ -1,9 +1,13 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-const apiUrl="https://localhost:7158/Category";
 export const fetchCategories = createAsyncThunk('Category/fetchCategories', async () => {
-  const response = await axios.get(apiUrl);
+ try {
+  const response = await axios.get("https://localhost:7158/Category");
+  console.log(response.data)
   return response.data;
+} catch (error) {
+  return rejectWithValue(error.response.data);
+}
 });
 export const fetchProductByCategoryName = createAsyncThunk(
   'category/fetchCategoryNameById',
@@ -21,6 +25,7 @@ export const fetchProductByCategoryName = createAsyncThunk(
 const initialState={
   cat:[],
   prodInCat:[],
+  catStatus:"",
 }
 const categorySlice = createSlice({
   name: 'category',
@@ -31,6 +36,16 @@ const categorySlice = createSlice({
     builder
       .addCase(fetchCategories.fulfilled, (state, action) => {
         state.cat = action.payload;
+        state.catStatus = "success";
+        console.log(state.catStatus)
+      })
+      .addCase(fetchCategories.pending, (state) => {
+        state.catStatus = "pending";
+        console.log(state.catStatus)
+      })
+      .addCase(fetchCategories.rejected, (state) => {
+        state.catStatus = "failed";
+        console.log(state.catStatus)
       })
       .addCase(fetchProductByCategoryName.fulfilled, (state, action) => {
         state.prodInCat = action.payload;

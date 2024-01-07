@@ -11,10 +11,47 @@ function MartProductPage(props) {
     const { productName } = useParams()
     
     const items= useSelector(state=>state.product.products);
-
+    const userId = useSelector((state) => state.auth.userId);
     
     const product = items.find((item) => item.name === productName);
+    const cartItems= useSelector(state=>state.cart.cartItems)
+    const handleAddToCart=(prodId)=>{
+        if (userId===null)
+        {
+          alert("Please login to add items to cart")
+        }
+        else
+        {
+          // dispatch(
+          //   addToCart({
+          //     prodId: product.productID,
+          //     name: product.name,
+          //     price: product.price,
+          //     image: product.image,
+          //   })
+          // );
+          const existingItem = cartItems.find((item) => item.id === prodId);
     
+          if (existingItem) {
+            // If the item exists, dispatch the putCart thunk
+            alert("existingItem")
+            // dispatch(putCart({ userId, prodId, quantity: existingItem.quantity + 1 }));
+          } else {
+            // If the item does not exist, dispatch the postCart thunk
+            dispatch(addToCart({ userId, prodId,quantity:1}));
+          }
+            //postcart
+          //   const items={
+          //     id: action.payload.id,
+          //     name: action.payload.name,
+          //     price: action.payload.price,
+          //     image: action.payload.image,
+          //     quantity: 1,
+          // }
+          // state.cartItems.push(items)
+        }
+      
+    }    
     return (
         <>
         <div className=' scroll'>
@@ -185,30 +222,30 @@ function MartProductPage(props) {
                     </div>
                     <div className="flex flex-wrap items-center -mx-4 ">
                         <div className="w-full px-4 mb-4 lg:w-1/2 lg:mb-0">
-                            <button  onClick={() => {
-                      dispatch(
-                        addToCart({
-                          id: product.id,
-                          name: product.name,
-                          price: product.price,
-                          image: product.image,
-                        })
-                      );
-                    }
-}
+                            <button  onClick={()=>{handleAddToCart(product.id)}}
                                 className="flex items-center justify-center w-full p-4 text-fuchsia-500 border border-fuchsia-500 rounded-md dark:text-gray-200 dark:border-fuchsia-600 hover:bg-fuchsia-600 hover:border-fuchsia-600 hover:text-gray-100 dark:bg-fuchsia-600 dark:hover:bg-fuchsia-700 dark:hover:border-fuchsia-700 dark:hover:text-gray-300">
                                 Add to Cart
                             </button>
                         </div>
                         <div className="w-full px-4 mb-4 lg:mb-0 lg:w-1/2">
-                            <button onClick={()=>{
-                      dispatch(addTowishList({
-                        id: product.id,
-                        name: product.name,
-                        price: product.price,
-                        image: product.image,
-                        quantity:product.quantity,
-                  }))}}
+                            <button onClick={
+                                ()=>{
+                                  if (userId===null)
+                                  {
+                                    alert("Please login to add items to wishlist")
+                                  }
+                                  else
+                                  {
+                                    dispatch(addTowishList({
+                                        id: product.productID,
+                                        name: product.name,
+                                        price: product.price,
+                                        image: product.image,
+                                        quantity:product.quantity,
+                                  }))
+                                  }
+                      }
+                    }
                                 className="flex items-center justify-center w-full p-4 text-fuchsia-500 border border-fuchsia-500 rounded-md dark:text-gray-200 dark:border-fuchsia-600 hover:bg-fuchsia-600 hover:border-fuchsia-600 hover:text-gray-100 dark:bg-fuchsia-600 dark:hover:bg-fuchsia-700 dark:hover:border-fuchsia-700 dark:hover:text-gray-300">
                                 Add to wishlist
                             </button>
