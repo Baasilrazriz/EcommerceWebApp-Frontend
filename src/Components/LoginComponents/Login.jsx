@@ -32,7 +32,6 @@ function Login() {
      dispatch(loginUser( {username, password} ))
     if(isAuthenticated===true)
     {
-     
          navigation('/') 
          alert("success");  
          setPassword("");

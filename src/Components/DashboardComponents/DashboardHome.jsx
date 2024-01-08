@@ -2,7 +2,7 @@ import React from 'react';
 import TableComponent from './TableComponent';
 import NavBar from './NavBar';
 
-function DashboardPage1(props) {
+function DashboardHome(props) {
     return (
         
   <>
@@ -11,7 +11,7 @@ function DashboardPage1(props) {
    
    </div>
     
-   <div className=' border rounded-xl h-[40rem] mt-3 p-2 w-full overflow-hidden    shadow-lg'>
+   <div className=' border rounded-xl h-[39.8rem] mt-3 p-2 w-full overflow-hidden    shadow-lg'>
 
         <div className="mt-12">
           <div className="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-4">
@@ -122,4 +122,4 @@ function DashboardPage1(props) {
     );
 }
 
-export default DashboardPage1;
+export default DashboardHome;

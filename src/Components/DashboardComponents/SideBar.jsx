@@ -17,7 +17,7 @@ function SideBar(props) {
   }
   const Ridereight =  isRiderOpen ? "h-full" : "h-12"
     return (
-        <div className="bg-gradient-to-br from-gray-800 to-gray-900   h-[98vh] z-50 my-2 mx-2  w-72 rounded-xl transition-transform duration-300 ">
+        <div className="bg-gradient-to-br from-gray-800 to-gray-900 h-[45rem] z-50 my-2 mx-2  w-72 rounded-xl transition-transform duration-300 ">
         <div className=" border-b border-white/20">
           <a className="flex items-center gap-4 py-6 px-8" href="#/">
             <h6 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-relaxed text-white">Admin</h6>

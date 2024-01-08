@@ -1,9 +1,11 @@
 import React from 'react'
-import TableComponent from './TableComponent'
-import DashboardPage1 from './DashboardPage1'
 import SideBar from './SideBar'
-import NavBar from './NavBar'
 import { useSelector } from 'react-redux'
+import DashboardHome from './DashboardHome'
+import DashboardAddSeller from './SellerInfoComponents/DashboardAddSeller';
+import DashboardUpdateSeller from './SellerInfoComponents/DashboardUpdateSeller';
+import DashboardViewSeller from './SellerInfoComponents/DashboardViewSeller';
+import DashboardDeleteSeller from './SellerInfoComponents/DashboardDeleteSeller';
 
 function Dashboard() {
   const step = useSelector((state) => state.forgot.step);
@@ -12,14 +14,14 @@ function Dashboard() {
    <div>
    <SideBar/>
    </div>
-   <div className='w-full h-full'>
+   <div className='w-full h-full mx-2'>
    
    
-   <DashboardPage1/> 
-   {/* {step === 1 && <FogotPage1 />}
-      {step === 2 && <FogotPage2 />}
-      {step === 3 && <FogotPage3 />}
-      {step === 4 && <FogotPage4 />}
+
+   {step === 1 &&    <DashboardDeleteSeller/> }
+      {/* {step === 2 && <DashboardPage2/>}
+      {step === 3 && <DashboardPage3/>}
+      {step === 4 && <DashboardPage4/>}
       {step === 5 && <FogotPage5 />} */}
    </div>
     </div>
