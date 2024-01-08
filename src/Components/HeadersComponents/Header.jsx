@@ -44,6 +44,25 @@ function Header({ toggleCart }) {
     }
 
   };
+  const toggleWhishlist = () => {
+    if(userId===null||userId==="")
+    {
+ alert("please login to add to whishlist");
+   }
+   else
+   {
+           dispatch(toggleCart(userId))
+           if (fetchCartStatus==="success"||fetchCartStatus==="pending") {
+             console.log("cat loaded")
+                 }
+                 else{
+                     if (fetchCartStatus !==""||fetchCartStatus !=="failed") {
+                       dispatch(fetchCart(userId));
+                     }
+                   }
+         }
+    
+     };
   const categoryDropdownRef = useRef(null);
   const userDropdownRef = useRef(null);
   useEffect(() => {
@@ -176,7 +195,7 @@ function Header({ toggleCart }) {
 
         <div className="justify-center gap-6 flex h-10 my-1" ref={userDropdownRef}>
           <NavLink to={"/mart/wishlist"}>
-            <button className="w-8  ">
+            <button className="w-8  " onClick={toggleWhishlist}>
               <svg
                 className=""
                 width="32"

@@ -84,14 +84,18 @@ function MartWishList() {
                   <div className="product-section my-10 flex flex-row  flex-wrap gap-5 ">
                    {wishlist.length>0?(<>
                     {wishlist.map((product) => (
-                      <ProductCard
+                <div id='product.wishlistId'>
+
+                <ProductCard
+                id={product.productId}
                         image={product.image}
-                        name={product.name}
-                        price={product.price}
+                        name={product.productName}
+                        price={product.productPrice}
                         handleAddToCart={() => {
-                          handleAddToCart(handleAddToCart(product.id))                         
+                          handleAddToCart(handleAddToCart(product.productId))                         
                         }}
-                      />
+                        />
+                        </div>
                     ))}
                    </>):<>
                    

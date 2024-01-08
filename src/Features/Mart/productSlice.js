@@ -12,7 +12,7 @@ const initialState={
     
   ],
   prodStatus:"",
-  error:""  
+
 }
 const productSlice = createSlice({
   name: 'product',
@@ -24,19 +24,17 @@ extraReducers: (builder) => {
     .addCase(fetchProducts.fulfilled, (state, action) => {
       state.products = action.payload;
       state.prodStatus = "success";
-      console.log(state.prodStatus)
+      console.log("product"+state.prodStatus)
     })
     .addCase(fetchProducts.pending, (state) => {
       // Optional: Add some state to track that the cart is being loaded
       state.prodStatus = "pending";
-      console.log(state.prodStatus)
+
     })
     .addCase(fetchProducts.rejected, (state, action) => {
       // Handle the error state
       state.prodStatus = "failed"; // Set loading state to false
-       
-      state.error = action.payload; 
-      console.log(state.prodStatus)
+      console.log("product"+state.prodStatus)
     });
 
     // .addCase(fetchCategoryNameById.fulfilled, (state, action) => {

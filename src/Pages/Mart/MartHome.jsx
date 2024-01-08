@@ -16,9 +16,17 @@ import { fetchCategories } from "../../Features/Mart/categorySlice";
 function MartHome() {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.auth.userId);
-  
   const prodStatus= useSelector(state=>state.product.prodStatus);
   const catStatus = useSelector((state) => state.category.catStatus);
+  const categories = useSelector((state) => state.category.cat);
+  const carousel=useSelector(state=>state.carousel.martimages)
+  const items= useSelector(state=>state.product.products);
+  const wishlist=useSelector(state=>state.wish.wishList)
+  const isCartOpen= useSelector(state=>state.cart.isCartOpen)
+  const cartItems= useSelector(state=>state.cart.cartItems)
+  const addCartStatus= useSelector(state=>state.cart.fetchCartStatus)
+  const addwhishListStatus = useSelector((state) => state.wish.addwhishListStatus);
+
   useEffect(() => {
     if (catStatus==="success"||catStatus==="pending") {
       console.log("cat loaded")
@@ -39,16 +47,11 @@ function MartHome() {
       {
         dispatch(fetchProducts());
       }
+
     }
+ 
   }, [prodStatus,catStatus, dispatch]);
-  const categories = useSelector((state) => state.category.cat);
-  const carousel=useSelector(state=>state.carousel.martimages)
-  const items= useSelector(state=>state.product.products);
-  const wishlist=useSelector(state=>state.wish.wishList)
-  const isCartOpen= useSelector(state=>state.cart.isCartOpen)
-  const cartItems= useSelector(state=>state.cart.cartItems)
-  const addCartStatus= useSelector(state=>state.cart.fetchCartStatus)
-  const addwhishListStatus = useSelector((state) => state.wish.addwhishListStatus);
+  
   function getCatNameById( catId) {
     const category = categories.find(cat => cat.categoryID === catId);
     return category ? category.name : null;
@@ -62,7 +65,7 @@ function MartHome() {
       else
       {
        
-        const existingItem = cartItems.find((item) => item.id === prodId);
+        const existingItem = cartItems.find((item) => item.productID === prodId);
   
         if (existingItem) {
           // If the item exists, dispatch the putCart thunk
@@ -72,7 +75,7 @@ function MartHome() {
           // If the item does not exist, dispatch the postCart thunk
           
             if (addCartStatus==="success"||addCartStatus==="pending") {
-              console.log("cat loaded")
+              
             }
             else{
               if(addCartStatus===""||addCartStatus==="failed")
@@ -85,15 +88,6 @@ function MartHome() {
             
     
         }
-          //postcart
-        //   const items={
-        //     id: action.payload.id,
-        //     name: action.payload.name,
-        //     price: action.payload.price,
-        //     image: action.payload.image,
-        //     quantity: 1,
-        // }
-        // state.cartItems.push(items)
       }
     
   }
@@ -105,7 +99,7 @@ function MartHome() {
       }
       else
       {
-        const existingItem = wishlist.find((item) => item.id === prodId);
+        const existingItem = wishlist.find((item) => item.productID === prodId);
         if (existingItem) {
           // If the item exists, dispatch the putCart thunk
           // dispatch(putCart({ userId, prodId, quantity: existingItem.quantity + 1 }));
@@ -118,7 +112,7 @@ function MartHome() {
             else{
               if(addwhishListStatus===""||addwhishListStatus==="failed")
               {
-                console.log((addwhishListStatus))
+                console.log("widshlist:"+addwhishListStatus)
                 dispatch(addTowishList({prodId,userId}));
               }
         
@@ -185,15 +179,15 @@ function MartHome() {
                     tagline={`Explore our ${category} products`}
                   />
                   <div className="product-section my-10 flex flex-row  flex-wrap gap-5 ">
+                    
                     {categoryProducts.map((product) => (
                       <ProductCard
-                      id={product.id}
+                      id={product.productID}
                         image={product.image}
                         name={product.name}
                         price={product.price}
-                        handleAddToCart={()=>{handleAddToCart(product.id)}}
-                        handleAddToWishList={()=>{handleAddToWhishList(product.id)
-                          
+                        handleAddToCart={()=>{handleAddToCart(product.productID)}}
+                        handleAddToWishList={()=>{handleAddToWhishList(product.productID)
                         }}
                       />
                     ))}

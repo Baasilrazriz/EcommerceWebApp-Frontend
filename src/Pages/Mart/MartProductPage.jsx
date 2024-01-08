@@ -3,55 +3,114 @@ import MartHeader from './MartHeader';
 import Footer from '../../Components/GeneralComponents/Footer';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { addTowishList } from '../../Features/Mart/wishSlice';
-import { addToCart } from '../../Features/Mart/cartSlice';
+import { addTowishList, fetchWishlist } from '../../Features/Mart/wishSlice';
+import { addToCart, fetchCart } from '../../Features/Mart/cartSlice';
 
 function MartProductPage(props) {
     const dispatch = useDispatch();
     const { productName } = useParams()
-    
+    const addCartStatus= useSelector(state=>state.cart.fetchCartStatus)
+    const addwhishListStatus = useSelector((state) => state.wish.addwhishListStatus);      
     const items= useSelector(state=>state.product.products);
     const userId = useSelector((state) => state.auth.userId);
-    
+    const wishlist=useSelector(state=>state.wish.wishList) 
     const product = items.find((item) => item.name === productName);
     const cartItems= useSelector(state=>state.cart.cartItems)
-    const handleAddToCart=(prodId)=>{
-        if (userId===null)
-        {
-          alert("Please login to add items to cart")
-        }
-        else
-        {
-          // dispatch(
-          //   addToCart({
-          //     prodId: product.productID,
-          //     name: product.name,
-          //     price: product.price,
-          //     image: product.image,
-          //   })
-          // );
-          const existingItem = cartItems.find((item) => item.id === prodId);
+    async function handleAddToCart(prodId)
+  {
+      if (userId===null||userId==="")
+      {
+        alert("Please login to add items to cart")
+      }
+      else
+      {
+       
+        const existingItem = cartItems.find((item) => item.productId === prodId);
+  
+        if (existingItem) {
+          // If the item exists, dispatch the putCart thunk
+          // dispatch(putCart({ userId, prodId, quantity: existingItem.quantity + 1 }));
+          alert("existingItem  "+existingItem.productName+""+existingItem.productId)
+        } else {
+          // If the item does not exist, dispatch the postCart thunk
+          
+            if (addCartStatus==="success"||addCartStatus==="pending") {
+              console.log("cart loaded")
+            }
+            else{
+              if(addCartStatus===""||addCartStatus==="failed")
+              {
+                console.log(userId,prodId)
+          await dispatch(addToCart({ userID:userId,productID:prodId,quantity:1}));
+          dispatch(fetchCart(userId));
+              }
+        
+            }
+          
+            
     
-          if (existingItem) {
-            // If the item exists, dispatch the putCart thunk
-            alert("existingItem")
-            // dispatch(putCart({ userId, prodId, quantity: existingItem.quantity + 1 }));
-          } else {
-            // If the item does not exist, dispatch the postCart thunk
-            dispatch(addToCart({ userId, prodId,quantity:1}));
-          }
-            //postcart
-          //   const items={
-          //     id: action.payload.id,
-          //     name: action.payload.name,
-          //     price: action.payload.price,
-          //     image: action.payload.image,
-          //     quantity: 1,
-          // }
-          // state.cartItems.push(items)
         }
-      
-    }    
+      }
+    
+  }
+  async function  handleAddToWhishList(prodId)
+  {
+    console.log("status:"+  addwhishListStatus)
+      if (userId===null||userId==="")
+      {
+        alert("Please login to add items to wishlist")
+      }
+      else
+      {
+        const existingItem = wishlist.find((item) => item.productId === prodId);
+        if (existingItem) {
+          // If the item exists, dispatch the putCart thunk
+          // dispatch(putCart({ userId, prodId, quantity: existingItem.quantity + 1 }));
+          alert("existingItem")
+        } else {
+          // If the item does not exist, dispatch the postCart thunk
+            if (addwhishListStatus==="success"||addwhishListStatus==="pending") {
+              console.log("wishlist loaded")
+            }
+            else{
+              if(addwhishListStatus===""||addwhishListStatus==="failed")
+              {
+                console.log(userId,prodId)
+        await  dispatch(addTowishList({productID:prodId,userID:userId}));
+        dispatch(fetchWishlist(userId))
+              }
+        
+            }
+        }
+            
+    
+        }
+      }
+    
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     return (
         <>
         <div className=' scroll'>
@@ -204,10 +263,27 @@ function MartProductPage(props) {
                         </div>
                     </div>
                     <div className="w-32 mb-8 ">
-                        <label for="" onClick={() => dispatch(decrementQuantity(product.id))}
+                        <label for=""
                             className="w-full text-xl font-semibold text-gray-700 dark:text-gray-400">Quantity</label>
                         <div className="relative flex flex-row w-full h-10 mt-4 bg-transparent rounded-lg">
                             <button
+                              
+    // onClick={
+    //     async () => {
+    //     if(cart.quantity>1){
+    //       dispatch(setfetchCartStatus(""));    
+    //     try {
+    //       await dispatch(UpdateCart({ quantity: item.quantity - 1, cart_id: item.cartId }));
+    //        dispatch(fetchCart(userId));
+    //     } catch (error) {
+    //       console.error("Error updating cart:", error);
+    //       // Handle error (show message to user, etc.)
+    //     }
+          
+    //     }
+   
+    //   }
+    // }
                                 className="w-20 h-full text-gray-600 bg-gray-300 rounded-l outline-none cursor-pointer dark:hover:bg-gray-700 dark:text-gray-400 hover:text-gray-700 dark:bg-gray-900 hover:bg-gray-400">
                                 <span className="m-auto text-2xl font-thin">-</span>
                             </button>
@@ -222,7 +298,7 @@ function MartProductPage(props) {
                     </div>
                     <div className="flex flex-wrap items-center -mx-4 ">
                         <div className="w-full px-4 mb-4 lg:w-1/2 lg:mb-0">
-                            <button  onClick={()=>{handleAddToCart(product.id)}}
+                            <button  onClick={()=>{handleAddToCart(product.productID)}}
                                 className="flex items-center justify-center w-full p-4 text-fuchsia-500 border border-fuchsia-500 rounded-md dark:text-gray-200 dark:border-fuchsia-600 hover:bg-fuchsia-600 hover:border-fuchsia-600 hover:text-gray-100 dark:bg-fuchsia-600 dark:hover:bg-fuchsia-700 dark:hover:border-fuchsia-700 dark:hover:text-gray-300">
                                 Add to Cart
                             </button>
@@ -230,20 +306,7 @@ function MartProductPage(props) {
                         <div className="w-full px-4 mb-4 lg:mb-0 lg:w-1/2">
                             <button onClick={
                                 ()=>{
-                                  if (userId===null)
-                                  {
-                                    alert("Please login to add items to wishlist")
-                                  }
-                                  else
-                                  {
-                                    dispatch(addTowishList({
-                                        id: product.productID,
-                                        name: product.name,
-                                        price: product.price,
-                                        image: product.image,
-                                        quantity:product.quantity,
-                                  }))
-                                  }
+                                    handleAddToWhishList(product.id)
                       }
                     }
                                 className="flex items-center justify-center w-full p-4 text-fuchsia-500 border border-fuchsia-500 rounded-md dark:text-gray-200 dark:border-fuchsia-600 hover:bg-fuchsia-600 hover:border-fuchsia-600 hover:text-gray-100 dark:bg-fuchsia-600 dark:hover:bg-fuchsia-700 dark:hover:border-fuchsia-700 dark:hover:text-gray-300">

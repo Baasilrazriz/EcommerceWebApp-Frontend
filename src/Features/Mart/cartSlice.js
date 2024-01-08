@@ -16,12 +16,12 @@ export const fetchCart = createAsyncThunk(
 );
 export const addToCart = createAsyncThunk(
   'cart/addToCart',
-  async ({userId,prodId,quantity}, { rejectWithValue }) => {
+  async ({userID,productID,quantity}, { rejectWithValue }) => {
     try {
  
         const response = await axios.post('https://localhost:7158/Cart', {
-          userId,
-          prodId,
+          productID,
+          userID,
           quantity
         })
   

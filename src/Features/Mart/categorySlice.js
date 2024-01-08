@@ -37,15 +37,15 @@ const categorySlice = createSlice({
       .addCase(fetchCategories.fulfilled, (state, action) => {
         state.cat = action.payload;
         state.catStatus = "success";
-        console.log(state.catStatus)
+        console.log("category"+state.catStatus)
       })
       .addCase(fetchCategories.pending, (state) => {
         state.catStatus = "pending";
-        console.log(state.catStatus)
+        
       })
       .addCase(fetchCategories.rejected, (state) => {
         state.catStatus = "failed";
-        console.log(state.catStatus)
+        console.log("category"+state.catStatus)
       })
       .addCase(fetchProductByCategoryName.fulfilled, (state, action) => {
         state.prodInCat = action.payload;

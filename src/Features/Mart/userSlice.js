@@ -155,7 +155,6 @@ state.username=null;
       console.log(action.payload.id)    
       console.log(state.username)
       console.log(action.payload.email)
-      console.log(action.payload.profilepic)  
       document.body.style.overflowY = "scroll";  
     })
     .addCase(loginUser.rejected, (state) => {

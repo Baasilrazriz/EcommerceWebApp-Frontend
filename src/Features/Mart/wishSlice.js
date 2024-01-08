@@ -1,26 +1,46 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-
+import axios from 'axios';
 export const fetchWishlist = createAsyncThunk(
   'whishlist/fetchWishlist',
   async (userId, { rejectWithValue }) => {
     try {
-      console.log("entering fetch whichlist")
-      const response = await axios.get(`https://localhost:7158/Wishlist/GetUserWishlist/${userId}`);
+      console.log("entering fetch whichlist "+userId)
+      const response = await axios.get(`https://localhost:7158/Wishlist/GetUserWishlist/1`);
       console.log(response.data)
       return response.data;
     } catch (error) {
+      console.log(error.response.data)
       return rejectWithValue(error.response.data);
     }
   }
 );
+// export const addToCart = createAsyncThunk(
+//   'cart/addToCart',
+//   async ({userId,prodId,quantity}, { rejectWithValue }) => {
+//     try {
+ 
+//         const response = await axios.post('https://localhost:7158/Cart', {
+//           userId,
+//           prodId,
+//           quantity
+//         })
+  
+//       console.log(response.data)
+//       return response.data; // Assuming the response contains the cart items
+//     } catch (error) {
+//       return rejectWithValue(error.response.data);
+//     }
+//   }
+// );
 export const addTowishList = createAsyncThunk(
   'whishlist/addTowishList',
-  async ({prodId,userId}, { rejectWithValue }) => {
+  async ({productID,userID}, { rejectWithValue }) => {
     try {
       console.log("entering post whishlist")
-        const response = await axios.post('https://localhost:7158/Wishlist', {
-          prodId,
-          userId
+      
+      const response = await axios.post('https://localhost:7158/Wishlist', {
+        productID,
+          userID
         })
         console.log("here")
       console.log(response.data)
@@ -56,9 +76,6 @@ const wishSlice = createSlice({
     //     state.wishList.push(items)
     //   }
     //   },
-      removeItem: (state, action) => {
-        state.wishList = state.wishList.filter((item) => item.id !== action.payload.id);
-      },
    
     },
     extraReducers: (builder) => {

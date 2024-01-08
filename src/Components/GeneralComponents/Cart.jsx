@@ -12,7 +12,7 @@ const Cart = () => {
   const fetchCartStatus = useSelector((state) => state.cart.fetchCartStatus);
   const discount= 10;
 
-      const total = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
+      const total = items.reduce((acc, item) => acc + item.productPrice * item.quantity, 0);
       const grandtotal = total+140-(total*(discount/100));
       const navigation=useNavigate()
 const handleCheckOut=()=>{
@@ -56,7 +56,8 @@ const handleCheckOut=()=>{
   ) : (
     <button
     
-    onClick={async () => {
+    onClick={
+      async () => {
       if(item.quantity>1){
         dispatch(setfetchCartStatus(""));    
       try {
@@ -69,7 +70,9 @@ const handleCheckOut=()=>{
         
       }
  
-    }}
+    }
+  }
+
       className="bg-blue-500 text-white font-bold py-1 px-2 rounded-l"
     >
       -
