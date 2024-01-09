@@ -1,5 +1,6 @@
 import {React , useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { toast, ToastContainer } from 'react-toastify';
 import {
   CloseCategoryDropdown,
   CloseUserDropdown,
@@ -13,21 +14,25 @@ import { NavLink, useNavigate} from "react-router-dom";
 import LoginModal from "../Modals/LoginModal";
 import { loggedOut, openLoginModal } from "../../Features/Mart/userSlice";
 import { updateSearchTerm } from "../../Features/General/searchSlice";
+import { fetchWishlist } from "../../Features/Mart/wishSlice";
 
 
 function Header({ toggleCart }) {
   const dispatch = useDispatch();
+
   const email=useSelector(state=>state.auth.email)
   const profilepic=useSelector(state=>state.auth.profilepic)
   const { categoryDropdownOpen, userDropdownOpen } = useSelector(
     (state) => state.header
   );
+  const userId=useSelector(state=>state.auth.userId)  
   const navigation=useNavigate()
   const searchTerm = useSelector( state=>state.search.searchTerm);
+  const module = useSelector( state=>state.landingPage.module);
   const username=useSelector(state=>state.auth.username)
   const categories = useSelector((state) => state.category.cat);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  
+  const whishlistlink=module==="/Fooddelivery/Home"?"/Fooddelivery/wishlist":"/mart/wishlist";
   const handleSignOut=()=>{
     dispatch(loggedOut());
     window.location.reload();
@@ -35,29 +40,40 @@ function Header({ toggleCart }) {
   const handleOpenLoginModal = () => {
 
     if (isLoggedIn === false ) {
+      
       document.body.style.overflowY = "hidden";
       dispatch(openLoginModal());
-      navigation('/login')
+      
     } else {
       document.body.style.overflowY = "scroll";
       dispatch(toggleUserDropdown());
     }
-
   };
+  
   const toggleWhishlist = () => {
     if(userId===null||userId==="")
     {
- alert("please login to add to whishlist");
+      toast.error("Please Login in first to view the whishlist ", {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        
+      });
    }
    else
    {
-           dispatch(toggleCart(userId))
+    navigation(whishlistlink)
+           dispatch(toggleWhishlist(userId))  
            if (fetchCartStatus==="success"||fetchCartStatus==="pending") {
              console.log("cat loaded")
                  }
                  else{
                      if (fetchCartStatus !==""||fetchCartStatus !=="failed") {
-                       dispatch(fetchCart(userId));
+                       dispatch(fetchWishlist(userId));
                      }
                    }
          }
@@ -92,7 +108,7 @@ function Header({ toggleCart }) {
         <div className=" flex gap-36">
           <div className="title text-center">
             <h1 className="text-black text-3xl font-bold font-['Inter'] leading-normal  tracking-wide">
-              <NavLink to={"/"}>Exclusive</NavLink>
+              <NavLink to={"/mart/Home"}>Exclusive</NavLink>
             </h1>
           </div>
         </div>
@@ -123,7 +139,7 @@ function Header({ toggleCart }) {
                           key={index}
                         >
                           <NavLink
-                            to={`/category/${cat.name}`}
+                            to={`/mart/category/${cat.name}`}
                             ClassName="text-blue-500"
                           >
                             {cat.name}
@@ -160,7 +176,7 @@ function Header({ toggleCart }) {
                     required
                   />
                    */}
-<NavLink  to="/search">
+<NavLink  to="/mart/search">
 
                   <button
                  
@@ -194,7 +210,7 @@ function Header({ toggleCart }) {
         </div>
 
         <div className="justify-center gap-6 flex h-10 my-1" ref={userDropdownRef}>
-          <NavLink to={"/mart/wishlist"}>
+          
             <button className="w-8  " onClick={toggleWhishlist}>
               <svg
                 className=""
@@ -213,7 +229,7 @@ function Header({ toggleCart }) {
                 />
               </svg>
             </button>
-          </NavLink>
+          
 
           <button className="w-8 " onClick={toggleCart}>
             <svg
@@ -287,7 +303,7 @@ function Header({ toggleCart }) {
             {userDropdownOpen && (
               
               <div
-                class=" absolute right-0  z-50   my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow-lg dark:bg-gray-700 dark:divide-gray-600"
+                class=" absolute right-0  z-[999]   my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow-lg dark:bg-gray-700 dark:divide-gray-600"
               >
                 <div class="px-4 py-3">
                   <span class="block text-sm text-gray-900 dark:text-white">

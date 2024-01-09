@@ -2,7 +2,7 @@ import React from 'react';
 import TableComponent from '../TableComponent';
 import NavBar from '../NavBar';
 
-function DashboardUpdateSeller(props) {
+function DashboardUpdateRider(props) {
     return (
         
         <>
@@ -12,7 +12,7 @@ function DashboardUpdateSeller(props) {
     </div>
      
     <div className=' border rounded-xl h-[39.8rem] my-2  p-2 py-5 w-full overflow-hidden    shadow-lg'>
-<h1 className="text-left text-4xl font-bold   text-gray-700 px-6 ">Update Seller Info</h1>
+<h1 className="text-left text-4xl font-bold   text-gray-700 px-6 ">Update Rider Info</h1>
 <form action="" className='pt- mx-5 flex flex-col gap-5' method="post">
 <div className="flex justify-center">
                 <div className=' h-44 w-44 rounded-full shadow-lg shadow-neutral-950 overflow-hidden'>
@@ -229,4 +229,4 @@ function DashboardUpdateSeller(props) {
     );
 }
 
-export default DashboardUpdateSeller;
+export default DashboardUpdateRider;

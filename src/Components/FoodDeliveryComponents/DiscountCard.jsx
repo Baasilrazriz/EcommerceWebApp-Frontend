@@ -10,7 +10,7 @@ function DiscountCard(props) {
             className="mt-[-0.15rem]"
             height={10}
             width={40}
-            src="../assets/FoodDelivery/discount.png"
+            src="../../assets/FoodDelivery/discount.png"
             alt=""
           />
           <h1 className="flex flex-col justify-center text-[18px] font-[Open Sans] font-[600]">

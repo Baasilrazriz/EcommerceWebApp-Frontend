@@ -14,24 +14,7 @@ export const fetchWishlist = createAsyncThunk(
     }
   }
 );
-// export const addToCart = createAsyncThunk(
-//   'cart/addToCart',
-//   async ({userId,prodId,quantity}, { rejectWithValue }) => {
-//     try {
- 
-//         const response = await axios.post('https://localhost:7158/Cart', {
-//           userId,
-//           prodId,
-//           quantity
-//         })
-  
-//       console.log(response.data)
-//       return response.data; // Assuming the response contains the cart items
-//     } catch (error) {
-//       return rejectWithValue(error.response.data);
-//     }
-//   }
-// );
+
 export const addTowishList = createAsyncThunk(
   'whishlist/addTowishList',
   async ({productID,userID}, { rejectWithValue }) => {
@@ -54,6 +37,7 @@ export const addTowishList = createAsyncThunk(
 
 const initialState={
     wishList:[],
+    fdwhishlist:[],
     fetchwishListStatus:"",
     addwhishListStatus:"",
 }

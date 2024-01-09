@@ -1,5 +1,6 @@
 // actions.js
 import { createSlice } from '@reduxjs/toolkit';
+// https://localhost:7158/Forgot/ValidateUsername
 
 const forgotSlice = createSlice({
   name: 'forgot',

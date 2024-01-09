@@ -7,7 +7,7 @@ import CategoryCard from "../../Components/MartComponents/CategoryCard";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart,toggleCart } from "../../Features/Mart/cartSlice";
 import MartHeader from "./MartHeader";
-import { addTowishList } from "../../Features/Mart/wishSlice";
+import { addTowishList, fetchWishlist } from "../../Features/Mart/wishSlice";
 import Footer from "../../Components/GeneralComponents/Footer";
 import { useEffect } from "react";
 import {  fetchProducts } from "../../Features/Mart/productSlice";
@@ -26,6 +26,7 @@ function MartHome() {
   const cartItems= useSelector(state=>state.cart.cartItems)
   const addCartStatus= useSelector(state=>state.cart.fetchCartStatus)
   const addwhishListStatus = useSelector((state) => state.wish.addwhishListStatus);
+  const fetchwishListStatus = useSelector((state) => state.wish.fetchwishListStatus);
 
   useEffect(() => {
     if (catStatus==="success"||catStatus==="pending") {
@@ -47,7 +48,16 @@ function MartHome() {
       {
         dispatch(fetchProducts());
       }
-
+      console.log(fetchwishListStatus)
+    if (fetchwishListStatus==="success"||fetchwishListStatus==="pending") {
+      console.log("prod loaded")
+    }
+    else{
+      if(fetchwishListStatus===""||fetchwishListStatus==="failed")
+      {
+        dispatch(fetchWishlist(userId));
+      }
+    }
     }
  
   }, [prodStatus,catStatus, dispatch]);

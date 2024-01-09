@@ -8,7 +8,7 @@ function Banner() {
 
   return (
         <>
- <div className="w-full  fixed top-0 left-0   z-[999] h-14 py-3 bg-black text-white justify-center inline-flex">
+ <div className="w-full  fixed top-0 left-0  z-10 h-14 py-3 bg-black text-white justify-center inline-flex">
   <div className=" gap-[200px] inline-flex">
 
     <div className="justify-start items-center gap-2 flex">

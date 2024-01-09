@@ -1,12 +1,11 @@
 import React from 'react';
-import MartHeader from '../Mart/MartHeader';
+import MartHeader from  "../Mart/MartHeader";
 import Footer from '../../Components/GeneralComponents/Footer';
 import ScrollableComponent from '../../Components/GeneralComponents/ScrollableComponent';
 import { useDispatch, useSelector } from 'react-redux';
 import CarouselDefault from '../../Components/GeneralComponents/CarouselDefault';
 import Heading from '../../Components/GeneralComponents/Heading';
 import { addTowishList } from '../../Features/Mart/wishSlice';
-
 import RestrauntCard from '../../Components/FoodDeliveryComponents/RestrauntCard';
 
 function FDHome() {

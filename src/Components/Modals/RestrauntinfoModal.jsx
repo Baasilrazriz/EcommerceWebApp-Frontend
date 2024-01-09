@@ -44,7 +44,7 @@ function RestrauntinfoModal(props) {
 <div className={`mx-5 my-5  ${contentHeight}  overflow-hidden`}>
 <div className={` p-1 flex justify-between`}>
 <div className=' flex gap-3'>
-<img src="../assets/FoodDelivery/clock.png" height={10} width={30}  alt="clock" srcset="" />
+<img src="../../assets/FoodDelivery/clock.png" height={10} width={30}  alt="clock" srcset="" />
 <h1 className=' text-2xl font-[700] text-gray-800  font-sans '>Closed untill 12:00</h1>     
 </div>
  <button onClick={handleTimeClick} className='rounded-full hover:scale-105 text-lg  font-medium   h-8  w-fit px-4 text-red-600 border border-gray-400 hover:shadow-xl '>view more <span className='relative top-[0.45rem]  text-2xl'>^</span></button> 
@@ -64,7 +64,7 @@ function RestrauntinfoModal(props) {
 
 <div className='mx-6 my-10'>
 <div className=' flex gap-4 '>
-<img src="../assets/FoodDelivery/placeholder.png" height={10} width={30}  alt="clock" srcset="" />
+<img src="../../assets/FoodDelivery/placeholder.png" height={10} width={30}  alt="clock" srcset="" />
 <h1 className=' text-[18px] font-[700] text-gray-800  font-sans w-66'>{restraunts.loc}</h1>     
 </div>
 <div  className='my-5 mx-2 border rounded-lg overflow-hidden h-[15rem]'>

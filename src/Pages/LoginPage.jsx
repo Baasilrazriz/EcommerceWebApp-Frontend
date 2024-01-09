@@ -11,10 +11,10 @@ function LoginPage() {
     
     return (
         
-    <div className="bg-white">
+    <div className="bg-white ">
     <MartHeader/>
     <div
-        className={`mt-28 flex flex-row w-full   px-10  justify-around `}
+        className={` mt-28 flex flex-row w-full   px-10  justify-around `}
       >
          <Login/>
          

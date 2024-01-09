@@ -22,7 +22,7 @@ function SignUpModal() {
               <div className=" w-[53%] ">
                 <img
                   className="h-[30rem]  object-fill"
-                  src="assets\loginbg1.jpg"
+                  src="../assets\loginbg1.jpg"
                   alt=""
                   srcset=""
                 />

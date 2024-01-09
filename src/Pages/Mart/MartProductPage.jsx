@@ -70,7 +70,7 @@ function MartProductPage(props) {
         } else {
           // If the item does not exist, dispatch the postCart thunk
             if (addwhishListStatus==="success"||addwhishListStatus==="pending") {
-              console.log("wishlist loaded")
+              console.log("wishlist done")
             }
             else{
               if(addwhishListStatus===""||addwhishListStatus==="failed")
@@ -127,36 +127,7 @@ function MartProductPage(props) {
                         <img src={product.image} alt=""
                             className="object-contain w-full h-full lg:h-full "/>
                     </div>
-                    <div className="flex-wrap hidden md:flex ">
-                        <div className="w-1/2 p-2 sm:w-1/4">
-                            <a href="#"
-                                className="block border border-fuchsia-300 dark:border-transparent dark:hover:border-fuchsia-300 hover:border-fuchsia-300">
-                                <img src="https://i.postimg.cc/PqYpFTfy/pexels-melvin-buezo-2529148.jpg" alt=""
-                                    className="object-cover w-full lg:h-20"/>
-                            </a>
-                        </div>
-                        <div className="w-1/2 p-2 sm:w-1/4">
-                            <a href="#"
-                                className="block border border-transparent dark:border-transparent dark:hover:border-fuchsia-300 hover:border-fuchsia-300">
-                                <img src="https://i.postimg.cc/PqYpFTfy/pexels-melvin-buezo-2529148.jpg" alt=""
-                                    className="object-cover w-full lg:h-20"/>
-                            </a>
-                        </div>
-                        <div className="w-1/2 p-2 sm:w-1/4">
-                            <a href="#"
-                                className="block border border-transparent dark:border-transparent dark:hover:border-fuchsia-300 hover:border-fuchsia-300">
-                                <img src="https://i.postimg.cc/PqYpFTfy/pexels-melvin-buezo-2529148.jpg" alt=""
-                                    className="object-cover w-full lg:h-20"/>
-                            </a>
-                        </div>
-                        <div className="w-1/2 p-2 sm:w-1/4">
-                            <a href="#"
-                                className="block border border-transparent dark:border-transparent dark:hover:border-fuchsia-300 hover:border-fuchsia-300">
-                                <img src="https://i.postimg.cc/PqYpFTfy/pexels-melvin-buezo-2529148.jpg" alt=""
-                                    className="object-cover w-full lg:h-20"/>
-                            </a>
-                        </div>
-                    </div>
+                 
                 </div>
                 {/* images */}
             </div>
@@ -216,8 +187,7 @@ function MartProductPage(props) {
                             <p className="text-xs dark:text-gray-400 ">(2 customer reviews)</p>
                         </div>
                         <p className="max-w-md mb-8 text-gray-700 dark:text-gray-400">
-                            Lorem ispum dor amet Lorem ispum dor amet Lorem ispum dor amet Lorem ispum dor amet
-                            Lorem ispum dor amet Lorem ispum dor amet Lorem ispum dor amet Lorem ispum dor amet
+                        {product.description}
                         </p>
                         <p className="inline-block mb-8 text-4xl font-bold text-gray-700 dark:text-gray-400 ">
                             <span>{product.price}</span>
@@ -226,76 +196,8 @@ function MartProductPage(props) {
                         </p>
                         <p className="text-green-600 dark:text-green-300 ">7 in stock</p>
                     </div>
-                    <div className="flex items-center mb-8">
-                        <h2 className="w-16 mr-6 text-xl font-bold dark:text-gray-400">
-                            Colors:</h2>
-                        <div className="flex flex-wrap -mx-2 -mb-2">
-                            <button
-                                className="p-1 mb-2 mr-2 border border-transparent hover:border-fuchsia-400 dark:border-gray-800 dark:hover:border-gray-400 ">
-                                <div className="w-6 h-6 bg-cyan-300"></div>
-                            </button>
-                            <button
-                                className="p-1 mb-2 mr-2 border border-transparent hover:border-fuchsia-400 dark:border-gray-800 dark:hover:border-gray-400">
-                                <div className="w-6 h-6 bg-green-300 "></div>
-                            </button>
-                            <button
-                                className="p-1 mb-2 border border-transparent hover:border-fuchsia-400 dark:border-gray-800 dark:hover:border-gray-400">
-                                <div className="w-6 h-6 bg-fuchsia-200 "></div>
-                            </button>
-                        </div>
-                    </div>
-                    <div className="flex items-center mb-8">
-                        <h2 className="w-16 text-xl font-bold dark:text-gray-400">
-                            Size:</h2>
-                        <div className="flex flex-wrap -mx-2 -mb-2">
-                            <button
-                                className="py-1 mb-2 mr-1 border w-11 hover:border-fuchsia-400 dark:border-gray-400 hover:text-fuchsia-600 dark:hover:border-gray-300 dark:text-gray-400">XL
-                            </button>
-                            <button
-                                className="py-1 mb-2 mr-1 border w-11 hover:border-fuchsia-400 hover:text-fuchsia-600 dark:border-gray-400 dark:hover:border-gray-300 dark:text-gray-400">S
-                            </button>
-                            <button
-                                className="py-1 mb-2 mr-1 border w-11 hover:border-fuchsia-400 hover:text-fuchsia-600 dark:border-gray-400 dark:hover:border-gray-300 dark:text-gray-400">M
-                            </button>
-                            <button
-                                className="py-1 mb-2 mr-1 border w-11 hover:border-fuchsia-400 hover:text-fuchsia-600 dark:border-gray-400 dark:hover:border-gray-300 dark:text-gray-400">XS
-                            </button>
-                        </div>
-                    </div>
-                    <div className="w-32 mb-8 ">
-                        <label for=""
-                            className="w-full text-xl font-semibold text-gray-700 dark:text-gray-400">Quantity</label>
-                        <div className="relative flex flex-row w-full h-10 mt-4 bg-transparent rounded-lg">
-                            <button
-                              
-    // onClick={
-    //     async () => {
-    //     if(cart.quantity>1){
-    //       dispatch(setfetchCartStatus(""));    
-    //     try {
-    //       await dispatch(UpdateCart({ quantity: item.quantity - 1, cart_id: item.cartId }));
-    //        dispatch(fetchCart(userId));
-    //     } catch (error) {
-    //       console.error("Error updating cart:", error);
-    //       // Handle error (show message to user, etc.)
-    //     }
-          
-    //     }
-   
-    //   }
-    // }
-                                className="w-20 h-full text-gray-600 bg-gray-300 rounded-l outline-none cursor-pointer dark:hover:bg-gray-700 dark:text-gray-400 hover:text-gray-700 dark:bg-gray-900 hover:bg-gray-400">
-                                <span className="m-auto text-2xl font-thin">-</span>
-                            </button>
-                            <input type="text"readOnly
-                                className="flex items-center w-full font-semibold text-center text-gray-700 placeholder-gray-700 bg-gray-300 outline-none dark:text-gray-400 dark:placeholder-gray-400 dark:bg-gray-900 focus:outline-none text-md hover:text-black"
-                                placeholder="1"/>
-                            <button onClick={() => dispatch(incrementQuantity(product.id))}
-                                className="w-20 h-full text-gray-600 bg-gray-300 rounded-r outline-none cursor-pointer dark:hover:bg-gray-700 dark:text-gray-400 dark:bg-gray-900 hover:text-gray-700 hover:bg-gray-400">
-                                <span className="m-auto text-2xl font-thin">+</span>
-                            </button>
-                        </div>
-                    </div>
+                    
+                  
                     <div className="flex flex-wrap items-center -mx-4 ">
                         <div className="w-full px-4 mb-4 lg:w-1/2 lg:mb-0">
                             <button  onClick={()=>{handleAddToCart(product.productID)}}

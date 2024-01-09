@@ -81,7 +81,7 @@ function RestrauntPage() {
                         className="mt-[-0.15rem]"
                         height={25}
                         width={25}
-                        src="../assets/FoodDelivery/star.png"
+                        src="../../assets/FoodDelivery/star.png"
                         alt=""
                         />
                         </div>
@@ -105,7 +105,7 @@ function RestrauntPage() {
                     <img
                       height={20}
                       width={20}
-                      src="../assets/FoodDelivery/motorbike.png"
+                      src="../../assets/FoodDelivery/motorbike.png"
                       alt=""
                     />
                     <p className="text-[14px] font-[Open Sans] flex flex-col justify-center     text-gray-700 font-[600]">

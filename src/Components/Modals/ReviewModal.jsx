@@ -84,11 +84,11 @@ dispatch(sortByDescendingDate());
   </div>
   <div className='py-4 h-full w-1/2 '>
 <div className='flex flex-col gap-2'>
-<div className=' flex gap-1'><h1 className='text-[14px] flex flex-col mt-[0.2rem] justify-center'>5</h1><img src="../assets\FoodDelivery\star.png" width={20} alt="" srcset="" /><div className='w-44 flex flex-col justify-center'><ProgressBar value={40}/></div><div>40%</div> </div>
-<div className=' flex gap-1'><h1 className='text-[14px] flex flex-col mt-[0.2rem] justify-center'>4</h1><img src="../assets\FoodDelivery\star.png" width={20} alt="" srcset="" /><div className='w-44 flex flex-col justify-center'><ProgressBar value={30}/></div><div>30%</div> </div>
-<div className=' flex gap-1'><h1 className='text-[14px] flex flex-col mt-[0.2rem] justify-center'>3</h1><img src="../assets\FoodDelivery\star.png" width={20} alt="" srcset="" /><div className='w-44 flex flex-col justify-center'><ProgressBar value={20}/></div><div>20%</div> </div>
-<div className=' flex gap-1'><h1 className='text-[14px] flex flex-col mt-[0.2rem] justify-center'>2</h1><img src="../assets\FoodDelivery\star.png" width={20} alt="" srcset="" /><div className='w-44 flex flex-col justify-center'><ProgressBar value={5}/></div><div>5%</div> </div>
-<div className=' flex gap-1'><h1 className='text-[14px] flex flex-col mt-[0.2rem] justify-center'>1</h1><img src="../assets\FoodDelivery\star.png" width={20} alt="" srcset="" /><div className='w-44 flex flex-col justify-center'><ProgressBar value={5}/></div><div>5%</div> </div>
+<div className=' flex gap-1'><h1 className='text-[14px] flex flex-col mt-[0.2rem] justify-center'>5</h1><img src="../../assets/FoodDelivery/star.png" width={20} alt="" srcset="" /><div className='w-44 flex flex-col justify-center'><ProgressBar value={40}/></div><div>40%</div> </div>
+<div className=' flex gap-1'><h1 className='text-[14px] flex flex-col mt-[0.2rem] justify-center'>4</h1><img src="../../assets/FoodDeliverystar.png" width={20} alt="" srcset="" /><div className='w-44 flex flex-col justify-center'><ProgressBar value={30}/></div><div>30%</div> </div>
+<div className=' flex gap-1'><h1 className='text-[14px] flex flex-col mt-[0.2rem] justify-center'>3</h1><img src="../../assets/FoodDelivery/star.png" width={20} alt="" srcset="" /><div className='w-44 flex flex-col justify-center'><ProgressBar value={20}/></div><div>20%</div> </div>
+<div className=' flex gap-1'><h1 className='text-[14px] flex flex-col mt-[0.2rem] justify-center'>2</h1><img src="../../assets/FoodDelivery/star.png" width={20} alt="" srcset="" /><div className='w-44 flex flex-col justify-center'><ProgressBar value={5}/></div><div>5%</div> </div>
+<div className=' flex gap-1'><h1 className='text-[14px] flex flex-col mt-[0.2rem] justify-center'>1</h1><img src="../../assets/FoodDelivery/star.png" width={20} alt="" srcset="" /><div className='w-44 flex flex-col justify-center'><ProgressBar value={5}/></div><div>5%</div> </div>
 
 </div>
   </div>

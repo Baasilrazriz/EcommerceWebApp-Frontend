@@ -26,7 +26,7 @@ const handleCheckOut=()=>{
 <div className="flex flex-col items-center ">
     <img src="https://cdn-icons-png.flaticon.com/128/12115/12115163.png" className="h-16" alt="" srcset="" />
     <h3 className=" font-sans  font-thin  pb-6">30 mins</h3>
-    <h3 className=" font-sans    font-semibold text-normal">Your order from Pandamart - Johar</h3>
+    <h3 className=" font-sans    font-semibold text-normal">Your order from DoorDash - Johar</h3>
   </div>
   
   <div className="cart-items flex flex-col gap-2 overflow-x-hidden  overflow-y-scroll scroll  h-[19.7rem] my-2">

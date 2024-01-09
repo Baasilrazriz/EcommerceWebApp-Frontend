@@ -2,17 +2,17 @@ import React from 'react';
 import TableComponent from '../TableComponent';
 import NavBar from '../NavBar';
 
-function DashboardUpdateSeller(props) {
+function DashboardAddRider(props) {
     return (
         
-        <>
-        <div className=' border rounded-xl h-fit mt-3 p-2 w-full overflow-hidden    shadow-lg'>
-     <NavBar/>
+  <>
+       <div className=' border rounded-xl h-fit mt-3 p-2 w-full overflow-hidden    shadow-lg'>
+    <NavBar/>
+   
+   </div>
     
-    </div>
-     
-    <div className=' border rounded-xl h-[39.8rem] my-2  p-2 py-5 w-full overflow-hidden    shadow-lg'>
-<h1 className="text-left text-4xl font-bold   text-gray-700 px-6 ">Update Seller Info</h1>
+   <div className=' border rounded-xl h-[39.8rem] my-2  p-2 py-5 w-full overflow-hidden    shadow-lg'>
+<h1 className="text-left text-4xl font-bold   text-gray-700 px-6 ">Add Rider</h1>
 <form action="" className='pt- mx-5 flex flex-col gap-5' method="post">
 <div className="flex justify-center">
                 <div className=' h-44 w-44 rounded-full shadow-lg shadow-neutral-950 overflow-hidden'>
@@ -209,17 +209,15 @@ function DashboardUpdateSeller(props) {
                         type="submit"
                         className="  bg-blue-500 hover:bg-blue-800 text-white text-2xl font-bold h-14 w-[17rem]  rounded-full shadow-lg shadow-neutral-950 hover:text-white transform transition-all duration-500 ease-in-out hover:scale-110 hover:brightness-110 hover:animate-pulse active:animate-bounce"
                       >
-                        Update Seller
+                        Add Seller
                       </button>
                 
 </div>
 </form>
         
    </div>
- 
-   </>
- 
- 
+
+  </>
 
 
 
@@ -229,4 +227,4 @@ function DashboardUpdateSeller(props) {
     );
 }
 
-export default DashboardUpdateSeller;
+export default DashboardAddRider;

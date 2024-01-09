@@ -1,6 +1,58 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
-function NavBar(props) {
+function NavBar() {
+  const page = useSelector((state) => state.adminDashboard.page);
+  const [route, setRoute] = useState("");
+
+  useEffect(() => {
+    switch (page) {
+      case 1:
+        setRoute("Home");
+        break;
+      case 2:
+        setRoute("/Seller/AddSeller");
+        break;
+      case 3:
+        setRoute("/Seller/UpdateSeller");
+        break;
+      case 4:
+        setRoute("/Seller/DeleteSeller");
+        break;
+      case 5:
+        setRoute("/Seller/ViewSeller");
+        break;
+      case 6:
+        setRoute("/User/AddUser");
+        break;
+      case 7:
+        setRoute("/User/UpdateUser");
+        break;
+      case 8:
+        setRoute("/User/DeleteUser");
+        break;
+      case 9:
+        setRoute("/User/ViewUser");
+        break;
+      case 10:
+        setRoute("/Rider/AddRider");
+        break;
+      case 11:
+        setRoute("/Rider/UpdateRider");
+        break;
+      case 12:
+        setRoute("/Rider/DeleteRider");
+        break;
+      case 13:
+        setRoute("/Rider/ViewRider");
+        break;
+      // Add the rest of your cases here
+      default:
+        setRoute(""); // Or set a default route
+    }
+  }, [page]);
+
+ 
     return (
         <div>
              <nav className="block w-full  bg-transparent text-white shadow-none rounded-xl transition-all ">
@@ -12,14 +64,14 @@ function NavBar(props) {
                     <a href="#">
                       <p className="block antialiased font-sans text-sm leading-normal text-blue-900 font-normal opacity-50 transition-all hover:text-blue-500 hover:opacity-100">dashboard</p>
                     </a>
-                    <span className="text-gray-500 text-sm antialiased font-sans font-normal leading-normal mx-2 pointer-events-none select-none">/</span>
+                    
                   </li>
                   <li className="flex items-center text-blue-900 antialiased font-sans text-sm font-normal leading-normal cursor-pointer transition-colors duration-300 hover:text-blue-500">
-                    <p className="block antialiased font-sans text-sm leading-normal text-blue-gray-900 font-normal">home</p>
+                    <p className="block antialiased font-sans text-sm leading-normal text-blue-gray-900 font-normal">{route}</p>
                   </li>
                 </ul>
               </nav>
-              <h6 className="block antialiased tracking-normal font-sans text-base font-semibold leading-relaxed text-gray-900">home</h6>
+              <h6 className="block antialiased tracking-normal font-sans text-base font-semibold leading-relaxed text-gray-900">{route}</h6>
             </div>
             <div className="flex items-center">
               <div className="mr-auto md: md:w-56">

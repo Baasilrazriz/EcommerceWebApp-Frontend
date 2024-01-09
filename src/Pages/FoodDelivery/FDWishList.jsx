@@ -1,13 +1,14 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import MartHeader from './MartHeader';
-import Heading from '../../Components/Heading';
+import MartHeader from '../Mart/MartHeader';
+
 import { addTowishList } from '../../Features/Mart/wishSlice';
-import RestrauntCard from '../../Components/RestrauntCard';
+import RestrauntCard from '../FoodDelivery/RestrauntPage';
+import Heading from '../../Components/GeneralComponents/Heading';
 
 function FDWishList() {
     const dispatch = useDispatch();
-    const wishlist=useSelector(state=>state.wish.wishList)
+    const wishlist=useSelector(state=>state.wish.fdwhishlist)
     return (
         <>
       <MartHeader />

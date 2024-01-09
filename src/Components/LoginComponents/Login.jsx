@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import { openSignupModal } from '../../Features/Mart/signupSlice';
-
+import { toast, ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 import { openforgotModal } from '../../Features/Mart/forgotSlice';
 import {closeLoginModal, loggedIn, loggedOut , loginUser, setUserRole, togglePasswordVisibility } from '../../Features/Mart/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useNavigate } from "react-router-dom";
 import GoogleButton from "./GoogleButton";
+import SuccessMessage from '../ToastComponents/SuccessMessage';
 function Login() {
     const dispatch = useDispatch();
     const navigation=useNavigate()      
@@ -25,34 +27,52 @@ function Login() {
       dispatch(setUserRole({ role })); // Updated to send an object
     };
     const  handleSubmit = async (e) => {
+      
       e.preventDefault();
-
+      
+ if(userRole===null||userRole==="")
+ {
+  toast.error("kindly select your role to login", {
+    position: "top-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    
+    });
+    
+    
+ }
+ else
+ {
   if(username!==""&&password!=="")
   {
-     dispatch(loginUser( {username, password} ))
-    if(isAuthenticated===true)
-    {
-         navigation('/') 
-         alert("success");  
-         setPassword("");
-         setUsername("");
-    }
-    else if (isAuthenticated===false)
-        {
-              setPassword("");
-         setUsername("");
-        }
-  }
+    dispatch(loginUser( {username, password} ))
+   
+}
 else
 {
-  alert(`username and password cannot be empty`);
+toast.error("username or password cannot be null", {
+position: "top-center",
+autoClose: 5000,
+hideProgressBar: false,
+closeOnClick: true,
+pauseOnHover: true,
+draggable: true,
+progress: undefined,
+
+});
+
 }
+ }
       
     };
     const handleClose = () => {
-      dispatch(closeLoginModal());
+     
       document.body.style.overflowY = "scroll";
-  navigation('/')
+      dispatch(closeLoginModal());
     };
   
     const handleOpenForgortModal = () => {
@@ -70,10 +90,11 @@ else
         <div className="  z-50 modal-overlay fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center ">
         <div className="   login-modal bg-white   h-[33rem] w-[55rem] rounded-md overflow-hidden">
           <div className="flex h-full w-full ">
+      
             <div className=" w-[53%] ">
               <img
                 className="h-full  object-fill"
-                src="assets\loginbg1.jpg"
+                src="../assets\loginbg1.jpg"
                 alt=""
                 srcset=""
               />
@@ -97,7 +118,7 @@ else
                       type="button"
                       className={`h-20 w-18 p-2   border rounded-md text-base shadow-sm font-medium ${
                         userRole === "Admin"
-                          ? " focus:shadow-lg focus:border-2 focus:animate-pulse focus:ring-purple-600 focus:border-purple-500 focus:z-10 sm:text-sm text-purple-500"
+                        ? " shadow-lg border-2 animate-pulse ring-purple-600 border-purple-500 focus:z-10 sm:text-sm text-purple-500 "
                           : "bg-white text-gray-600"
                       } transform transition-all duration-500 ease-in-out hover:scale-110  `}
                       onClick={() => handleRoleChange("Admin")}
@@ -105,7 +126,7 @@ else
                       <img
                         width="50"
                         height="50"
-                        src="assets\admin.png"
+                        src="../assets\admin.png"
                         alt="administrator-male--v1"
                       />
                       Admin
@@ -114,27 +135,27 @@ else
                     <button
                       type="button"
                       className={`h-20 w-18 p-2  border rounded-md text-base shadow-sm font-medium ${
-                        userRole === "Buyer"
-                          ? " focus:shadow-lg focus:border-2 focus:animate-pulse focus:ring-purple-600 focus:border-purple-500 focus:z-10 sm:text-sm text-purple-500"
+                        userRole === "User"
+                        ? " shadow-lg border-2 animate-pulse ring-purple-600 border-purple-500 focus:z-10 sm:text-sm text-purple-500 scale-110"
                           : "bg-white text-gray-600"
                       }transform transition-all duration-500 ease-in-out hover:scale-110   `}
-                      onClick={() => handleRoleChange("Buyer")}
+                      onClick={() => handleRoleChange("User")}
                     >
                       <img
                         width="50"
                         height="50"
 
-                        src="assets\shopping_4990616 (1).png"
+                        src="../assets/shopping_4990616 (1).png"
                         alt=""
                         srcset=""
                       />
-                      Buyer
+                      User
                     </button>
                     <button
                       type="button"
                       className={`h-20 w-18 p-2  border rounded-md text-base shadow-sm font-medium ${
                         userRole === "Seller"
-                          ? " focus:shadow-lg focus:border-2 focus:animate-pulse focus:ring-purple-600 focus:border-purple-500 focus:z-10 sm:text-sm  text-purple-500"
+                        ? " shadow-lg border-2 animate-pulse ring-purple-600 border-purple-500 focus:z-10 sm:text-sm text-purple-500 scale-110"
                           : "bg-white text-gray-600"
                       }transform transition-all duration-500 ease-in-out hover:scale-110   `}
                       onClick={() => handleRoleChange("Seller")}
@@ -142,14 +163,14 @@ else
                       <img 
                       width="50"
                       height="50"
-                      src="assets\seller.png" alt="" />
+                      src="../assets\seller.png" alt="" />
                       Seller
                     </button>
                     <button
                       type="button"
                       className={`h-20 w-18 p-2  border rounded-md text-base shadow-sm font-medium ${
                         userRole === "Rider"
-                          ? " focus:shadow-lg focus:border-2 focus:animate-pulse focus:ring-purple-600 focus:border-purple-500 focus:z-10 sm:text-sm text-purple-500"
+                        ? " shadow-lg border-2 animate-pulse ring-purple-600 border-purple-500 focus:z-10 sm:text-sm text-purple-500 scale-110"
                           : "bg-white text-gray-600"
                       }transform transition-all duration-500 ease-in-out hover:scale-110   `}
                       onClick={() => handleRoleChange("Rider")}
@@ -158,7 +179,7 @@ else
                       width="50"
                       height="50"
                       
-                      src="assets\food-delivery.png" alt="" />
+                      src="../assets\food-delivery.png" alt="" />
                       Rider
                     </button>
                   </div>
@@ -222,6 +243,7 @@ else
 </div>
 <div className="flex justify-center">
 <GoogleButton/>
+
                 </div>
                     </div>
                     <div>

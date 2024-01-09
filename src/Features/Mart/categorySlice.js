@@ -9,18 +9,18 @@ export const fetchCategories = createAsyncThunk('Category/fetchCategories', asyn
   return rejectWithValue(error.response.data);
 }
 });
-export const fetchProductByCategoryName = createAsyncThunk(
-  'category/fetchCategoryNameById',
-  async (categoryName, { rejectWithValue }) => {
-    try {
-      const response = await axios.get(`https://localhost:7158/ProductByCategories/GetProductsByCategory/${categoryName}`);
-      console.log(response.data)
-      return response.data; // Assuming the response contains the category name
-    } catch (error) {
-      return rejectWithValue(error.response.data);
+  export const fetchProductByCategoryName = createAsyncThunk(
+    'category/fetchCategoryNameById',
+    async (categoryName, { rejectWithValue }) => {
+      try {
+        const response = await axios.get(`https://localhost:7158/ProductByCategories/GetProductsByCategory/${categoryName}`);
+        console.log(response.data)
+        return response.data; // Assuming the response contains the category name
+      } catch (error) {
+        return rejectWithValue(error.response.data);
+      }
     }
-  }
-);
+  );
 
 const initialState={
   cat:[],

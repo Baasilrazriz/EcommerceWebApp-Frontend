@@ -1,5 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios'
+import { toast } from 'react-toastify';
+
 
 
 export const loginUser = createAsyncThunk(
@@ -11,8 +13,8 @@ export const loginUser = createAsyncThunk(
           password
 
       })
-      
       let id,email,profilepic;
+      const role=response.data.validUser.role;
 if(response.data.validUser.role==='Admin') {  
             try {
              
@@ -75,7 +77,7 @@ if(response.data.validUser.role==='Admin') {
        
     }
     console.log("end");
-      return {id,profilepic,email,username}
+      return {id,profilepic,email,username,role}
   } catch (error) {
       console.log(rejectWithValue(error.response.data))
       return rejectWithValue(error.response.data)
@@ -108,7 +110,7 @@ const userSlice = createSlice({
       state.profilepic=null;   
       state.email=null;   
 state.username=null;
-
+state.isLoginModalOpen = false;
     },
     openLoginModal: (state) => {
       state.isLoginModalOpen = true;
@@ -127,6 +129,7 @@ state.username=null;
     },
     setUserRole: (state, action) => {
       state.role = action.payload.role;
+      
     },
     setUsernames: (state, action) => {
       state.username = action.payload;
@@ -144,23 +147,59 @@ state.username=null;
   extraReducers: (builder) => {
     builder
     .addCase(loginUser.fulfilled, (state,action) => {
-      state.isAuthenticated = true;
-      state.isLoginModalOpen=false;
-      state.isLoggedIn=true;
-      console.log("enter in extra reducer");
-      state.userId=action.payload.id;   
-      state.profilepic=action.payload.profilepic;   
-      state.email=action.payload.email;   
-      state.username=action.payload.username;
-      console.log(action.payload.id)    
-      console.log(state.username)
-      console.log(action.payload.email)
-      document.body.style.overflowY = "scroll";  
+      
+      console.log(state.role,action.payload.role)
+if (action.payload.role===state.role) {
+ 
+  state.isAuthenticated = true;
+  state.isLoginModalOpen=false; 
+  state.isLoggedIn=true;
+  state.userId=action.payload.id;   
+  state.profilepic=action.payload.profilepic;   
+  state.email=action.payload.email;   
+  state.username=action.payload.username;
+  console.log(action.payload.id)    
+  console.log(state.username)
+  console.log(action.payload.email)
+  toast.success("Logged in successfully!", {
+    position: "top-center",
+    autoClose: 3000,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    
+  });
+  document.body.style.overflowY = "scroll";  
+}
+else{
+  toast.error("incorrect credentials ", {
+    position: "top-center",
+    autoClose: 2000,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    
+  });  
+}
     })
     .addCase(loginUser.rejected, (state) => {
       state.isAuthenticated = false;
       state.isLoggedIn=false;
-      alert(`incorrect credentials or something went wrong ${username} AND ${password}`);
+      toast.error("incorrect credentials ", {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        
+      });
+    
+      
     })
     
   },

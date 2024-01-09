@@ -17,7 +17,11 @@ import discountReducer from  "../Features/FoodDelivery/discountSlice";
 import reviewReducer from "../Features/FoodDelivery/reviewSlice"
 import carouselReducer from "../Features/General/carouselSlice"
 import navigationReducer from "../Features/General/navigationSlice"
-
+import adminDashboardReducer from "../Features/Dashboard/adminDashboardSlice"
+import usersInfoReducer from "../Features/Dashboard/usersInfoSlice"
+import riderReducer from "../Features/Dashboard/riderSlice";
+import sellerReducer from "../Features/Dashboard/sellerSLice";
+import landingPageReducer from "../Features/LandingPage/LandingPageSlice"
 export const store = configureStore({
   reducer: {
     banner: bannerReducer,
@@ -38,5 +42,10 @@ export const store = configureStore({
     menuSection:menuSectionReducer,
     discount:discountReducer,
     review:reviewReducer,
+    adminDashboard:adminDashboardReducer,
+    user:usersInfoReducer,
+    seller:sellerReducer,
+    rider:riderReducer,
+    landingPage:landingPageReducer,
   },
 });

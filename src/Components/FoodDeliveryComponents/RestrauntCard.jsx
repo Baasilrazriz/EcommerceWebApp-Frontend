@@ -11,7 +11,7 @@ const RestrauntCard = ({ image, name,description,handleAddToWishList}) => {
       <div className=" relative flex rounded-xl  hover:border-gray-300   h-66  w-full  hover:bg-gray-100 items-center justify-center border-2 shadow-lg overflow-hidden ease-in transition-all">
             <div className="w-[90vw] h-full flex gap-10">
     <div className="rounded-l-xl h-full w-1/2 overflow-hidden ml-[-1rem]">
-            <NavLink to={`/restraunts/${name}`} ClassName="-z-50 text-blue-500" >
+            <NavLink to={`/fooddelivery/restraunts/${name}`} ClassName="-z-50 text-blue-500" >
     <img  src={image} alt={name} className="h-full w-full object-cover   " />
     </NavLink>
     </div>
@@ -28,7 +28,7 @@ const RestrauntCard = ({ image, name,description,handleAddToWishList}) => {
       > 
   ♡      
       </button>
-            <NavLink to={`/restraunts/${name}`} onClick={()=>{<ReviewModal/>}} ClassName="-z-50 text-blue-500" >
+            <NavLink to={`/fooddelivery/restraunts/${name}`} onClick={()=>{<ReviewModal/>}} ClassName="-z-50 text-blue-500" >
       <button
         className=" text-green-500 hover:bg-green-700 hover:text-white border-2 bg-white rounded-full px-9 py-3 absolute  top-52 right-3"
         

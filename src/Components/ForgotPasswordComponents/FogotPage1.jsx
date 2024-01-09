@@ -12,7 +12,7 @@ dispatch(setStep(2))
 
   };
   const handleUserName=(e)=>{
-    dispatch(setUsername(e.target.value))
+    
   }
     return (
         <div className="   ">

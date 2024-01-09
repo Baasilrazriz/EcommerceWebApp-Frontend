@@ -7,7 +7,7 @@ const ProductCard = ({id, image, name, price,handleAddToCart,handleAddToWishList
   
   return (
     
-    <NavLink to={`/products/${name}`} ClassName="text-blue-500" >
+    <NavLink to={`/mart/products/${name}`} ClassName="text-blue-500" >
       <div id={id} className="relative flex flex-col     h-52  w-48  hover:bg-gray-100 items-center justify-center border-2 shadow-lg overflow-hidden">
     <img src={image} alt={name} className="  w-24 h-24 object-cover" />
     <h3 className="text-lg text-center  my-2 ">{name}</h3>
