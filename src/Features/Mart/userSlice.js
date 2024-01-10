@@ -2,7 +2,19 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios'
 import { toast } from 'react-toastify';
 
-
+export const sendEmail = createAsyncThunk(
+  'WelcomeController/sendEmail',
+  async ({email}, { rejectWithValue }) => {
+    try {
+      console.log(username)
+      const response = await axios.post(`https://localhost:7158/WelcomeController`, {email});
+      console.log(response.data)
+      return response.data; // Assuming the server responds with the created seller data
+    } catch (error) {
+      return rejectWithValue(error.response.data); // Assuming the server responds with an error message
+    }
+  }
+);
 
 export const loginUser = createAsyncThunk(
   'login/loginUser',
@@ -35,7 +47,7 @@ if(response.data.validUser.role==='Admin') {
                 console.log(roleDataResponse.data)
                 id = roleDataResponse.data.sellerID; 
                 profilepic=roleDataResponse.data.image;   
-              
+            
                 email=roleDataResponse.data.email
               }
                 catch (error) {
@@ -146,11 +158,9 @@ state.isLoginModalOpen = false;
   },
   extraReducers: (builder) => {
     builder
-    .addCase(loginUser.fulfilled, (state,action) => {
-      
+    .addCase(loginUser.fulfilled, (state,action) => {    
       console.log(state.role,action.payload.role)
 if (action.payload.role===state.role) {
- 
   state.isAuthenticated = true;
   state.isLoginModalOpen=false; 
   state.isLoggedIn=true;

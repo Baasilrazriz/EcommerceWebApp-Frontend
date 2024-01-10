@@ -2,10 +2,10 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 export const fetchWishlist = createAsyncThunk(
   'whishlist/fetchWishlist',
-  async (userId, { rejectWithValue }) => {
+  async ({userID} , { rejectWithValue }) => {
     try {
-      console.log("entering fetch whichlist "+userId)
-      const response = await axios.get(`https://localhost:7158/Wishlist/GetUserWishlist/1`);
+      console.log("entering fetch whichlist "+userID)
+      const response = await axios.get(`https://localhost:7158/Wishlist/GetUserWishlist/${userID}`);
       console.log(response.data)
       return response.data;
     } catch (error) {
@@ -39,12 +39,17 @@ const initialState={
     wishList:[],
     fdwhishlist:[],
     fetchwishListStatus:"",
-    addwhishListStatus:"",
+    addwhishListStatus:false,
+    wishlistOpen:"",
 }
 const wishSlice = createSlice({
   name: 'wish',
   initialState,
   reducers: {
+    setWishlist:(state)=>
+    {
+      state.wishlistOpen=!state.wishlistOpen
+    }
     // addTowishList: (state, action) => {
     //   const existingItem = state.wishList.find((item) => item.id === action.payload.id);
     //   if (existingItem) {
@@ -104,5 +109,5 @@ const wishSlice = createSlice({
         
 });
 
-export const {removeItem } = wishSlice.actions;
+export const {setWishlist } = wishSlice.actions;
 export default wishSlice.reducer;

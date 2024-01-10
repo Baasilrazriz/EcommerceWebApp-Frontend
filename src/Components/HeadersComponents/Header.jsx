@@ -14,7 +14,7 @@ import { NavLink, useNavigate} from "react-router-dom";
 import LoginModal from "../Modals/LoginModal";
 import { loggedOut, openLoginModal } from "../../Features/Mart/userSlice";
 import { updateSearchTerm } from "../../Features/General/searchSlice";
-import { fetchWishlist } from "../../Features/Mart/wishSlice";
+import { fetchWishlist, setWishlist } from "../../Features/Mart/wishSlice";
 
 
 function Header({ toggleCart }) {
@@ -33,6 +33,7 @@ function Header({ toggleCart }) {
   const categories = useSelector((state) => state.category.cat);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const whishlistlink=module==="/Fooddelivery/Home"?"/Fooddelivery/wishlist":"/mart/wishlist";
+  // const wishlistOpen=useSelector(state=>state.wish.wishlistOpen)
   const handleSignOut=()=>{
     dispatch(loggedOut());
     window.location.reload();
@@ -50,7 +51,8 @@ function Header({ toggleCart }) {
     }
   };
   
-  const toggleWhishlist = () => {
+  const toggleWhishlist = async () => {
+    console.log(userId)
     if(userId===null||userId==="")
     {
       toast.error("Please Login in first to view the whishlist ", {
@@ -66,14 +68,15 @@ function Header({ toggleCart }) {
    }
    else
    {
-    navigation(whishlistlink)
-           dispatch(toggleWhishlist(userId))  
-           if (fetchCartStatus==="success"||fetchCartStatus==="pending") {
-             console.log("cat loaded")
+    
+           if (fetchWishlist==="success"||fetchWishlist==="pending") {
+             console.log("wishlist loaded")
                  }
                  else{
-                     if (fetchCartStatus !==""||fetchCartStatus !=="failed") {
-                       dispatch(fetchWishlist(userId));
+                     if (fetchWishlist !==""||fetchWishlist!=="failed") {
+
+                     await dispatch(fetchWishlist({userID:userId}))
+                      navigation(whishlistlink) 
                      }
                    }
          }

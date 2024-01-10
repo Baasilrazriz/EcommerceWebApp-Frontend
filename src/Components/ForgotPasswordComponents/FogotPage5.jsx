@@ -8,13 +8,12 @@ import { setPassword } from "../../Features/Mart/userSlice";
 
 function FogotPage5() {
   const dispatch = useDispatch();
-  
   const [newPAss, setNewPAss] = useState("");
   const [confirmPass, setConfirmPAss] = useState("");
 
   const handleSubmit = () => {
     if (newPAss === confirmPass) {
-        dispatch(setPassword(confirmPass));
+          ``
         dispatch(setStep(1));
         dispatch(closeforgotModal());
 

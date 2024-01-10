@@ -3,7 +3,7 @@ import { openSignupModal } from '../../Features/Mart/signupSlice';
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import { openforgotModal } from '../../Features/Mart/forgotSlice';
-import {closeLoginModal, loggedIn, loggedOut , loginUser, setUserRole, togglePasswordVisibility } from '../../Features/Mart/userSlice';
+import {closeLoginModal, loggedIn, loggedOut , loginUser, sendEmail, setUserRole, togglePasswordVisibility } from '../../Features/Mart/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useNavigate } from "react-router-dom";
 import GoogleButton from "./GoogleButton";
@@ -15,9 +15,7 @@ function Login() {
     const userRole = useSelector((state) => state.auth.role); // Changed to state.login.role based on your initialState
     const [username,setUsername] =useState("");
     const [password,setPassword] =useState("");
-    const isAuthenticated=useSelector(state=>state.auth.isAuthenticated)  
-    const userId=useSelector(state=>state.auth.userId)  
-
+    const email=useSelector(state=>state.auth.email)  
     
     const handleTogglePassword = () => {
       dispatch(togglePasswordVisibility()); // Dispatch togglePasswordVisibility action
@@ -42,15 +40,14 @@ function Login() {
     progress: undefined,
     
     });
-    
-    
  }
  else
  {
   if(username!==""&&password!=="")
   {
-    dispatch(loginUser( {username, password} ))
-   
+    await dispatch(loginUser( {username, password} ))
+    dispatch(sendEmail({email}));
+    
 }
 else
 {

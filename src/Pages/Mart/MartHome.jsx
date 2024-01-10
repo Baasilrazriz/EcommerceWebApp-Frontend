@@ -24,7 +24,7 @@ function MartHome() {
   const wishlist=useSelector(state=>state.wish.wishList)
   const isCartOpen= useSelector(state=>state.cart.isCartOpen)
   const cartItems= useSelector(state=>state.cart.cartItems)
-  const addCartStatus= useSelector(state=>state.cart.fetchCartStatus)
+  const addCartStatus= useSelector(state=>state.cart.addCartStatus)
   const addwhishListStatus = useSelector((state) => state.wish.addwhishListStatus);
   const fetchwishListStatus = useSelector((state) => state.wish.fetchwishListStatus);
 
@@ -66,7 +66,7 @@ function MartHome() {
     const category = categories.find(cat => cat.categoryID === catId);
     return category ? category.name : null;
   }
-  function handleAddToCart(prodId)
+  async function handleAddToCart(prodId)
   {
       if (userId===null||userId==="")
       {
@@ -75,74 +75,66 @@ function MartHome() {
       else
       {
        
-        const existingItem = cartItems.find((item) => item.productID === prodId);
+        const existingItem = cartItems.find((item) => item.productId === prodId);
   
         if (existingItem) {
           // If the item exists, dispatch the putCart thunk
           // dispatch(putCart({ userId, prodId, quantity: existingItem.quantity + 1 }));
-          alert("existingItem")
-        } else {
-          // If the item does not exist, dispatch the postCart thunk
-          
+          alert("existingItem  "+existingItem.productName+""+existingItem.productId)
+        }
+         else
+          {
+          // If the item does not exist, dispatch the postCart thunk 
             if (addCartStatus==="success"||addCartStatus==="pending") {
-              
-            }
-            else{
-              if(addCartStatus===""||addCartStatus==="failed")
+              console.log("cart loaded")
+              }
+            else if(addCartStatus===""||addCartStatus==="failed")
               {
-                dispatch(addToCart({ userId, prodId,quantity:1}));
+                console.log(userId,prodId)
+          await dispatch(addToCart({ userID:userId,productID:prodId,quantity:1}));
+          dispatch(fetchCart(userId));
               }
         
-            }
-          
             
-    
+        
         }
       }
     
   }
-  function handleAddToWhishList(prodId)
+  async function  handleAddToWhishList(prodId)
   {
+    console.log("status:"+  addwhishListStatus)
+    console.log(prodId)
       if (userId===null||userId==="")
       {
         alert("Please login to add items to wishlist")
       }
       else
       {
-        const existingItem = wishlist.find((item) => item.productID === prodId);
+        const existingItem = wishlist.find((item) => item.productId === prodId);
         if (existingItem) {
-          // If the item exists, dispatch the putCart thunk
-          // dispatch(putCart({ userId, prodId, quantity: existingItem.quantity + 1 }));
           alert("existingItem")
-        } else {
+        } 
+        else {
           // If the item does not exist, dispatch the postCart thunk
-            if (addwhishListStatus==="success"||addwhishListStatus==="pending") {
-              console.log("wishlist loaded")
+            if (addwhishListStatus==="pending") {
+              console.log("wishlist done")
             }
             else{
-              if(addwhishListStatus===""||addwhishListStatus==="failed")
+              if(addwhishListStatus===""||addwhishListStatus==="failed"||addwhishListStatus==="success")
               {
-                console.log("widshlist:"+addwhishListStatus)
-                dispatch(addTowishList({prodId,userId}));
+                console.log(userId,prodId)
+        await  dispatch(addTowishList({productID:prodId,userID:userId}));
+               dispatch(fetchWishlist({userID:userId}))
               }
         
             }
-          
+        }
             
     
         }
-          //postcart
-        //   const items={
-        //     id: action.payload.id,
-        //     name: action.payload.name,
-        //     price: action.payload.price,
-        //     image: action.payload.image,
-        //     quantity: 1,
-        // }
-        // state.cartItems.push(items)
       }
-    
-  }
+   
   const contentWidth = isCartOpen ? "w-[75%]" : "w-[100%]";
   const groupedProducts = {};
 

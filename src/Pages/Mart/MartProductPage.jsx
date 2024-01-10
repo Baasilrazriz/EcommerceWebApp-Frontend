@@ -5,7 +5,6 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addTowishList, fetchWishlist } from '../../Features/Mart/wishSlice';
 import { addToCart, fetchCart } from '../../Features/Mart/cartSlice';
-
 function MartProductPage(props) {
     const dispatch = useDispatch();
     const { productName } = useParams()
@@ -24,16 +23,15 @@ function MartProductPage(props) {
       }
       else
       {
-       
         const existingItem = cartItems.find((item) => item.productId === prodId);
-  
         if (existingItem) {
           // If the item exists, dispatch the putCart thunk
           // dispatch(putCart({ userId, prodId, quantity: existingItem.quantity + 1 }));
           alert("existingItem  "+existingItem.productName+""+existingItem.productId)
-        } else {
-          // If the item does not exist, dispatch the postCart thunk
-          
+        }
+         else
+          {
+          // If the item does not exist, dispatch the postCart thunk 
             if (addCartStatus==="success"||addCartStatus==="pending") {
               console.log("cart loaded")
             }
@@ -46,9 +44,7 @@ function MartProductPage(props) {
               }
         
             }
-          
-            
-    
+        
         }
       }
     
@@ -56,6 +52,7 @@ function MartProductPage(props) {
   async function  handleAddToWhishList(prodId)
   {
     console.log("status:"+  addwhishListStatus)
+    console.log(prodId)
       if (userId===null||userId==="")
       {
         alert("Please login to add items to wishlist")
@@ -64,20 +61,19 @@ function MartProductPage(props) {
       {
         const existingItem = wishlist.find((item) => item.productId === prodId);
         if (existingItem) {
-          // If the item exists, dispatch the putCart thunk
-          // dispatch(putCart({ userId, prodId, quantity: existingItem.quantity + 1 }));
           alert("existingItem")
-        } else {
+        } 
+        else {
           // If the item does not exist, dispatch the postCart thunk
-            if (addwhishListStatus==="success"||addwhishListStatus==="pending") {
+            if (addwhishListStatus==="pending") {
               console.log("wishlist done")
             }
             else{
-              if(addwhishListStatus===""||addwhishListStatus==="failed")
+              if(addwhishListStatus===""||addwhishListStatus==="failed"||addwhishListStatus==="success")
               {
                 console.log(userId,prodId)
         await  dispatch(addTowishList({productID:prodId,userID:userId}));
-        dispatch(fetchWishlist(userId))
+               dispatch(fetchWishlist({userID:userId}))
               }
         
             }
@@ -208,7 +204,7 @@ function MartProductPage(props) {
                         <div className="w-full px-4 mb-4 lg:mb-0 lg:w-1/2">
                             <button onClick={
                                 ()=>{
-                                    handleAddToWhishList(product.id)
+                                    handleAddToWhishList(product.productID)
                       }
                     }
                                 className="flex items-center justify-center w-full p-4 text-fuchsia-500 border border-fuchsia-500 rounded-md dark:text-gray-200 dark:border-fuchsia-600 hover:bg-fuchsia-600 hover:border-fuchsia-600 hover:text-gray-100 dark:bg-fuchsia-600 dark:hover:bg-fuchsia-700 dark:hover:border-fuchsia-700 dark:hover:text-gray-300">

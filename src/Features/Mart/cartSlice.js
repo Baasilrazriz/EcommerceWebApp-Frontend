@@ -105,31 +105,38 @@ setfetchCartStatus:(state,action)=>{
       .addCase(fetchCart.pending, (state) => {
         // Optional: Add some state to track that the cart is being loaded
         state.fetchCartStatus = "pending";
+        console.log("state.fetchCartStatus"+state.fetchCartStatus)
       })
       .addCase(fetchCart.fulfilled, (state, action) => {
         // Set the cart items to the fetched data
     console.log(action.payload)
         state.cartItems = action.payload;
         state.fetchCartStatus = "success"; // Set loading state to false
+        console.log("state.fetchCartStatus"+state.fetchCartStatus)
       })
       .addCase(fetchCart.rejected, (state, action) => {
         // Handle the error state
         state.fetchCartStatus = "failed"; // Set loading state to false
         state.error = action.payload; // You might want to store the error message in the state
+        console.log("state.fetchCartStatus"+state.fetchCartStatus)
       })
       .addCase(addToCart.pending, (state) => {
         // Optional: Add some state to track that the cart is being loaded
         state.addCartStatus = "pending";
+        console.log("addCartStatus"+state.addCartStatus)
       })
       .addCase(addToCart.fulfilled, (state, action) => {
         // Set the cart items to the fetched data
     console.log(action.payload)
         state.addCartStatus = "success"; // Set loading state to false
+        console.log("addCartStatus"+state.addCartStatus)
+        setTimeout(()=>{state.addCartStatus = ""},  5000)
+       // Set loading state to false
       })
       .addCase(addToCart.rejected, (state, action) => {
         // Handle the error state
         state.addCartStatus = "failed"; // Set loading state to false
-        state.error = action.payload; // You might want to store the error message in the state
+        console.log("addCartStatus"+state.addCartStatus)
       })
   },  
 });

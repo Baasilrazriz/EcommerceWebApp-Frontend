@@ -11,27 +11,8 @@ function MartHeader() {
     const isCartOpen= useSelector(state=>state.cart.isCartOpen)
     const userId = useSelector((state) => state.auth.userId);
     const fetchCartStatus= useSelector(state=>state.cart.fetchCartStatus);  
-    useEffect(()=>{
-      if(userId===null||userId==="")
-{
 
-}
-else
-{
-  if (fetchCartStatus==="success"||fetchCartStatus==="pending") {
-    console.log("cat loaded")
-  }
-  else
-  {
-    if(fetchCartStatus===""||fetchCartStatus==="failed")
-    {
-      dispatch(fetchCart(userId));
-    }
-
-  }
-}
-    },[fetchCartStatus])
-    const handleToggleCart = () => {
+    const handleToggleCart =async () => {
       if(userId===null||userId==="")
       {
         toast.error("Please Login in first to view the cart ", {
@@ -47,7 +28,23 @@ else
      }
      else
      {
-             dispatch(toggleCart(userId))
+    if (fetchCartStatus==="success"||fetchCartStatus==="pending") {
+      console.log("cart loaded")
+      dispatch(toggleCart(userId))
+    }
+    else
+    {
+      if(fetchCartStatus===""||fetchCartStatus==="failed")
+      {
+       await dispatch(fetchCart(userId));
+        dispatch(toggleCart(userId))
+      }
+  
+    }
+
+             
+
+
         
            }
       

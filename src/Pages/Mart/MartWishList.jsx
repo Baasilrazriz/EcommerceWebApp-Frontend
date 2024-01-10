@@ -4,34 +4,14 @@ import MartHeader from './MartHeader';
 import Heading from '../../Components/GeneralComponents/Heading';
 import ProductCard from '../../Components/MartComponents/ProductCard';
 import { addToCart } from '../../Features/Mart/cartSlice';
-import { addTowishList, fetchWishlist } from '../../Features/Mart/wishSlice';
+
 
 function MartWishList() {
     const dispatch = useDispatch();
     // const fetchwishListStatus = useSelector((state) => state.wish.fetchwishListStatus);
     // const addwhishListStatus = useSelector((state) => state.wish.addwhishListStatus);
     const userId = useSelector((state) => state.auth.userId);
-    // useEffect(() => {
-    //   if (fetchwishListStatus==="success"||fetchwishListStatus==="pending") {
-    //     console.log("whish fetch/ loaded") 
-    //   }
-    //   else
-    //   {
-    //     if(fetchwishListStatus===""||fetchwishListStatus==="failed")
-    //     {
-    //       dispatch(fetchWishlist(userId));
-    //     }
-    //   }
-    //   if (addwhishListStatus==="success"||addwhishListStatus==="pending") {
-    //     console.log("wish post/ loaded")
-    //   }
-    //   else{
-    //     if(addwhishListStatus===""||addwhishListStatus==="failed")
-    //     {
-    //       dispatch(addTowishList());
-    //     }
-    //   }
-    // }, [fetchwishListStatus,addwhishListStatus, dispatch]);
+    const cartItems= useSelector(state=>state.cart.cartItems)
     const handleAddToCart=(prodId)=>{
       if (userId===null)
       {
