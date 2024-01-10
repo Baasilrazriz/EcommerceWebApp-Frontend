@@ -1,16 +1,44 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setEmail, setStep } from "../../Features/Mart/forgotSlice";
+import { SendOtp, setEmail, setStep } from "../../Features/Mart/forgotSlice";
+import { toast } from 'react-toastify';
 
 function FogotPage3() {
   const dispatch = useDispatch();
 const email=useSelector(state=>state.forgot.email)  
+const validEmail=useSelector(state=>state.forgot.validEmail)  
+const username=useSelector(state=>state.forgot.username)  
 const handleEmail=(e)=>{
   dispatch(setEmail(e.target.value))
 }
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(setStep(4));
+    if(validEmail===email)
+    {
+      const sendOtpPromise =dispatch(SendOtp({username,email}))
+      
+
+      toast.promise(
+        sendOtpPromise,
+        {
+          pending: 'Sending OTP...',
+          success: 'OTP sent successfully!',
+          error: 'Failed to send OTP. Please try again.'
+        }
+      );
+    }
+    else
+    {
+      toast.error("invalid email ", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        
+      });
+    }
   };
   const medium = useSelector((state) => state.forgot.selectedDropdownValue);
   return (
@@ -29,7 +57,7 @@ const handleEmail=(e)=>{
                 class=" my-2 dark:border-white-400 dark:scale-100 border transition-all duration-500 ease-in-out dark:hover:scale-110 dark:checked:scale-100 w-5 h-5"
                 type="checkbox"
               />
-  {medium==="EMAIL"?           <span className="text-gray-800 absolute left-10 my-2 text-base">  ba*************ail.com</span>:  <span className="text-gray-800 absolute left-10 my-2 text-base">  +923******249</span>}
+             <span className="text-gray-800 absolute left-10 my-2 text-base">{email}</span>
           </div>
             </label>
             <div class="relative h-11 w-full min-w-[200px]">
@@ -37,7 +65,7 @@ const handleEmail=(e)=>{
          <input
          type="text"
            placeholder=""
-           value={email}
+           value={validEmail}
            onChange={handleEmail}
            class="peer h-full w-full rounded-md border  order border-blue-gray-200 border-t-transparent bg-transparent px-3 py-3 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-cyan-500 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
          />

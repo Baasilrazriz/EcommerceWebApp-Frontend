@@ -5,7 +5,7 @@ import { setOTP, setStep } from '../../Features/Mart/forgotSlice';
 function ForgotPage4() {
   const dispatch = useDispatch();
   const otp = useSelector((state) => state.forgot.otp);
-  const email = useSelector((state) => state.forgot.email);
+  
   const inputRefs = Array.from({ length: 4 }, () => useRef());
 
   const handleInputChange = (index, value) => {

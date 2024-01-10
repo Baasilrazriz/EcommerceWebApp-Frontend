@@ -6,9 +6,9 @@ function FogotPage2() {
     const dispatch=useDispatch();
   
   const selectedValue = useSelector(state=>state.forgot.selectedDropdownValue);
-
+let newValue
   const handleDropdownChange = (event) => {
-    const newValue = event.target.value;
+     newValue = event.target.value;
     dispatch(setselectedDropdownValue(newValue));
   };
   
@@ -33,7 +33,7 @@ function FogotPage2() {
             className=" h-full w-full rounded-md    border-blue-gray-200  bg-transparent px-3 py-3 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 border-2 focus:border-cyan-500   focus:outline-0 ">
                      {selectedValue ? null : <option value="">Select a medium</option>}     
                         <option value="EMAIL">EMAIL</option>
-                        <option value="WHATSAPP">WHATSAPP</option>
+                        
                         
                     </select>
             </div>
