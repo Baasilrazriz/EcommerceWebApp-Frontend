@@ -1,11 +1,12 @@
 // actions.js
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-export const addUser = createAsyncThunk(
-  'User/addUser',
-  async (userData, { rejectWithValue }) => {
+
+export const addRider = createAsyncThunk(
+  'Rider/addRider',
+  async (riderData, { rejectWithValue }) => {
     try {
-      const response = await axios.post('https://localhost:7158/User/Createuser', userData);
+      const response = await axios.post('https://localhost:7158/Rider', riderData);
       console.log(response.data)
       return response.data; // Assuming the server responds with the created seller data
     } catch (error) {
@@ -13,11 +14,11 @@ export const addUser = createAsyncThunk(
     }
   }
 );
-export const UpdateUser = createAsyncThunk(
-  'User/UpdateUser',
-  async (userData,username, { rejectWithValue }) => {
+export const UpdateRider = createAsyncThunk(
+  'Rider/UpdateRider',
+  async (riderData,userId, { rejectWithValue }) => {
     try {
-      const response = await axios.put(`https://localhost:7158/User/${username}`, userData);
+      const response = await axios.put(`https://localhost:7158/Rider/${userId}`,riderData);
       console.log(response.data)
       return response.data; // Assuming the server responds with the created seller data
     } catch (error) {
@@ -25,17 +26,17 @@ export const UpdateUser = createAsyncThunk(
     }
   }
 );
-export const fetchUsers = createAsyncThunk(
-  'User/fetchUsers', async () => {
-  const response = await axios.get("https://localhost:7158/User");
+export const fetchRider = createAsyncThunk(
+  'Rider/fetchRider', async () => {
+  const response = await axios.get("https://localhost:7158/Rider");
   console.log(response.data)
   return response.data;
 });
-export const fetchUserByUsername = createAsyncThunk(
-  'User/fetchUserByUsername',
+export const fetchRiderByUsername = createAsyncThunk(
+  'Rider/fetchRiderByUsername',
   async (username, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`https://localhost:7158/User/${username}`);
+      const response = await axios.get(`https://localhost:7158/Rider/${username}`);
       console.log(response.data)
       return response.data; // Assuming the response contains the category name
     } catch (error) {
@@ -43,11 +44,11 @@ export const fetchUserByUsername = createAsyncThunk(
     }
   }
 );
-export const DeleteUser = createAsyncThunk(
-  'User/DeleteUser',
-  async (username, { rejectWithValue }) => {
+export const DeleteRider = createAsyncThunk(
+  'Rider/DeleteRider',
+  async (userId, { rejectWithValue }) => {
     try {
-      const response = await axios.delete(`https://localhost:7158/User/${username}`);
+      const response = await axios.delete(`https://localhost:7158/Rider/${userId}`);
       console.log(response.data)
       return response.data; // Assuming the response contains the category name
     } catch (error) {
@@ -56,11 +57,11 @@ export const DeleteUser = createAsyncThunk(
   }
 );
 
-const usersInfoSlice = createSlice({
+const riderSlice = createSlice({
   name: 'user',
   initialState: {
     users:[],
-    userByUsername:[],
+    riderByUsername:[],
     addUserStatus:"",
     fetchUserStatus:"",
     updateUserStatus:"",
@@ -73,39 +74,39 @@ const usersInfoSlice = createSlice({
     }
   },
   extraReducers: {
-    [addUser.pending]: (state) => {
+    [addRider.pending]: (state) => {
       state.addUserStatus = "pending";
     },
-    [addUser.fulfilled]: (state, action) => {
+    [addRider.fulfilled]: (state, action) => {
       state.addUserStatus = "success";
       state.error = null;
     },
-    [addUser.rejected]: (state, action) => {
+    [addRider.rejected]: (state, action) => {
       state.addUserStatus = "failed";
       state.error = action.payload || 'Failed to add seller';
     },
-    [fetchUsers.pending]: (state) => {
+    [fetchRider.pending]: (state) => {
       state.fetchUserStatus = "pending";
     },
-    [fetchUsers.fulfilled]: (state, action) => {
+    [fetchRider.fulfilled]: (state, action) => {
       state.fetchUserStatus = "success";
       state.users = action.payload;
       state.error = null;
     },
-    [fetchUsers.rejected]: (state, action) => {
+    [fetchRider.rejected]: (state, action) => {
       state.fetchUserStatus = "failed";
       state.error = action.payload || 'Failed to add seller';
     },
-    [fetchUserByUsername.fulfilled]: (state, action) => {
+    [fetchRiderByUsername.fulfilled]: (state, action) => {
       state.fetchUserByUsernameStatus = "success";
-      state.userByUsername = action.payload;
+      state.riderByUsername = action.payload;
       state.error = null;
     },
-    [UpdateUser.fulfilled]: (state, action) => {
+    [UpdateRider.fulfilled]: (state, action) => {
       state.updateUserStatus = "success";
       state.error = null;
     },
-    [DeleteUser.fulfilled]: (state, action) => {
+    [DeleteRider.fulfilled]: (state, action) => {
       state.deleteUserStatus = "success";
       state.error = null;
     },
@@ -113,7 +114,7 @@ const usersInfoSlice = createSlice({
   },
 });
 
-export const {setUSerByUser} = usersInfoSlice.actions;
+export const {setRiderByUser} = riderSlice.actions;
 
-export default usersInfoSlice.reducer;
+export default riderSlice.reducer;
 

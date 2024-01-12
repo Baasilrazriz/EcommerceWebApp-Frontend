@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { openSignupModal } from '../../Features/Mart/signupSlice';
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
@@ -7,10 +7,10 @@ import {closeLoginModal, loggedIn, loggedOut , loginUser, sendEmail, setUserRole
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useNavigate } from "react-router-dom";
 import GoogleButton from "./GoogleButton";
-import SuccessMessage from '../ToastComponents/SuccessMessage';
+
 function Login() {
     const dispatch = useDispatch();
-    const navigation=useNavigate()      
+    const navigate=useNavigate()      
     const showPassword = useSelector((state) => state.auth.showPassword);
     const userRole = useSelector((state) => state.auth.role); // Changed to state.login.role based on your initialState
     const [username,setUsername] =useState("");
@@ -20,7 +20,13 @@ function Login() {
     const handleTogglePassword = () => {
       dispatch(togglePasswordVisibility()); // Dispatch togglePasswordVisibility action
     };
-  
+    const { role } = useSelector(state => state.auth);
+    // useEffect(() => {
+    //   if (role === 'Admin') {
+    //     navigate('/admin-dashboard');
+    //   }
+    //   // Add more conditions for other roles if needed
+    // }, [role, navigate]);  
     const handleRoleChange = (role) => {
       dispatch(setUserRole({ role })); // Updated to send an object
     };
@@ -46,9 +52,15 @@ function Login() {
   if(username!==""&&password!=="")
   {
     await dispatch(loginUser( {username, password} ))
+    .then((action) => {
+      if (action.payload && action.payload.role === 'Admin') {
+        navigate('/dashboard'); // Adjust the route as necessary
+      }
+      // You can add more conditions for other roles
+    });
+
     dispatch(sendEmail({email}));
-    
-}
+  }
 else
 {
 toast.error("username or password cannot be null", {

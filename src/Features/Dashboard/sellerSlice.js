@@ -15,9 +15,9 @@ export const addSeller = createAsyncThunk(
 );
 export const UpdateSeller = createAsyncThunk(
   'Seller/UpdateSeller',
-  async (SellerData,Sellername, { rejectWithValue }) => {
+  async (SellerData,userId, { rejectWithValue }) => {
     try {
-      const response = await axios.put(`https://localhost:7158/Seller/${Sellername}`, SellerData);
+      const response = await axios.put(`https://localhost:7158/Seller/${userId}`, SellerData);
       console.log(response.data)
       return response.data; // Assuming the server responds with the created seller data
     } catch (error) {
@@ -45,9 +45,9 @@ export const fetchSellerByUsername = createAsyncThunk(
 );
 export const DeleteSeller = createAsyncThunk(
   'Seller/DeleteSeller',
-  async (Username, { rejectWithValue }) => {
+  async (userId, { rejectWithValue }) => {
     try {
-      const response = await axios.delete(`https://localhost:7158/Seller/${Username}`);
+      const response = await axios.delete(`https://localhost:7158/Seller/${userId}`);
       console.log(response.data)
       return response.data; // Assuming the response contains the category name
     } catch (error) {

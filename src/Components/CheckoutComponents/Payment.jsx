@@ -1,5 +1,6 @@
 import { CardCvcElement, CardExpiryElement, CardNumberElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 
 function Payment(props) {
     const [savedCard, setSavedCard] = useState('Mastercard ending 234');
@@ -29,9 +30,16 @@ function Payment(props) {
         if (error) {
             alert('[error]', error);
         } else {
-            alert(paymentMethod.name+""+ paymentMethod.type);
-            // Send the paymentMethod.id to your backend for processing
-            alert ("payment successful")
+          
+      toast.success("payment done successfully", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        
+      });
         }
         
     };  

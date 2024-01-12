@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setOTP, setStep } from '../../Features/Mart/forgotSlice';
+import { setOTP, setStep, validateOtp } from '../../Features/Mart/forgotSlice';
 
 function ForgotPage4() {
   const dispatch = useDispatch();
@@ -26,8 +26,8 @@ function ForgotPage4() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(setStep(5));
-    alert(otp)
+    
+    dispatch(validateOtp(otp))
   };
 
   return (

@@ -21,9 +21,21 @@ export const SendOtp = createAsyncThunk(
   'Forgot/SendOtp',
   async ({username,email}, { rejectWithValue }) => {
     try {
-      console.log(username)
-      console.log(email)
       const response = await axios.post(`https://localhost:7158/Forgot/InititateRecovery`, {username,email});
+      console.log(response.data)
+return response.data
+    } catch (error) {
+      return rejectWithValue(error.response.data); // Assuming the server responds with an error message
+    }
+  }
+);
+export const validateOtp = createAsyncThunk(
+  'Forgot/validateOtp',
+  async ({username,otp}, { rejectWithValue }) => {
+    try {
+      console.log(username)
+      console.log(otp)
+      const response = await axios.post(`https://localhost:7158/Forgot/ValidateOTP`, {username,otp});
       console.log(response.data)
 return response.data
     } catch (error) {
@@ -46,6 +58,7 @@ const forgotSlice = createSlice({
     selectedDropdownValue: '',
     OtpStatus:"",
     validStatus:"",
+    OtpCheckStatus:"",
   },
   reducers: {
     
@@ -115,7 +128,7 @@ state.email=action.payload.email
       state.OtpStatus = "success";      
       state.step=4;
 state.email=action.payload.email
-      toast.success("otp send successfully ", {
+      toast.success("otp send successfully!You will have 2 mins to enter the otp after that it will be expired", {
         position: "top-center",
         autoClose: 3000,
         hideProgressBar: true,
@@ -129,6 +142,36 @@ state.email=action.payload.email
     [SendOtp.rejected]: (state, action) => {
       state.OtpStatus = "failed";
       toast.error("otp sending failed ... ", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        
+      });
+    },
+    [validateOtp.pending]: (state) => {
+      state.OtpCheckStatus = "pending";
+    },
+    [validateOtp.fulfilled]: (state, action) => {
+      state.OtpStatus = "success";      
+      state.step=5;
+
+      toast.success("otp is valid  ", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        
+      });
+          
+    },
+    [validateOtp.rejected]: (state, action) => {
+      state.OtpStatus = "failed";
+      toast.error("otp is not valid or expired", {
         position: "top-center",
         autoClose: 3000,
         hideProgressBar: true,

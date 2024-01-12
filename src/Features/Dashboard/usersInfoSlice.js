@@ -1,5 +1,6 @@
 // actions.js
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
 import axios from 'axios';
 export const addUser = createAsyncThunk(
   'User/addUser',
@@ -15,9 +16,9 @@ export const addUser = createAsyncThunk(
 );
 export const UpdateUser = createAsyncThunk(
   'User/UpdateUser',
-  async (userData,username, { rejectWithValue }) => {
+  async (userData,userId, { rejectWithValue }) => {
     try {
-      const response = await axios.put(`https://localhost:7158/User/${username}`, userData);
+      const response = await axios.put(`https://localhost:7158/User/${userId}`, userData);
       console.log(response.data)
       return response.data; // Assuming the server responds with the created seller data
     } catch (error) {
@@ -45,9 +46,9 @@ export const fetchUserByUsername = createAsyncThunk(
 );
 export const DeleteUser = createAsyncThunk(
   'User/DeleteUser',
-  async (username, { rejectWithValue }) => {
+  async (userId, { rejectWithValue }) => {
     try {
-      const response = await axios.delete(`https://localhost:7158/User/${username}`);
+      const response = await axios.delete(`https://localhost:7158/User/${userId}`);
       console.log(response.data)
       return response.data; // Assuming the response contains the category name
     } catch (error) {
@@ -79,6 +80,16 @@ const usersInfoSlice = createSlice({
     [addUser.fulfilled]: (state, action) => {
       state.addUserStatus = "success";
       state.error = null;
+      toast.success("added successfully", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        
+      });
+
     },
     [addUser.rejected]: (state, action) => {
       state.addUserStatus = "failed";
@@ -107,7 +118,17 @@ const usersInfoSlice = createSlice({
     },
     [DeleteUser.fulfilled]: (state, action) => {
       state.deleteUserStatus = "success";
-      state.error = null;
+
+      toast.success("user deleted successfully", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        
+      });
+
     },
 
   },

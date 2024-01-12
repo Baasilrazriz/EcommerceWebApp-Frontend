@@ -69,9 +69,6 @@ function DashboardViewUsers(props) {
               <p className="block antialiased font-sans text-[11px] font-medium uppercase text-blue-gray-400">email</p>
             </th>
             <th className="border border-blue-gray-50 py-3 px-3  text-center">
-              <p className="block antialiased font-sans text-[11px] font-medium uppercase text-blue-gray-400">status</p>
-            </th>
-            <th className="border border-blue-gray-50 py-3 px-3  text-center">
               <p className="block antialiased font-sans text-[11px] font-medium uppercase text-blue-gray-400">gender</p>
             </th>
             <th className="border border-blue-gray-50 py-3 px-3  text-center">
@@ -99,7 +96,6 @@ function DashboardViewUsers(props) {
       <td className="border border-blue-gray-50 py-2 w-fit px-2 whitespace-nowrap text-center ">   <p className="block antialiased font-sans text-[11px] font-medium uppercase text-blue-gray-400">{project.country}</p></td>
       <td className="border border-blue-gray-50 py-2 w-fit px-2 whitespace-nowrap text-center ">   <p className="block antialiased font-sans text-[11px] font-medium uppercase text-blue-gray-400">{project.phoneNumber}</p></td>
       <td className="border border-blue-gray-50 py-2 w-fit px-2 whitespace-nowrap text-center ">   <p className="block antialiased font-sans text-[11px] font-medium uppercase text-blue-gray-400">{project.email}</p></td>
-      <td className="border border-blue-gray-50 py-2 w-fit px-2 whitespace-nowrap text-center ">   <p className="block antialiased font-sans text-[11px] font-medium uppercase text-blue-gray-400">{project.status}</p></td>
       <td className="border border-blue-gray-50 py-2 w-fit px-2 whitespace-nowrap text-center ">   <p className="block antialiased font-sans text-[11px] font-medium uppercase text-blue-gray-400">{project.gender}</p></td>
       <td className="border border-blue-gray-50 py-2 w-fit px-2 whitespace-nowrap text-center ">   <p className="block antialiased font-sans text-[11px] font-medium uppercase text-blue-gray-400">{project.dob}</p></td>
       <td className="border border-blue-gray-50 py-2 w-fit px-2 whitespace-nowrap text-center ">   <p className="block antialiased font-sans text-[11px] font-medium uppercase text-blue-gray-400">{project.age}</p></td>

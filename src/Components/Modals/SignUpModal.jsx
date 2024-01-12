@@ -21,7 +21,7 @@ function SignUpModal() {
             <div className="flex h-full w-full ">
               <div className=" w-[53%] ">
                 <img
-                  className="h-[30rem]  object-fill"
+                  className="h-[32rem]  object-fill"
                   src="../assets\loginbg1.jpg"
                   alt=""
                   srcset=""

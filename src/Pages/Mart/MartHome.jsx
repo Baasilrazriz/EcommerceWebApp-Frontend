@@ -11,7 +11,7 @@ import { addTowishList, fetchWishlist } from "../../Features/Mart/wishSlice";
 import Footer from "../../Components/GeneralComponents/Footer";
 import { useEffect } from "react";
 import {  fetchProducts } from "../../Features/Mart/productSlice";
-import { fetchCategories } from "../../Features/Mart/categorySlice";
+
 
 function MartHome() {
   const dispatch = useDispatch();
@@ -36,7 +36,7 @@ function MartHome() {
     {
       if(catStatus===""||catStatus==="failed")
       {
-        dispatch(fetchCategories());
+        
       }
 
     }
@@ -139,12 +139,11 @@ function MartHome() {
   const groupedProducts = {};
 
   items.map((product) => {
-    const { categoryID } = product;
-  const catName= getCatNameById(categoryID);
-    if (!groupedProducts[catName]) {
-      groupedProducts[catName] = [];
+    const { category } = product;
+    if (!groupedProducts[category]) {
+      groupedProducts[category] = [];
     }
-    groupedProducts[catName].push(product);
+    groupedProducts[category].push(product);
   });
 
   return (
@@ -177,7 +176,7 @@ function MartHome() {
               ([category, categoryProducts]) => (
                 <div key={category} className="">
                   <Heading
-                    title={category}
+                    title="Fruits and Vegetables"
                     tagline={`Explore our ${category} products`}
                   />
                   <div className="product-section my-10 flex flex-row  flex-wrap gap-5 ">
