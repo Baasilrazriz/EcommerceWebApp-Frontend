@@ -1,8 +1,8 @@
 import React from 'react';
-import TableComponent from '../TableComponent';
-import NavBar from '../NavBar';
 
-function DashboardDeleteRider(props) {
+import NavBar from '../../DashboardComponents/NavBar';
+
+function DashboardDeleteSeller(props) {
     return (
         
         <>
@@ -12,7 +12,7 @@ function DashboardDeleteRider(props) {
     </div>
      
     <div className=' border rounded-xl h-[39.8rem] my-2  p-2 py-5 w-full overflow-hidden    shadow-lg'>
-<h1 className="text-left text-4xl font-bold   text-gray-700 px-6 ">Delete Rider</h1>
+<h1 className="text-left text-4xl font-bold   text-gray-700 px-6 ">Delete Seller</h1>
 <div className='flex flex-col gap-5 px-6 mt-5'>
 <label htmlFor="username" className='text-left text-xl font-bold   text-red-600'>Enter the username of the seller you want to delete *</label> 
 <div class="relative h-11  mx-96  w-80 shadow-lg">
@@ -88,4 +88,4 @@ Password
     );
 }
 
-export default DashboardDeleteRider;
+export default DashboardDeleteSeller;

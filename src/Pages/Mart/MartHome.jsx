@@ -11,61 +11,68 @@ import { addTowishList, fetchWishlist } from "../../Features/Mart/wishSlice";
 import Footer from "../../Components/GeneralComponents/Footer";
 import { useEffect } from "react";
 import {  fetchProducts } from "../../Features/Mart/productSlice";
+import { fetchCategories } from "../../Features/Mart/categorySlice";
+import { toast } from "react-toastify";
 
 
 function MartHome() {
   const dispatch = useDispatch();
-  const userId = useSelector((state) => state.auth.userId);
+  //status
+  const categoryStatus = useSelector((state) => state.category.categoryStatus);
   const prodStatus= useSelector(state=>state.product.prodStatus);
-  const catStatus = useSelector((state) => state.category.catStatus);
-  const categories = useSelector((state) => state.category.cat);
+  const addCartStatus= useSelector(state=>state.cart.addCartStatus)
+  const addwhishListStatus = useSelector((state) => state.wish.addwhishListStatus);
+  const userId = useSelector((state) => state.auth.userId);
+  const categories = useSelector((state) => state.category.categories);
   const carousel=useSelector(state=>state.carousel.martimages)
   const items= useSelector(state=>state.product.products);
   const wishlist=useSelector(state=>state.wish.wishList)
   const isCartOpen= useSelector(state=>state.cart.isCartOpen)
   const cartItems= useSelector(state=>state.cart.cartItems)
-  const addCartStatus= useSelector(state=>state.cart.addCartStatus)
-  const addwhishListStatus = useSelector((state) => state.wish.addwhishListStatus);
-  const fetchwishListStatus = useSelector((state) => state.wish.fetchwishListStatus);
 
   useEffect(() => {
-    if (catStatus==="success"||catStatus==="pending") {
-      console.log("cat loaded")
-    }
-    else
-    {
-      if(catStatus===""||catStatus==="failed")
-      {
-        
+    
+      if(categoryStatus==="")
+      { 
+        dispatch(fetchCategories());
       }
+      else if(categoryStatus==="failed")
+      {
+        toast.error("Failed to load category", {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          
+        });
 
-    }
-    if (prodStatus==="success"||prodStatus==="pending") {
-      console.log("prod loaded")
-    }
-    else{
-      if(prodStatus===""||prodStatus==="failed")
+      }
+      if(prodStatus==="")
       {
         dispatch(fetchProducts());
       }
-      console.log(fetchwishListStatus)
-    if (fetchwishListStatus==="success"||fetchwishListStatus==="pending") {
-      console.log("prod loaded")
-    }
-    else{
-      if(fetchwishListStatus===""||fetchwishListStatus==="failed")
+      
+      else if(prodStatus==="failed")
       {
-        dispatch(fetchWishlist(userId));
+        toast.error("Failed to load products", {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          
+        });
+        
       }
-    }
-    }
+      
  
-  }, [prodStatus,catStatus, dispatch]);
+  }, [prodStatus,categoryStatus]);
   
-  function getCatNameById( catId) {
-    const category = categories.find(cat => cat.categoryID === catId);
-    return category ? category.name : null;
-  }
   async function handleAddToCart(prodId)
   {
       if (userId===null||userId==="")
@@ -148,7 +155,7 @@ function MartHome() {
 
   return (
     
-    <div className="">
+    <div className=" scroll ">
       <MartHeader/>
       <div
         className={`mt-28 flex flex-row ${contentWidth}   px-10  j  ustify-around `}
@@ -167,7 +174,7 @@ function MartHome() {
             <Heading title="Categories" tagline={`Explore our categories`} />
             <div className=" my-10 flex flex-row  flex-wrap gap-5 ">
               {categories.map((cat) => (
-                <CategoryCard name={cat.name} image={cat.image} />
+                <CategoryCard name={cat.name} categoryImage={cat.categoryImage} />
               ))}
             </div>
           </div>

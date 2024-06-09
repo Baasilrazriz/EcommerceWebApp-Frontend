@@ -22,6 +22,8 @@ import usersInfoReducer from "../Features/Dashboard/usersInfoSlice"
 import riderReducer from "../Features/Dashboard/riderSlice";
 import sellerReducer from "../Features/Dashboard/sellerSLice";
 import landingPageReducer from "../Features/LandingPage/LandingPageSlice"
+import sellerDashboardReducer from "../Features/Dashboard/sellerDashboard";
+import profileReducer from "../Features/Mart/profileSlice";
 export const store = configureStore({
   reducer: {
     banner: bannerReducer,
@@ -47,5 +49,7 @@ export const store = configureStore({
     seller:sellerReducer,
     rider:riderReducer,
     landingPage:landingPageReducer,
+    sellerDashboard:sellerDashboardReducer,
+    profile:profileReducer,
   },
 });

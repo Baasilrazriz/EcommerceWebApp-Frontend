@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import TableComponent from '../TableComponent';
-import NavBar from '../NavBar';
-import { addSeller } from '../../../Features/Dashboard/sellerSLice';
-import { useDispatch } from 'react-redux';
 
-function DashboardAddSeller(props) {
+import NavBar from '../../DashboardComponents/NavBar';
+import { addUser } from '../../../Features/Dashboard/usersInfoSlice';
+import { useDispatch } from 'react-redux';
+import { addRider } from '../../../Features/Dashboard/riderSlice';
+
+function DashboardAddRider(props) {
   const dispatch = useDispatch();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -42,7 +43,7 @@ function DashboardAddSeller(props) {
     }
     
     // Construct the data object to be sent
-    const sellerdata = {
+    const RiderData = {
       firstName,
       lastName,
       address,
@@ -59,11 +60,13 @@ function DashboardAddSeller(props) {
     };
     
     // Dispatch the action to add the seller
-    dispatch(addSeller(sellerdata));
+    dispatch(addRider(RiderData));
+    alert("added successfully") 
   };
 
-    return (
-    
+  return (
+        
+         
       <>
       <div className=' border rounded-xl h-fit mt-3 p-2 w-full overflow-hidden    shadow-lg'>
    <NavBar/>
@@ -71,13 +74,13 @@ function DashboardAddSeller(props) {
   </div>
    
   <div className=' border rounded-xl h-[39.8rem] my-2  p-2 py-5 w-full overflow-hidden    shadow-lg'>
-<h1 className="text-left text-4xl font-bold   text-gray-700 px-6 ">Add Seller</h1>
+<h1 className="text-left text-4xl font-bold   text-gray-700 px-6 ">Add Rider</h1>
 <form action="" className='pt- mx-5 flex flex-col gap-5' method="post" onSubmit={handleSubmit}>
 <div className="flex justify-center">
                      <div className='flex flex-col gap-2'>
  <div className='h-40 w-40 rounded-full shadow-lg shadow-neutral-950 overflow-hidden'>
                      <img 
-                     src={imageBase64?imageBase64:"../assets/admin.png"}
+                     src={imageBase64}
                        className=" h-full w-full object-cover"
                        >
                          
@@ -287,7 +290,7 @@ function DashboardAddSeller(props) {
                        type="submit"
                        className="  bg-blue-500 hover:bg-blue-800 text-white text-2xl font-bold h-14 w-[17rem]  rounded-full shadow-lg shadow-neutral-950 hover:text-white transform transition-all duration-500 ease-in-out hover:scale-110 hover:brightness-110 hover:animate-pulse active:animate-bounce"
                      >
-                       Add Seller
+                       Add Rider
                      </button>
                
 </div>
@@ -299,10 +302,9 @@ function DashboardAddSeller(props) {
 
 
 
-
         
   
     );
 }
 
-export default DashboardAddSeller;
+export default DashboardAddRider;

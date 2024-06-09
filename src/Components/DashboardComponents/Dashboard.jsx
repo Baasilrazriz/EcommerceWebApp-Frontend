@@ -2,18 +2,18 @@ import React, { useEffect } from 'react'
 import SideBar from './SideBar'
 import { useDispatch, useSelector } from 'react-redux'
 import DashboardHome from './DashboardHome'
-import DashboardAddSeller from './SellerInfoComponents/DashboardAddSeller';
-import DashboardUpdateSeller from './SellerInfoComponents/DashboardUpdateSeller';
-import DashboardViewSeller from './SellerInfoComponents/DashboardViewSeller';
-import DashboardDeleteSeller from './SellerInfoComponents/DashboardDeleteSeller';
-import DashboardAddUser from './UserInfoComponents/DashboardAddUser';
-import DashboardUpdateUser from './UserInfoComponents/DashboardUpdateUser';
-import DashboardDeleteUser from './UserInfoComponents/DashboardDeleteUser';
-import DashboardViewUsers from './UserInfoComponents/DashboardViewUsers';
-import DashboardAddRider from './RiderInfoComponents/DashboardAddRider';
-import DashboardUpdateRider from './RiderInfoComponents/DashboardUpdateRider';
-import DashboardDeleteRider from './RiderInfoComponents/DashboardDeleteRider';
-import DashboardViewRider from './RiderInfoComponents/DashboardViewRider';
+import DashboardAddSeller from '../AdminDashboard/SellerInfoComponents/DashboardAddSeller';
+import DashboardUpdateSeller from '../AdminDashboard/SellerInfoComponents/DashboardUpdateSeller';
+import DashboardViewSeller from '../AdminDashboard/SellerInfoComponents/DashboardViewSeller';
+import DashboardDeleteSeller from '../AdminDashboard/SellerInfoComponents/DashboardDeleteSeller';
+import DashboardAddUser from '../AdminDashboard/UserInfoComponents/DashboardAddUser';
+import DashboardUpdateUser from '../AdminDashboard/UserInfoComponents/DashboardUpdateUser';
+import DashboardDeleteUser from '../AdminDashboard/UserInfoComponents/DashboardDeleteUser';
+import DashboardViewUsers from '../AdminDashboard/UserInfoComponents/DashboardViewUsers';
+import DashboardAddRider from '../AdminDashboard/RiderInfoComponents/DashboardAddRider';
+import DashboardUpdateRider from '../AdminDashboard/RiderInfoComponents/DashboardUpdateRider';
+import DashboardDeleteRider from '../AdminDashboard/RiderInfoComponents/DashboardDeleteRider';
+import DashboardViewRider from '../AdminDashboard/RiderInfoComponents/DashboardViewRider';
 import { fetchUsers } from '../../Features/Dashboard/usersInfoSlice';
 
 function Dashboard() {

@@ -39,7 +39,7 @@ const initialState={
     wishList:[],
     fdwhishlist:[],
     fetchwishListStatus:"",
-    addwhishListStatus:false,
+    addwhishListStatus:"",
     wishlistOpen:"",
 }
 const wishSlice = createSlice({

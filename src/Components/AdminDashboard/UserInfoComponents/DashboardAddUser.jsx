@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import TableComponent from '../TableComponent';
-import NavBar from '../NavBar';
+import NavBar from '../../DashboardComponents/NavBar';
 import { addUser } from '../../../Features/Dashboard/usersInfoSlice';
 import { useDispatch } from 'react-redux';
 

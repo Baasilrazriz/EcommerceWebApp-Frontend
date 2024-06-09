@@ -1,17 +1,19 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setOTP, setStep, validateOtp } from '../../Features/Mart/forgotSlice';
-
+import {   validateOtp } from '../../Features/Mart/forgotSlice';
+import { toast } from 'react-toastify';
 function ForgotPage4() {
   const dispatch = useDispatch();
-  const otp = useSelector((state) => state.forgot.otp);
-  
+  const [otp,setOtp]=useState("");
+  const OtpCheckStatus = useSelector((state) => state.forgot.OtpCheckStatus);
+  const encryptedemail=useSelector(state=>state.forgot.encryptedemail)  
+  const username=useSelector(state=>state.forgot.username)  
   const inputRefs = Array.from({ length: 4 }, () => useRef());
 
   const handleInputChange = (index, value) => {
     const newOtp = [...otp];
     newOtp[index] = value;
-    dispatch(setOTP(newOtp.join('')));
+    setOtp(newOtp.join(''))
 
     if (value && index < inputRefs.length - 1) {
       inputRefs[index + 1].current.focus();
@@ -25,9 +27,29 @@ function ForgotPage4() {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault();    
+    if(OtpCheckStatus!=="pending")
+    {
+      const validOtpPromise =dispatch(validateOtp({username,otp}))
     
-    dispatch(validateOtp(otp))
+    toast.promise(
+      validOtpPromise,
+      {
+        pending: 'Validating OTP...',
+        success: 'otp is valid',
+        error: 'Invalid OTP. Please try again.'
+      }, {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        
+      }
+    );
+      
+    }
   };
 
   return (
@@ -35,7 +57,7 @@ function ForgotPage4() {
       <div className="mx-6 mt-20">
         <div className="flex flex-col gap-8">
         <div class="w-full  whitespace-nowrap   text-sm font-medium text-gray-400">
-          <p>We have sent a code to your email ba**@dipainhouse.com</p>
+          <p>We have sent a code to your email {encryptedemail}</p>
         </div>
 
           

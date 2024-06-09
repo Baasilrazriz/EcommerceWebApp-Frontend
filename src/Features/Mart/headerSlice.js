@@ -23,11 +23,11 @@ const headerSlice = createSlice({
     CloseUserDropdown:(state)=>{
       state.userDropdownOpen = false;
     },
-    toggleCategoryDropdown: (state) => {
-      state.categoryDropdownOpen = !state.categoryDropdownOpen;
-    },
     toggleUserDropdown: (state) => {
       state.userDropdownOpen = !state.userDropdownOpen;
+    },
+    toggleCategoryDropdown: (state) => {
+      state.categoryDropdownOpen = !state.categoryDropdownOpen;
     },
     toggleCartDropdown: (state) => {
       state.CartDropdownOpen = !state.CartDropdownOpen;

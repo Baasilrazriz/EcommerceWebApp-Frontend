@@ -1,6 +1,6 @@
 import React from 'react';
-import TableComponent from '../TableComponent';
-import NavBar from '../NavBar';
+
+import NavBar from '../../DashboardComponents/NavBar';
 
 function DashboardUpdateSeller(props) {
     return (

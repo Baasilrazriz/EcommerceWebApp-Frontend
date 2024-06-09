@@ -15,6 +15,9 @@ import RestrauntPage from './Pages/FoodDelivery/RestrauntPage'
 import LandingPage from './Pages/LandingPage'
 import FDWishList from './Pages/FoodDelivery/FDWishList'
 import { ToastContainer } from 'react-toastify'
+import AdminDashboard from './Pages/AdminDashboard/AdminDashboard'
+import SellerDashboard from './Pages/SellerDashboard/SellerDashboard'
+import MyProfile from './Components/GeneralComponents/MyProfile'
 
 function App() {
   return (
@@ -29,15 +32,19 @@ function App() {
     <Route path="/mart/search" element={<SearchedPage  />}/>
     <Route path="/mart/category/:categoryName" element={<MartCategory  />}/>
     <Route path="/mart/products/:productName" element={<MartProductPage  />}/>
-    <Route path="/dashboard" element={<Dashboard/>}/>
-
-    <Route path="/Fooddelivery/Home" element={<FDHome/>}/>
+    <Route path="/admin/dashboard" element={<AdminDashboard/>}/>
+    <Route path="/seller/dashboard" element={<SellerDashboard/>}/>
+    <Route  path="/Fooddelivery/Home" element={<FDHome/>}/>
     <Route path="/Fooddelivery/restraunts/:restraunt" element={<RestrauntPage  />}/>
+    <Route path="/success" element={<RestrauntPage  />}/>
+
+    <Route path="/profile" element={<MyProfile/>}/>
     <Route element={<ProtectedRoutes/>} >
     <Route path='/checkout' element={<Checkout/>}/>
     <Route path="/Fooddelivery/wishlist" element={<FDWishList  />}/>
     <Route path="/mart/wishlist" element={<MartWishList  />}/>
       </Route>    
+
    </Routes>
    </BrowserRouter>
   </div>

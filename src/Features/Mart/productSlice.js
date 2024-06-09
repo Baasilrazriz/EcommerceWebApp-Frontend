@@ -3,16 +3,12 @@ import axios from 'axios';
 const apiUrl="https://localhost:7158/Product";
 export const fetchProducts = createAsyncThunk('product/fetchProducts', async () => {
   const response = await axios.get(apiUrl);
-  console.log(response.data)
   return response.data;
 });
 const initialState={
-  products:[
-   
-    
-  ],
+  products:[],
   prodStatus:"",
-
+i:0,
 }
 const productSlice = createSlice({
   name: 'product',
@@ -22,19 +18,25 @@ const productSlice = createSlice({
 extraReducers: (builder) => {
   builder
     .addCase(fetchProducts.fulfilled, (state, action) => {
-      state.products = action.payload;
-      state.prodStatus = "success";
-      console.log("product"+state.prodStatus)
+      if(state.i===0)
+      {
+        state.products = action.payload;
+        state.prodStatus = "success";
+        console.log("fetch product :"+state.prodStatus)
+        state.i++;
+      }
+      
     })
     .addCase(fetchProducts.pending, (state) => {
-      // Optional: Add some state to track that the cart is being loaded
+      
       state.prodStatus = "pending";
+      console.log("fetch product:"+state.prodStatus)
 
     })
     .addCase(fetchProducts.rejected, (state, action) => {
       // Handle the error state
       state.prodStatus = "failed"; // Set loading state to false
-      console.log("product"+state.prodStatus)
+      console.log("fetch product:"+state.prodStatus)
     });
 
     // .addCase(fetchCategoryNameById.fulfilled, (state, action) => {
@@ -44,5 +46,5 @@ extraReducers: (builder) => {
 
 });
 
-export const { setProdInCat } = productSlice.actions;
+
 export default productSlice.reducer;

@@ -78,7 +78,7 @@ const cartSlice = createSlice({
 
     },
 setfetchCartStatus:(state,action)=>{
-  state.fetchCartStatus=action.payload;
+  state.fetchCartStatus=action.payload; 
 },
     removeItem: (state, action) => {
       

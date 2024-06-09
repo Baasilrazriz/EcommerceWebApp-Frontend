@@ -27,6 +27,7 @@ export const loginUser = createAsyncThunk(
       })
       let id,email,profilepic;
       const role=response.data.validUser.role;
+      const data=response.data.validUser;
 if(response.data.validUser.role==='Admin') {  
             try {
              
@@ -89,7 +90,7 @@ if(response.data.validUser.role==='Admin') {
        
     }
     console.log("end");
-      return {id,profilepic,email,username,role}
+      return {id,profilepic,email,username,role,data}
   } catch (error) {
       console.log(rejectWithValue(error.response.data))
       return rejectWithValue(error.response.data)
@@ -109,7 +110,10 @@ const userSlice = createSlice({
     isLoggedIn:false,
     isLoginModalOpen: false,
     profilepic:'',
-    showPassword:false
+    showPassword:false,
+    userLogin:false,
+    adminLogin:false,
+    sellerLogin:false,
   },
   reducers: {
     loggedIn: (state) => {
@@ -161,6 +165,21 @@ state.isLoginModalOpen = false;
     .addCase(loginUser.fulfilled, (state,action) => {    
       console.log(state.role,action.payload.role)
 if (action.payload.role===state.role) {
+  if(action.payload.role==='Admin')
+  {
+    state.adminLogin=true;
+    console.log(state.adminLogin)
+  }
+  else if(action.payload.role==='Seller')
+  {
+    state.sellerLogin=true;
+    console.log(state.sellerLogin)
+  }
+  else if(action.payload.role==='User')
+  {
+    state.userLogin=true;
+    console.log(state.userLogin)
+  }
   state.isAuthenticated = true;
   state.isLoginModalOpen=false; 
   state.isLoggedIn=true;

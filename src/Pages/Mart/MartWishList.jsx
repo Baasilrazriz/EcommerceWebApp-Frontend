@@ -7,6 +7,7 @@ import { addToCart } from '../../Features/Mart/cartSlice';
 
 
 function MartWishList() {
+  window.scrollTo(0, 0);
     const dispatch = useDispatch();
     // const fetchwishListStatus = useSelector((state) => state.wish.fetchwishListStatus);
     // const addwhishListStatus = useSelector((state) => state.wish.addwhishListStatus);

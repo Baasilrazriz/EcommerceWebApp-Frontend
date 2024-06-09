@@ -66,7 +66,7 @@ const sellerSlice = createSlice({
     updateSellerStatus:"",
     deleteSellerStatus:"",
     fetchSellerBySellernameStatus:"",
-  },
+  }, 
   reducers: {
     setSellerByUsername:(state)=>{
       state.SellerByUsername=[]

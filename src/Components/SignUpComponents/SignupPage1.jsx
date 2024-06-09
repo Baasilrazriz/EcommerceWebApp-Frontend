@@ -105,7 +105,7 @@ const dispatch=useDispatch();
 
                             </div>
                         
-                        <input type="file" onChange={handleImageChange} accept="image/*"  className=' ml-24'/>
+                        <input type="file" onChange={handleImageChange} accept="image/*"  className=' '/>
                       </div>
 
            <div className='mx-3  my-4 flex flex-col gap-5'> 

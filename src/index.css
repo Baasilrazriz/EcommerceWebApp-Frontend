@@ -13,8 +13,7 @@ body {
 }
 html
 {
-  scrollbar-width:normal;
-scrollbar-color: #777 #555;
+
 }
 html::-webkit-scrollbar{
   width: 1vw;
@@ -22,11 +21,11 @@ html::-webkit-scrollbar{
 }
 
 html::-webkit-scrollbar-thumb {
-  background-color:slategray ;
+  background-color:rgb(109, 108, 108) ;
   background-clip: padding-box;
   border-width: 4px; /* Set the width of the border */
   border-style: solid;
-  border-color: white;
+  border-color: transparent;
   
   border-radius:10px;
    
@@ -35,22 +34,16 @@ html::-webkit-scrollbar-track {
   background-color:white ;
   
 }
-.scroll
-{
-  scrollbar-width:normal;
-scrollbar-color: #777 #555;
-}
 .scroll::-webkit-scrollbar{
   width: 1vw;
-  
 }
 
 .scroll::-webkit-scrollbar-thumb {
-  background-color:slategray ;
+  background-color:rgb(109, 108, 108) ;
   background-clip: padding-box;
   border-width: 4px; /* Set the width of the border */
   border-style: solid;
-  border-color: white;
+  border-color: transparent;
   
   border-radius:10px;
    

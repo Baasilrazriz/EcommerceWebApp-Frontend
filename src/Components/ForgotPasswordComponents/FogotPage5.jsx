@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   closeforgotModal,
   setStep,
 } from "../../Features/Mart/forgotSlice";
-import { setPassword } from "../../Features/Mart/userSlice";
 
 function FogotPage5() {
   const dispatch = useDispatch();
@@ -13,13 +12,13 @@ function FogotPage5() {
 
   const handleSubmit = () => {
     if (newPAss === confirmPass) {
-          ``
-        dispatch(setStep(1));
-        dispatch(closeforgotModal());
-
+ 
+         dispatch(setStep(1));
+         dispatch(closeforgotModal());
+ 
     }
-    else{alert("password doesnt match")}
-    document.body.style.overflowY = "scroll";
+     else{alert("password doesnt match")}
+     document.body.style.overflowY = "scroll";
   };
 
   const email = useSelector((state) => state.forgot.email);

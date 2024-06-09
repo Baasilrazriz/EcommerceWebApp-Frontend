@@ -1,16 +1,36 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { setStep, validateUser } from '../../Features/Mart/forgotSlice';
-import { setUsername } from '../../Features/Mart/forgotSlice';
+import {  validateUser } from '../../Features/Mart/forgotSlice';
+import { toast } from 'react-toastify';
 
 function FogotPage1() {
 const dispatch=useDispatch();
 const [username,setUsername]=useState("")
+const validStatus = useSelector((state) => state.forgot.validStatus);
   const handleValidate =  (e) => {
     e.preventDefault();
-dispatch(validateUser({username}))
-    
+    console.log(username)
+    if(username===null||username==="")
+    {
+      toast.error("username cannot be empty", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        
+      });
+      
+      
+    }
+    else{
+      if(validStatus!=="pending")
+      {
+        dispatch(validateUser({username}))
+      }
 
+    }
   };
   
     return (
