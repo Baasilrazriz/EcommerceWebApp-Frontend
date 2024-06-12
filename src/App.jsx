@@ -18,6 +18,7 @@ import { ToastContainer } from 'react-toastify'
 import AdminDashboard from './Pages/AdminDashboard/AdminDashboard'
 import SellerDashboard from './Pages/SellerDashboard/SellerDashboard'
 import MyProfile from './Components/GeneralComponents/MyProfile'
+import SuccessPage from './Components/MartComponents/SuccessPage'
 
 function App() {
   return (
@@ -36,7 +37,7 @@ function App() {
     <Route path="/seller/dashboard" element={<SellerDashboard/>}/>
     <Route  path="/Fooddelivery/Home" element={<FDHome/>}/>
     <Route path="/Fooddelivery/restraunts/:restraunt" element={<RestrauntPage  />}/>
-    <Route path="/success" element={<RestrauntPage  />}/>
+    <Route path="/success" element={<SuccessPage  />}/>
 
     <Route path="/profile" element={<MyProfile/>}/>
     <Route element={<ProtectedRoutes/>} >

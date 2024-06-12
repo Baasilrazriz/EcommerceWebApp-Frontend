@@ -4,7 +4,7 @@ import Footer from "../../Components/GeneralComponents/Footer";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addTowishList, fetchWishlist } from "../../Features/Mart/wishSlice";
-import { addToCart, fetchCart } from "../../Features/Mart/cartSlice";
+import { UpdateCart, addToCart, fetchCart } from "../../Features/Mart/cartSlice";
 function MartProductPage(props) {
   window.scrollTo(0, 0);
   const dispatch = useDispatch();
@@ -32,6 +32,18 @@ function MartProductPage(props) {
             "" +
             existingItem.productId
         );
+        // try {
+        //   await dispatch(
+        //     UpdateCart({
+        //       quantity: existingItem.quantity + 1,
+        //       cart_id: existingItem.cartId,
+        //     })
+        //   );
+        //   dispatch(fetchCart(userId));
+        // } catch (error) {
+        //   console.error("Error updating cart:", error);
+         
+        // }
       } else {
         // If the item does not exist, dispatch the postCart thunk
         if (addCartStatus === "success" || addCartStatus === "pending") {

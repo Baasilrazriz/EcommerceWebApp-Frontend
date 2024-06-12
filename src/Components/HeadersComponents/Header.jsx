@@ -46,7 +46,16 @@ function Header({ toggleCart }) {
           }
           else{
               if (fetchProfileStatus!==""||fetchProfileStatus!=="failed") {
-            console.log("profile: "+username)
+                // toast.loading("loading", {
+                //   position: "top-center",
+                //   autoClose:100,
+                //   hideProgressBar: true,
+                //   closeOnClick: true,
+                //   pauseOnHover: true,
+                //   draggable: true,
+                  
+                      
+                // })
               await dispatch(fetchProfile({username}))
                dispatch(openProfileModal());
               document.body.style.overflowY = "hidden";
@@ -331,7 +340,18 @@ function Header({ toggleCart }) {
                 <ul class="py-2" aria-labelledby="user-menu-button">
                   <li>
                     <button
-                      
+onClick={()=>{
+            
+  toast.warning("feature comming soon", {
+    position: "top-center",
+    autoClose: 3000,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    
+  });
+}}                      
                       class="w-full block text-start px-4  py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                     >
                       Track your Order
@@ -339,7 +359,18 @@ function Header({ toggleCart }) {
                   </li>
                   <li>
                     <button
-                      
+     onClick={()=>{
+            
+      toast.warning("feature comming soon", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        
+      });
+    }}                                       
                       class="block w-full text-start px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                     >
                       Order History

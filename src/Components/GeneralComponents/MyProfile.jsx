@@ -8,9 +8,9 @@ const MyProfile = () => {
   const [isEditable, setIsEditable] = useState(false);
   const [userInfo, setUserInfo] = useState(profileInfo);
 
-  const handleEditClick = () => {
-    setIsEditable(true);
-  };
+  // const handleEditClick = () => {
+  //   setIsEditable(true);
+  // };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -52,12 +52,7 @@ const MyProfile = () => {
             className="w-36 h-36 rounded-full shadow-lg mb-4 "
           />
         </div>
-        <button
-          onClick={handleEditClick}
-          className="w-full bg-indigo-500 text-white px-4 py-2 rounded-lg shadow hover:bg-indigo-600 transition-all duration-300 mb-4"
-        >
-          Edit Info
-        </button>
+        
         <div className="w-full grid grid-cols-2 gap-4 text-white">
         {Object.keys(userInfo).map((key) => {
   if (key === 'password' || key === 'image') {

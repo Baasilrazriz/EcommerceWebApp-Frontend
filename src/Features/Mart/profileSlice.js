@@ -38,6 +38,7 @@ const profileSlice = createSlice({
     },
     closeProfileModal: (state) => {
       state.isProfileModalOpen = false;
+      state.fetchProfileStatus="";
     },
   },
   extraReducers: (builder) => {

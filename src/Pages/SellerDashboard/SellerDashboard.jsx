@@ -9,6 +9,7 @@ import DashboardDeleteSeller from '../../Components/AdminDashboard/SellerInfoCom
 
 import { fetchUsers } from '../../Features/Dashboard/usersInfoSlice';
 import DashboardAddProduct from '../../Components/SellerDashboard/DashboardAddProduct';
+import DashboardViewProduct from '../../Components/SellerDashboard/DashboardViewProduct';
 
 function SellerDashboard    () {
     const page = useSelector((state) => state.sellerDashboard.page);
@@ -32,7 +33,7 @@ function SellerDashboard    () {
    {page === 2 &&  <DashboardAddProduct/>}
    {page === 3 &&  <DashboardUpdateSeller/>}
    {page === 4 &&  <DashboardDeleteSeller/>}
-   {page === 5 &&  <DashboardViewSeller/>}
+   {page === 5 &&  <DashboardViewProduct/>}
       {/* {step === 2 && <DashboardPage2/>}
       {step === 3 && <DashboardPage3/>}
       {step === 4 && <DashboardPage4/>}

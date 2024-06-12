@@ -1,11 +1,14 @@
 import { CardCvcElement, CardExpiryElement, CardNumberElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
+import SuccessPage from '../MartComponents/SuccessPage';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 function Payment(props) {
     const [savedCard, setSavedCard] = useState('Mastercard ending 234');
     const [nameOnCard, setNameOnCard] = useState('Pomaline Moses Olanrewaju');
-   
+    const navigation = useNavigate();
     const stripe = useStripe();
     const elements = useElements();
 
@@ -40,6 +43,7 @@ function Payment(props) {
         draggable: true,
         
       });
+      navigation("/success");
         }
         
     };  
@@ -50,21 +54,6 @@ function Payment(props) {
       <div className="">
         <h2 className="text-2xl font-semibold mb-6">Payment Details</h2>
         
-        {/* Saved Card Dropdown
-        <div className="mb-4">
-          <label className="block mb-2 text-sm font-medium text-gray-700" htmlFor="saved-card">
-            Use saved card
-          </label>
-          <select
-            id="saved-card"
-            className="block w-full p-2 border border-gray-300 rounded-md shadow-sm"
-            value={savedCard}
-            onChange={(e) => setSavedCard(e.target.value)}
-          >
-            <option value="Mastercard ending 234">Mastercard ending 234</option>
-            {/* Additional saved cards would go here */}
-          {/* </select>
-        </div> */}
      
         <div className="mb-4">
           <label className="block mb-2 text-sm font-medium text-gray-700" htmlFor="name-on-card">

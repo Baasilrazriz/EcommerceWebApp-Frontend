@@ -59,6 +59,7 @@ const initialState={
   fetchCartStatus:"",
   addCartStatus:"",
   amount: 0,
+  total: 0,
   error:"",
 }
 
@@ -86,7 +87,7 @@ setfetchCartStatus:(state,action)=>{
     },
     applyDiscount: (state, action) => {
       // Assuming a fixed discount for example purposes
-      const validDiscountCode = 'DISCOUNT20';
+      const validDiscountCode = 'ZIMBABAR';
       const discountAmount = 20; // This could be a percentage or a fixed amount
 
       if (action.payload === validDiscountCode) {
@@ -98,6 +99,9 @@ setfetchCartStatus:(state,action)=>{
         state.isValid = false;
         state.amount = 0;
       }
+    },
+    setTotal: (state, action) => {
+      state.total=action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -141,5 +145,5 @@ setfetchCartStatus:(state,action)=>{
   },  
 });
 
-export const {toggleCart,applyDiscount,setfetchCartStatus, incrementQuantity, decrementQuantity, removeItem } = cartSlice.actions;
+export const {toggleCart,setTotal,applyDiscount,setfetchCartStatus, incrementQuantity, decrementQuantity, removeItem } = cartSlice.actions;
 export default cartSlice.reducer;

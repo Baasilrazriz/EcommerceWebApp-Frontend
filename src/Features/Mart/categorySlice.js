@@ -20,6 +20,17 @@ export const fetchCategories = createAsyncThunk('Category/fetchCategories', asyn
       }
     }
   );
+  export const fetchCategoryById = createAsyncThunk(
+    'category/fetchCategoryById',
+    async (Id, { rejectWithValue }) => {
+      try {
+        const response = await axios.get(`https://localhost:7158/Category/${Id}`);
+        return response.data; // Assuming the response contains the category name
+      } catch (error) {
+        return rejectWithValue(error.response.data);
+      }
+    }
+  );
 
 const initialState={
   categories:[
@@ -36,6 +47,7 @@ const initialState={
   prodInCat:[],
   categoryStatus:"",
   prodInCategoryStatus:"",
+  fetchCatStatus:"",
   fetch:0,
   pic:0,
 }
@@ -81,6 +93,19 @@ const categorySlice = createSlice({
         console.log("fetch category by name :"+state.prodInCategoryStatus)
       })
       .addCase(fetchProductByCategoryName.rejected, (state, action) => {
+        state.prodInCategoryStatus = "failed";
+        console.log("fetch category by name :"+state.prodInCategoryStatus)
+      })
+      .addCase(fetchCategoryById.fulfilled, (state, action) => {
+        state.prodInCategoryStatus = "success";
+        state.prodInCat=action.payload;
+        console.log("fetch category by name :"+state.prodInCategoryStatus)
+      })
+      .addCase(fetchCategoryById.pending, (state, action) => {
+        state.prodInCategoryStatus = "pending";
+        console.log("fetch category by name :"+state.prodInCategoryStatus)
+      })
+      .addCase(fetchCategoryById.rejected, (state, action) => {
         state.prodInCategoryStatus = "failed";
         console.log("fetch category by name :"+state.prodInCategoryStatus)
       })

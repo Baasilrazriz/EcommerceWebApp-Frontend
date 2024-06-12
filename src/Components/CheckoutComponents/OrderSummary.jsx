@@ -26,7 +26,7 @@ const dis_amount=useSelector((state) => state.cart.amount);
   };
 
   // Calculate the subtotal of cart items
-  const subTotal = items.reduce( (total, item) => total + item.price * item.quantity,0);
+  const subTotal = items.reduce( (total, item) => total + item.productPrice * item.quantity,0);
   const tax = 3.45; // Fixed tax value for the example
   const shippingCost = 0; // Free shipping
   let grandtotal = 0;
@@ -58,8 +58,8 @@ else{
                        <div className="cart-item__details flex flex-col gap-2  pr-4">
     
                         <div className=" flex justify-between gap-10">
-                        <h4 className="text-md relative top-5 font-body  w-36">{item.name}</h4>
-                        <p className=" w-10 flex gap-2 relative mt-5  font-semibold "><span>Rs </span>{item.price}</p>
+                        <h4 className="text-md relative top-5 font-body  w-36">{item.productName||"tskljskjomato"}</h4>
+                        <p className=" w-10 flex gap-2 relative mt-5  font-semibold "><span>Rs </span>{item.productPrice}</p>
                         </div>
                         
           
